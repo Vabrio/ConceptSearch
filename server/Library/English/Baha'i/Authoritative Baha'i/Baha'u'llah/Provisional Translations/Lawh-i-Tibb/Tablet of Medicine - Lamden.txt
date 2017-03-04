@@ -1,0 +1,199 @@
+The Tablet of Medicine - Lawh-i-Tibb
+by Baha'u'llah
+
+Translated by Khazeh Fananapazir & Stephen Lambden
+Source: BSB 6:4-7:2 (October 1992) pp.18-65
+ 
+  
+
+Introduction
+
+The Arabic-Persian text of Baha'u'llah's Tablet of Medicine (Lawh-i-Tibb) [1] is to be dated to the early 'Akka' period of his ministry (early 1870's?). It was addressed to a Baha'i named Mirza Muhammad Rida'-yi Tabib-i-Yazdi, a physician of the traditional school. The text is translated and selectively annotated below. The tentative translation is highly provisional. The notes are designed to clarify what is a sometimes difficult text which could, at certain points, have been translated in quite a number of different ways. Only a few of the verses or terms contained within the *Lawh-i-Tibb* are commented upon. It is hoped that the translation and notes will be of interest to Baha'is in general and to those who are practitioners of modern medicine. Doubtless, in the future, scholars expert in both Baha'i doctrine and in the history of science/medicine will write learned and comprehensive commentaries upon this important Tablet.
+	 [1. The *Lawh-i-Tibb* was first published in *Majmu'a-yi alwah-i mubaraka* (Cairo, 1920, Rep. Wilmette, Illinois: BPT., 1981, 222-226 (Reproduced and translated below).]
+
+As indicated, not all of the numerous Baha'i texts which might have an expository bearing on the Tablet of Medicine can be cited below. The following letter of Shoghi Effendi makes some centrally important points:
+
+"The Tablet to a Physician was addressed to a man who was a student of the old type of healing prevalent in the East and familiar with the terminology used in those days, and He addresses him in terms used by the medical men of those days. These terms are quite different from those used by modern medicine, and one would have to have a deep knowledge of this former school of medicine to understand the questions Baha'u'llah was elucidating. Baha'u'llah has recommended that people seek the help and advice of experts and doctors: He does not say which school they should belong to.
+
+"Likewise there is nothing in the teachings about whether people should eat their food cooked or raw: exercise or not exercise: resort to specific therapies or not: nor is it forbidden to eat meat.
+
+"Baha'u'llah says teaching is the greatest of all services, but He does not mean one should give up medicine to teach." [2]
+	 [2. From a letter written on behalf of Shoghi Effendi to an individual believer, December 18, 1945 cited UHJ:1984 -- see also the letter printed in BSB 4:3-4 (April 1990), 58.]
+
+Shoghi Effendi indicated in a letter dated 14th January 1932 that the first few Arabic paragraphs of the Tablet of Medicine contain useful advice for the maintenance of good health (see II:1ff).[3] They echo those medical maxims and pieces of useful advice (fawa'id) found in a variety of Greek and Islamic literatures -- generally speaking, a considerable proportion of Islamic medicine has Greek roots. Ullmann has written in the introduction to his Islamic Medicine, "'Islamic medicine' did not grow up on Arab soil. Rather it is the medicine of later Greek antiquity which was formulated in the Arabic language in the south and west of the Mediterranean from the ninth century A.D." (p.xi). While the Qur'an contains little or no explicit medicine -- neither the word doctor/physician nor medicine are mentioned (cf. Ullmann, p.4; Dols, review of Rahman p.417) -- this is more than made up for in the Sunni and Shi'i *hadith* literatures.
+	 [3. Part of this letter of Shoghi Effendi reads, "With the appearance of every Revelation a new insight is created in man and this in turn expresses itself in the growth of science. This has happened in past dispensations and we find its earliest fruits in our present day. What we see however is only the beginning. With the spiritual awakening of man this force will develop and marvelous results will become manifest. Among other phases of human learning the medical science will have a place. There is a Tablet of Medicine that Baha'u'llah has revealed and which is translated into English. That does not contain much of scientific informations [sic.] but has some interesting advices for keeping healthy." (cited LDG 2:21 )]
+
+From the early Islamic centuries compilations of medical wisdom attributed to the Prophet Muhammad were made by Sunni and Shi'i writers (see the various *Tibb al-nabi/ Tibb al-nabawi* works). [4] Such major Sunni canonical collections of hadith as that of al-Bukhhari (810-870 CE) contain their own *Kitab al-tibb*("Book of Medicine"). Many medical or quasi-medical traditions were attributed to the Prophet Muhammad. It is nonetheless the case that "The hadith directly related to medicine are relatively few, usually late, and frequently contradictory." [5]
+	 [4. Refer, for example, Cyril Elgood, 'Tibb al-Nabi or Medicine of the Prophet, Being a Translation of Two Works of the same Name: I. The *Tibb-ul-Nabbi* [*Tibb al-Nabi*] of Al-Suyuti; II. The Tibb-ul-Nabbi of Mahmud bin Mohammad al-Chaghhayni' the scientist-astronomer Mamud ibn 'Umar Chagmini] in *Osiris* Vol.14 (1962) 33-192. With respect to the al-Chaghmini's medical tract Elgood writes, "Next is the version by Mahmud bin 'Umar Jaghmini [=Chaghmini] of which I also present a translation as a contrast to the much longer version of al-Suyuti and as a specimen of the aphoristic form of writing which was once so popular in Persia. This is written in Arabic. Mahmud also wrote in Persian a book called *Qanunchi fi al-Tibb*, being an extract from the Canon of Avicenna. The edition that I used for my translation is a small book lithographed in Teheran in I888/89 and is in my private collection." (p.43). On page 40 of the aforementioned article Elgood writes, "A reference to the Encyclopaedia of Hajji Khalifa [written 1658 CE] shows that he devotes a special section in his work to what he calls *'Ilm al-Tibb al-Nabbawi* or *The Science of Prophetic Medicine*. Here he mentions seven different works on this subject which were existing in his day and were known to him. The authors whom he names as having made these collections are Nu'aym Ahmad of Ispahan [948-1038 CE], Abu al-'Abbas Ja'far Mustaghfiri, Jalal al-Din al-Suyuti [1445-1505 CE], Abu Hassan 'Ali al-Rida [the 8th Imam, Imam Ria' see below], Habib Nishapuri, Habib al-Thani, and 'Abd al-Malik bin Habib." (transliteration altered). In the books of the 'Prophetic Medicine' (*Tibb al-nabawi*) innumerable inauthentic traditions were attributed to the Prophet Muhammad. Ibn Khaldun (1332-1406) as noted by Ullmann "alone has said clearly that essentially this is bedouin medicine and can have no claim to be divine revelation and therefore cannot be obligatory under religious law." (p.5).]
+	 [5. M.W. Dols, review of Rahman in *Hist. Sci.* xxvi (1988), 417.]
+
+The medical wisdom of the Twelver Shi'i Imams (*tibb al- a'immah*) was likewise assiduously compiled (see Agha Buzurg al-Tihrani,*al-Dhari'a ila tasanif al-shi'a* 25 Vols Tehran / Najaf 1355/1936, 15:135-144). [6] A great many statements are attributed to the Twelver Imams that, in one way or another, have to do with medical matters or with bodily health. To the eighth Imam 'Ali al-Rida' (c.768-818 CE) is attributed *al-Risala al-dhahabiya/al-mudhahhaba fi'-tibb* ("The Golden Treatise...") a treatise on medical cures and good health written for and at the request of the 'Abbasid Caliph al-Mansur (text in Majlisi, *Bihar al-anwar* (2nd ed) LXII: 308-328). Commentaries are said to have been written on this Arabic treatise which have been translated into Persian and Urdu (see W. Malelung, Ali al-Reza, EIr. 2:877-8). [7] There exists furthermore, a treatise in the Jabirean corpus--writings attributed to Jabir ibn Hayyan (c.103/721-c.200/815) -- certain of which Baha'u'llah drew upon -- entitled *Kitab al-tibb al-nabawi'ala ahl al-bayt* ("The Book of Prophetic Medicine) according to the view of the Household of the Prophet").
+	 [6. The recently published Batool Ispahany (trans.) & Andrew J. Newman (Ed.), *Islamic Medical Wisdom, The ibb al-A'imma* ([= Medicine of the Imams] London: The Muhammadi Trust 1991) is a collection of statements of certain Twelver Imams compiled by Abu 'Atab 'Abd Allah and al-Husayn, the sons of Bisam b. Sabur -- Bistam was a companion of the sixth Imam Abu Abd Allah Ja'far b. Muhammad al-Sadiq (d. 148/765) and the seventh Imam Abu al-Hasan Musa b. Ja'far al-Kazim (d. 183/799) (cf. * al-Dhari'a * 15:139-140). In the preface to this work Newman writes, "There is no dearth of Twelver Shi'i medical texts. Agha Buzurg al-Tehrani (d. 1389/1970) in his massive bibliography of Twelver texts [see above] devoted several pages to listing texts on medicine completed from the earliest years following the disappearance of the Twelfth Imam up to the last century." See for further details ibid p. xxxiv ff.]
+	 [7. See also Muhammad 'Ali al-Bar, *al-Imam 'Ali al-Rida wa risalat fi al-tibb al-nabawi, al-risala al-dhahabiya, awwal risala fi al-tibb al-nabawi*, (Beirut: Dar al-manahil, 1412/1991). This volume commences with material highlighting the glories of the "people of the House of the Prophet" (Pt.I pp.11-68) followed by an hagiographical biography of 'Ali al-Rida' (Pt.II 69-110); the text of Imam Rida's "Golden Treatise" (Pt. III pp. 111-126) and two further sections; a prolegomenon to the understanding of ancient medical books and books of the medicine of the Prophet (Pt. IV pp. 127-137) the *Risala dhahabiya* and an exposition and glosses on some of its terms (Pt. V pp. 139-183).]
+.
+A multitude of other Shi'i works, which cannot possibly be even listed here, are relevant to the study of the background to the *Lawh-i-Tibb*. The *Lawh-i-Tibb* cannot be fully or adequately commented upon without some reference to its (Shi'i) Islamic background; not forgetting its pre-Islamic antecedents which will only at certain points in the notes below be cursorily indicated.
+
+Sources known to the present writer only allow the *sitz im leben* ("setting in life") of the *Lawh-i-Tibb* to be inadequately sketched. In volume three of his *The Revelation of Baha'u'llah* (Oxford: George Ronald 1983) Adib Taherzadeh gives something of a summary of key points of the Tablet of Medicine (see 3: 358-360). He translates a passage from Haji Muammad Tahir-i Malamiri's memoirs, the *Khatirat-i-Malamiri*, about Aqa Mirza Muhammad-Rida' (the recipient of the *Lawh-i-Tibb*):
+
+"One of the early believers who embraced the Faith when Siyyid Yahyay-i-Darabi, known as Vahid, came to Yazd, was Aqa Mirza Muammad-Riay-i-Abib. He was a skilled and distinguished physician, and an embodiment of grace and steadfastness. The Pen of the Most High revealed the Lawh-i-Tibb in his honour. In that exalted Tablet, Baha'u'llah states that the mere visit of a physician who has drunk deep of the wine of His love will cure the patient. Mirza Muhammad-Rida was truly the fulfilment of these words of Baha'u'llah. He used to cure the patient by administering very simple remedies. Truly, he possessed wonderful qualities which made him a very special person in the community of the Most Great Name. Owing to his intense piety he became highly disturbed when Mirza Yahya broke the Covenant. As a result he was bewildered and stunned; he even became hesitant in the Cause for a short time. Then it was as though Divine Providence sent Mulla Zaynu'l-'Abidin, a native of Najafabad (he was entitled by Baha'u'llah as Zaynu'l-Muqarribin) to Yazd in order to calm his agitation and dispel his doubts. Zaynu'l-Muqarribin at first stayed in the house of this servant in the district of Malamir, but when he learned of the intense anguish and distress that Mirza Muhammad-Rida was subjected to, he changed his residence and stayed in his home instead. Consequently, Mirza Muhammad-Rida became fully aware of the circumstances of the Revelation of Baha'u'llah. He later received many Tablets from the Pen of the Most High, and served the Faith of Baha'u'llah with devotion and love till the end of his life. He was about eighty years old when he passed away." [8]
+	 [8. See *Khatirat-i- Malamiri*. Hoffheim-Langenhain: Baha'i-Verlag, 149/1992, 58-9 cited in translation in A. Taherzadeh, *The Revelation of Baha'u'llah* Vol. 3 (Oxford: George Ronald, 1983), 359.]
+
+
+=============================================
+
+
+I
+
+Revealed unto a Physician, upon him be the Glory of God!
+
+He is God, the One Who is Most Knowing
+
+The Tongue of the Ancient of Days uttereth that which shall be a sufficient Treasure for the wise ones in the absence of physicians.
+
+II
+
+[1] Say: O People! Eat not except after having hungered and drink not after retiring to sleep (al-huju'). [2] How beneficial is exercise when one ['s stomach] is empty for through it the limbs become strengthened; and how dark a calamity is exercise when one['s stomach] is full! [3] Do not avoid medical treatment (al-'ilaj) when thou hast need of it but abandon it when thy constitution hath been restored (istiqamat). [4] Do not commence a meal except after full digestion [of the previous meal] and swallow not save after the completion of chewing. [5] Treat an illness firstly with nutrients (or foods, aliments, haghdhiya) and proceed not [immediately] unto medications (adwiyat). [6] If that which thou desirest resulteth from elemental nutrients (al-mufradat) refrain from the compound treatments (al-murakkabat). [7] Abandon medication (al-dawa') when thou art healthy but take hold of it when thou hast need thereof. [8] If foods of opposing disposition (diddan) are available at table, do not mix them; under such circumstances content thyself with but one of them. [9] Commence first with the light food (al-raqiq) before moving on to the heavier one (al-ghaliz) and with the liquid before the solid. [10] To intake one food which becomes superimposed upon another, (idkhal al-ta'am 'ala ta'am) is dangerous; be warned of this matter.
+
+III
+
+[1] When thou wouldst commence eating, start by mentioning My Most Glorious Name (al-abha) and finish it with the Name of Thy Lord, the Possessor of the Throne above and of the earth below. [2] And when thou hast finished eating, walk a little to settle thy meal. [3] That [foodstuff] which is hard to chew; the same is forbidden unto those possessed of intelligence. Thus doth the Supreme Pen command thee. [4] Eat a little in the morning for this is as a lamp to the body. [5] Eschew harmful habits [i.e. addictive substances al-i'ada al-mudirra) for they truly, are a calamity for created beings. [6] Counter disease by utilizing established means (bi'l-asbab). This utterance is the decisive command in this discourse.
+
+IV
+
+[1] Most necessary to thy well-being is contentment (al-qana'at) under all circumstances for through it will the soul be saved from sloth and ill-being. [2] Eschew anxiety (al-hamma) and depression (al-ghamm) for through these twain will transpire a darksome affliction (bala' adham).
+
+V
+
+[1] Say: Envy (al-hasad) consumeth the body and rage [or anger, wrath, al-ghayz) burneth the liver: avoid these two as ye would a fierce lion (al-asad). [2] Purification of the bowels (tanqiyat al-fudul) constitutes a pillar [of health, al-'umdat) when accomplished in the temperate seasons (al-fusul al-mu'tadila). [3] He whose eating hath been excessive, his malady will be heightened. [4] We, assuredly, have decreed a cause (sabab an) for all things and vouchsafed everything with an effect (al-athar). All of this is by virtue of the effulgence of My Name, the Efficacious [the 'Producer of Effects' al-mu'aththir) upon existing things. Verily, thy Lord is the One Who exerciseth command over all that He willeth.
+
+VI
+
+[1] Say: Through all that which We have expounded the [equilibrium of the] four humours (al-akhlat) will not exceed their moderate balance (al-i'tidal), neither will their measures deviate from their mean conditions. [2] The [human constitutional] foundation (al-al) will remain in its purity and the "sixth part" and the "sixth of the sixth part" (wa'l-suds wa suds al-suds) in their stable condition. [3] The twin active forces (fa'ilan) and the twin passive realities (munfa'ilan) will be rendered whole. And upon God is all our trust. There is no God but Him, the true Healer, the Omniscient, the One Whose succour is sought by all. [4] My Supreme Pen hath not moved over such words as the above save out of My love for thee, that thou mayest know that sorrows have not overtaken the Ancient Beauty and He is not saddened by that which hath befallen Him from the nations. [5] Sorrow is for that one who loseth a thing, and from My Grasp is not lost all that is in the heavens and the earth.
+
+VII
+
+[1] O Physician! Firstly, heal thou the sick ones with the Remembrance of thy Lord (bi-dhikr rabbika), the Lord of the Day of Mutual Invocation (yawm al-tanad) and afterwards by that which We have ordained for the health of the constitutions of the servants. [2] By My life! Merely attaining the presence of the physician who hath drunk of the Wine of My Love conferreth healing and his mere breath bringeth mercy and hope. [3] Say: Adhere to him for the restoration of the body's well-being. [4] Verily such a physician is assisted by God for the treatment of ills. [5] Say: The science of healing is the most noble of all the sciences. [6] Verily, it is the greatest instrument given by God, the Quickener of mouldering bones, for the preservation of the bodies of peoples. God hath given it precedence over all sciences and branches of wisdom. [7] But this Day is the Day wherein thou shouldst arise to bring about My Victory, detached from all the worlds.
+
+VIII
+
+Say: "Thy Name is My healing, O my God, and remembrance of Thee is my remedy. Nearness to Thee is my hope and love for Thee my companion. Thy mercy to me is my healing (tabib) and my succour in both this world and the world to come. Thou, verily, art the All-Bountiful, the All-Knowing, the All-Wise."
+
+IX
+
+[1] Give the salutations of God to all the Friends. [2] Say: In this Day two decrees (du amr) are beloved and to be desired. The first is wisdom and utterance. [3] The second is steadfastness in the Cause of thy Lord, the Most Compassionate. [4] Every one that attaineth unto these twin commands is accounted and mentioned, in the sight of God, as among the dwellers of the City of Immortality (madinah-i baqa'). [5] For it is through the instrumentality of these twin decrees that the Cause of God hath been and will continue to be established amongst God's servants. [6] This inasmuch as, were it not for wisdom and utterance, all will become sorely tried. Were such to be the case none would remain to guide the people unto the Religion of the One True God. [7] Furthermore, if it were not for steadfastness, the words of the teacher [lit. narrator, reminder, dhakir) shall not be effective.
+
+X
+
+[1] Say: O Friends! Apprehensiveness and agitation pertaineth unto women. [2] And should the beloved of God reflect briefly upon the world and its manifest vicissitudes, the dominance of those who hath been tyrants will not frighten them. [3] Then shall they take their flight on the wings of yearning desire unto the One Who is at the centre of the Luminous Horizons [of the next World?] (nayyir al-afaq) [4] This servant hath wished for Himself that which He hath wished for all the servants of God. [5] The reason that wisdom (hikmat) and the protection of the friends hath been and shall be commanded is that those who remember Me should remain in the world and occupy themselves with the mention of the Lord of all the worlds. [6] Thus it is binding and necessary that all may protect themselves and their brethren for the sake of the Cause of God. [7] If the beloved of God had performed that which they were commanded, the majority of the people of the world at this time would have been adorned with the garment of faith. [8] Great is the blessedness of him who leadeth another soul to the Immortal Faith of God and guideth him to life everlasting. [9] This is an act of supreme importance in the presence of thy Lord, the Mighty, the Most Exalted.
+
+May the Spirit be upon thee! And may the Glory be upon thee also!
+
+
+
+=======================================
+
+
+
+APPENDIX ONE: EARLY TRANSLATIONS OF PORTIONS OF THE 'TABLET TO A PHYSICIAN' [ = TABLET OF MEDICINE ]
+
+Unapproved or provisional English translations of passages from the Tab/et of Medicine have been around since the time of the ministry of 'Abdu'l-Baha. Among the translations which may be noted are the following--:
+
+
+Star of the West (Vol. 13 No.9 [December 1922] Vol. 8 [of the reprint] George Ronald: Oxford 1978) p.252 -- the translator is not named.
+
+Some rules for health, from a Tablet revealed by Baha'u'llah.
+
+"O God! The Supreme Knower! The Ancient Tongue speaks that which will satisfy the wise in the absence of doctors.
+
+"O People, do not eat except when you are hungry. Do not drink after you have retired to sleep.
+
+"Exercise is good when the stomach is empty; H strengthens the muscles. When the stomach is full it is very harmful. Do not neglect medical treatment when H is necessary, but leave it off when the body is in good condition.
+
+"Do not take nourishment except when (the process of) digestion is completed. Do not swallow until you have thoroughly masticated your food.
+
+
+
+The translations from this tablet printed in the first edition of BNE were slightly revised in later editions. It is the slightly revised passages from the 5th Ed. (1980 rep.1990) which are reproduced above.
+
+
+
+"Treat disease first of all through diet and, refrain from medicine. If you can find what you need for healing in a single herb do not use a compound medicine. Leave off medicine when the health is good, and use it in case of necessity.
+
+"If two diametrically opposite foods are put on the table, do not mix them. Be content with one of them. Take first the liquid food before partaking of solid food. The taking of food before that which you have already eaten is digested b dangerous....
+
+"When you have eaten walk a little that the food may settle. That which is difficult to masticate is forbidden by the wise. Thus the Supreme Pen commands you.
+
+"A light meal in the morning is as a light to the body. Avoid all harmful habits: they cause unhappiness in the world. Search for the causes of disease. This saying is the conclusion of this utterance."
+
+
+
+Another and slightly different English translation -- not available to the present writers -- was published in the Australian Baha'i magazine, Herald of the South 2:4 (October-November 1927). See also letter of the Universal House of Justice, 8 June 1988, which appeared in the Australian Baha'i Bulletin (September 1989) p. 4, and in BSB 4:3-4 (April 1990), p. 58.
+
+In William Collins' Bibliography of English Language Works on the Babi and Baha'i Faiths 1844-19B5 (Oxford: George Ronald 1990, p. 1) there is reference to another published partial (? single page) translation, Baha'u'llah's Letter to a Physician. Mokelumne Hill, Calif.: Health Research, n.d. [197-?].
+
+
+
+
+APPENDIX TWO: REFERRING TO COMPETENT PHYSICIANS 2
+
+The following are a number of passages from Baha'i sources which are directly or indirectly related to that verse of the Kitab-i-Aqdas in which Baha'u'llah advises that the sick refer (or be referred) to competent physicians.
+
+"...In the Kitab-i-Aqdas Baha'u'llah has stated: 'Whenever ye fall ill, refer to competent physicians. Verily, We had not abolished recourse to material means, rather have We affirmed it through this Pen which God hath made the Dawning Place of His luminous and resplendent Cause. 'The secretaries of the Guardian have conveyed his guidance on this point in many letters to individual believers in passages such as these: '..refer to competent physicians, an abide by their considered decisions', '...invariably consult and follow the treatment of competent and conscientious physicians...' and '...consult the best physicians ... doctors who have studied a scientific system of medicine. 'Thus the obligation to consult physicians and to distinguish between doctors who are well trained in medical sciences a those who are not is clear, but the Faith should not be associated with any particular school of medical theory or practice. It is left to each believer to decide for himself which doctors he should consult, bearing in mind the principle enunciated above..." (From a letter written on behalf of the Universal House of Justice to an individual believer January 24, 1977)
+
+
+2 A proportion of these passages are collected in Zohoori, 1985.
+
+56
+
+"Whatever the competent physicians or surgeons prescribe for a patient should be accepted and compiled with." (Baha'u'llah, cited UHJ:1984, 1)
+
+"..Therefore thou shouldst also accept physical remedies inasmuch as these two have come from the mercy and favour of God, Who hath revealed and made manifest medical science so that His servants may profit from this kind of treatment also." (SWAB: 151 -2).
+
+"It is incumbent upon everyone to seek medical treatment and to follow the doctor's instructions, for this is in compliance with the divine ordinance, but, in reality, He Who giveth healing is God." ('Abdu'l-Baha, SWAB: 156)
+
+"... thou hast written about thy poor sight. According to the explicit divine text the sick must refer to the doctor. This decree is decisive and everyone is bound to observe it. While thou art there thou shouldst consult the most skilled and the most famed eye 
+specialist." (From a Tablet of 'Abdu'l-Baha to an individual believer, cited UHJ:1970)
+
+"One must obey the command of God and submit to medical opinion. Thou hast undertaken this journey to comply with His command and not for the sake of healing, since healing Is in the hand of God, not In the hand of doctors." (From a Tablet of 'Abdu'l-Baha to an individual believer, cited UHJ: 1970)
+
+"According to the explicit decree of Baha'u'llah one must not turn aside from the advice of a competent doctor. It is imperative to consult one even if the patient himself be a well-known and eminent physician. In short, the point is that you should maintain your health by consulting a highly-skilled physician. " ('Abdu'l-Baha SWAB:156)
+
+"... He fully sympathizes with you in this great sorrow that has afflicted you. At such occasions, the true servants of God should be resigned and try to act wisely, using at the same time all available means to help their loved one who is in distress and is suffering from illness.
+
+"Baha'u'llah tells us that in case of disease we should pray but at the same time refer to competent physicians, and abide by their considered decisions. Shoghi Effendi wishes you therefore to find whether your son has really become ill, and if he is, then follow the directions of the doctor. Being versed in the medical sciences they can treat better than even a loving mother can. You can render your assistance by praying for him and at the same time helping the physicians to treat him."(From a letter written on behalf of the Guardian to an individual believer, April 9,1933 cited UHJ:1970, pp. 5-6).
+
+"In His Most Holy Book (the Aqdas) Baha'u'llah says to consult the best physicians, in other words, doctors who have studied a scientific system of medicine: he never gave us to believe He Himself would heal us through 'healers', but rather through prayer and the assistance of medicine and approved treatments."
+
+"In the Book of Aqdas Baha'u'llah urges us, that when we obtain any physical ailment we should refer to the doctor and abide by his decision. Physical and spiritual forces have both to be used to secure the speedy recovery of the patients; no partial treatment is sufficient. So you should pray for your son and also be faithful in your obedience to the directions of the physicians who are trying to restore him to health." (From a letter written on behalf of Shoghi Effendi to an individual believer, June 1, 1933 cited LG:939)
+
+"Now, as long as your healing is in no opposition to these principles, as long as you do not try and take the place of a regular doctor in trying to heal others, but only give them your kind of help through constructive suggestion -- or whatever it may be -- and do not associate this help with being a channel of the direct grace of Baha'u'llah, the Guardian sees no harm in your continuing your assistance to others. But you must conscientiously decide whether in view of the above you are really justified in continuing. He will pray for your guidance and happiness..." (cited LG: 930 From a letter written on behalf of the Guardian to an individual believer, June 8,1948: [Ibid. p. 811 Baha'i News, No. 237, p. 2, November 1950)
+
+57
+
+"He is pleased to see that you are feeling better, and will certainly pray for your full recovery. Before having any serious operation, you should consult more than one qualified physician." (From a letter written on behalf of the Guardian to an individual believer, April 8, 1954 cited LG:989)
+
+"You should always bear in mind Baha'u'llah's counsel that we should take the utmost care of our health, surely not because it is an end in itself, but as a necessary means of serving His Cause. In case of illness, He emphatically tells us, we should refer to the most competent physicians..." (From a letter written on behalf of Shoghi Effendi to an Individual believer, July 17, 1937, cited LG: 991)
+
+'Whatever the skilled physicians prescribe is pleasing and acceptable." (From a letter written on behalf of Shoghi Effendi to an individual believer, June 10, 1928, cited UNJ:1970, 5)
+
+"You should always bear in mind Baha'u'llah's instruction to the effect that in case of any illness, no matter how slight, we should always seek the help and advice of the most competent physicians." (From a letter written on behalf of Shoghi Effendi to an individual believer, April 17, 1937, cited ibid, 6)
+
+"...follow the advice which Baha'u'llah has so repeatedly given in His Tablets namely, that in case of sickness we should invariably consult the most competent physicians, follow their Instructions and leave the rest in God's hands." (From a letter written on behalf of Shoghi Effendi to an individual believer, June 29, 1938, cited ibid., 7)
+
+"According to the explicit decree of Baha'u'llah one must not turn aside from the advice of a competent doctor. It is imperative to consult one even if the patient himself be a well-known and eminent physician. In short, the point is that you should maintain your health by consulting a highly skilled physician." ('Abdu'l-Baha cited UHJ:1970, 4)
+
+"He was very sorry to hear that you haw been so afflicted by disease; and he assures you that he will supplicate for your healing in the Holy Tomb.
+
+"He also urges you to consult first-class doctors, and see if perhaps modern medicine has not found a remedy for this malady which is afflicting you so sorely.
+
+"He urges you in spite of your disability to persevere in spreading the Message of Baha'u'llah, for this will attract to you the divine blessings." (From a letter written on behalf of Shoghi Effendi to an individual believer, April 1, 1951, cited ibid., 8)
+
+"He was very sorry indeed to hear of your serious affliction, but he feels very strongly that you should not despair of your condition but on the contrary put yourself in the hands of the best specialists you can find and combat this disease both spiritually and physically." (From a letter written on behalf of Shoghi Effendi to an individual believer, January 6, 1945, ibid)
+
+"As already urged by cable, he should continue the treatment. He should not be in a hurry but must comply with the instructions of a skillful physician and not go against what the doctor may prescribe or advise." (From a letter written on behalf of Shoghi Effendi to an individual believer, January 20, 1938 ibid., 7)
+
+"As regards Miss ... Shoghi Effendi feels unspeakably grateful for all the kind assistance you have been continually extending to her father in this assuredly heart-rending, nay indeed calamitous situation facing him. You did certainly well, however critical and hopeless his daughter's case may have been considered by the doctors, to advise him to take her to a hospital, and give her the best treatment medical science could possibly offer. In doing so you have acted in full conformity with the counsel so tenderly and repeatedly given by Baha'u'llah that in case of illness one should invariably consult and follow the treatment of competent and conscientious physicians." (From a letter written on behalf of Shoghi Effendi to an individual believer, June 18,1939: ibid)
+
+"He was very sorry to hear of the condition of your sister-in-law... He has already assured her that he will pray for her in the Holy Shrines, and advised her not to passively submit to her disease but to take the very best care of herself under the guidance of the best physicians available." (From a letter written on behalf of Shoghi Effendi, January 17, 1945: ibid)
+
+

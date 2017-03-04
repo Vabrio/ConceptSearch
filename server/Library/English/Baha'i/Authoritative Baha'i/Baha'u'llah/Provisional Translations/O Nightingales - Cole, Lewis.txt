@@ -1,0 +1,319 @@
+[Frank's version first, followed by Juan's final version.]
+
+From frlw@midway.uchicago.eduSat Sep 14 01:29:25 1996
+Date: Tue, 10 Sep 1996 11:02:59 -0500 (CDT)
+From: Frank Lewis <frlw@midway.uchicago.edu>
+To: jrcole@umich.edu
+Cc: irfan@umich.edu
+Subject: RE: O Nightingales
+
+Dear Juan:
+   Thanks so much for the transliteration and translation of ay bulbulan.
+It's a little difficult to make out some of the lines in transliteration
+without the long vowels, but here goes.  There seems to be a sekteh
+(metrical fault) in the 3rd hemistich.  The basic meter of the poem is
+mostaf'elun mostaf'elun mostaf'elun mostaf'elun, which is --^- 4 times.
+However, the 3rd hemistich reads"
+> Ay 'ashiqan, ay 'ashiqan: Ma'shuq rukh namud 'ayan
+which gives --^- --^- --^- ^-^^-  
+I don't have my Elwell-Sutton or Khanlari here at home, but I don't think
+this is a permissible variation of the foot.  Of course, it is not terribly
+unusual for a poet to have a metrically faulty foot, though it isn't
+considered tip-top style.  There is only one other variation from the
+metrical pattern, in hemistich 10:
+> Aynak chih khurshid-i sama bud; shab az kuhsar shud
+scanning as: --^- --^- -^^- --^-   which is probably a prosodically
+permissible variant (again, I'd have to check the prosodic manuals).
+
+However, there are a couple places where the transliteration needs to be
+amended to get the correct scansion:  In hemistich 7 dilbar must be followed
+by an ezafeh and the vowel of va must be elided:
+
+> An dilbar-i pardih nishin v-an khusruv-i charkh-i barin
+
+In hemistich 11, conversely, we must delete an ezafeh:
+
+> Bazar-i jumlih 'ashiqan az zulf-i mushk-i tu fishan shud
+
+In hemistich 12, I think it should be vowelled "dakkih."
+Also, in hemistich 13, for metrical reasons the va must be read as short
+"u":   Khumha hamih dar jush shud; 'aql u nuha madhush shud
+
+The above emendations, of course, have no bearing on the meaning of the
+words, but only on their vocalization.  There is, however, one minor and one
+important point that bear upon the correct understanding of the meaning of
+the text.  In hemistich 10 you give:
+> Aynak chih khurshid-i sama bud; shab az kuhsar shud
+The first word should be vowelled "inak" if it is in the meaning of behold,
+or voila. The second word--is it cheh or cho ?  If cheh, it is an
+expression of wonder, meaning "what a wonderful...", whereas if it is
+"cho" [the letters che and vav], it means "as / like."   It seems to me,
+it should read like this:
+inak cho khorshid-e samaa bovad, shab az kohsaar shod
+    here, now, is the sun of the heavens!
+    darkness [night] has fled from the hilltops.
+
+Finally, for the last line (hemistichs 13 and 14), you read:
+
+> Khumha hamih dar jush shud; 'aql va nuha madhush shud
+> Zi har kashandih nush shud, ta jam-i haqq sarshar shud.
+
+which you translate as:
+> Metal drums
+> 	are playing loudly;
+> 			reason and
+> intellect
+> 	 	are left
+>
+> 					bewildered
+>
+> Everyone drew up
+> 		a draft
+> 	till the Chalice of God
+>
+> overflowed.
+
+The word khum-haa does not usually mean metal drums, but wine jugs or
+amphora, which fits better here.  Also, there is perhaps a pun on the word
+nuhaa.  While it means intellect, it can also mean measure, depth, volume
+and also a glass. Hence the reading is:
+
+the wine jugs have all come to a boil [fervent ferment];
+intellect and reason [pun: the rising waters] are dumbfounded.
+
+Though I don't have the text in Persian characters, the second half of this
+line almost certainly should be read:
+
+    zahr-i kushandih nush shud ta jamm-i haq sarshaar shud
+
+which would mean:
+    The mortal poison was quaffed
+       as soon as the mystic goblet
+            filled to overflowing
+
+Here, then, heavily indebted to Juan's version, is another way to translate
+Baha'u'llah's poem.  It attempts, not by rhyme, but by grammatical and
+visual parallelism, to preserve something of the form of the original.  Of
+course, this often requires a somewhat convoluted word-order, but the word
+order is not always natural in the original, either.  What Baha'u'llah
+wrote, after all, is a classical and metrical ghazal; such poetry is not
+usually composed in a conversational, but rather a literary register.  The
+following version forgoes rhyme and uses a modern graphical lay-out of the
+words on the page (as did Juan's version), but pretty much preserves the
+symbols, diction and metaphors of the original (as, also, did Juan's).  It
+might also be possible to attempt a more modernizing translation, with a
+contemporary diction substituting approximate equivalents for the imagery.
+This might sound much better, but then it would be a modern adaptation of
+the poem and not a translation.
+     yours, Frank
+
+Nightingales,
+   O Nightingales!
+      The season of roses,
+                 of rose bowers,
+                       has come!
+Mystics,
+   O Mystics!
+      The Unseen,
+                in manifest form,
+                       has arrived!
+Lovers,
+   O Lovers!
+       The Beloved,
+                in plain view,
+                       has revealed his face!
+
+Seekers,
+    O Seekers!
+        The Object of Desire
+                into sight
+                       has come!
+
+The morn of Truth's beauty
+                       has dawned;
+the lights of the Absolute 					
+                       have appeared!
+One must escape
+    the prison of body
+      and soar into the air!
+
+That heart-ravisher--
+    the one who sat veiled in seclusion
+    the monarch of the highest paradise--
+        now, into the streets and markets,
+               like Joseph of Egypt,
+                        has ventured!
+
+The Unseen One--
+      hidden for a hundred centuries
+      on the mystic Mountain top of eternity--
+             Behold him now like the sun in the heavens!
+          From the hills,
+                  the darkness
+                         has retreated.
+
+The market for all the world's beloveds
+          has, by your musky locks,
+                            been overturned.
+     and from the sugar of his rubies [i.e, the words or breath of his lips]
+          it is as though
+               a perfume shop
+                            has opened its doors to us.
+
+The jugs of wine have fermented,
+Reason and intellect have gone mad;
+The lethal poison,
+     as soon as God's mystic cup
+                to the brim was filled,
+                            was quaffed.
+
+--END--
+
+
+
+
+
+
+
+From jrcole@umich.edu Wed Nov  6 00:57:16 1996
+Date: Wed, 6 Nov 1996 00:34:58 -0500 (EST)
+From: Juan R Cole <jrcole@umich.edu>
+To: irfan@umich.edu
+Subject: Baha'u'llah's "O Nightingales"
+
+
+
+I've finally gotten around to revising this rendering;  this is the final
+version and supercedes previous ones (some of which, to my embarrassment,
+were quite flawed philologically!).  Many thanks to Alma Engels, Frank
+Lewis and others for absolutely key help.  This experience has taught me
+that while my command of Persian prose is probably adequate for most of my
+historical research, I really have a lot of work to do with regard to
+poetry!  But what a nice prospect.
+
+cheers   Juan
+
+---------------------------
+
+Translated by
+
+Juan R.I. Cole
+History
+University of Michigan
+
+
+					O Nightingales
+
+   					           by
+
+					     Baha'u'llah
+
+				
+Nightingales, 
+		O nightingales!
+The season of roses,
+		the blooming time . . .
+	is here.
+
+
+Mystics, 
+	O mystics!
+		What you could
+not see, 
+	now you can.
+
+
+
+Lovers,
+		O lovers!
+The adored one's
+		cheek is in
+	full view.
+
+
+Seekers, 
+	O seekers!
+			The object of desire
+	is before
+	your eyes.
+
+
+
+The beauty of 
+		the Eternal Truth
+has dawned;
+		the lights of
+the Absolute
+	have shone.
+
+
+You must be
+	freed from the body's
+jail,
+		so that you can soar
+	into the 
+					air.
+
+
+
+The beloved 
+		seated, veiled--
+the great king
+		of the exalted 
+	spheres--
+
+
+now,  like Joseph
+		in Egypt,
+			frequents
+alleyways and
+	bazaars!
+
+
+The Unseen One
+	was concealed
+			behind a hundred
+		eons
+	on the Mount Qaf
+			of immortality--
+
+Look, what a sun in
+	the sky there was; 
+			night has fallen 
+because of
+	that mountain peak!
+
+
+The wholesale bazaar 
+			of lovers
+has been scattered
+		by your
+	perfumed locks
+
+
+And because of  your 
+	lips--sugar rubies--
+			everything
+smells like
+		a confectioner's shop.
+
+The wine has
+	matured in its jugs;
+			reason and 
+intellect
+	 	are left
+
+					bewildered
+
+When the chalice of God
+		was filled to the brim
+	everyone rushed to
+		imbibe 
+	   this 
+		deadly
+			poison!	
+
+
+5
+
+
