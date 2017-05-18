@@ -1,22 +1,17 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <title>Recherche par concept</title>
-        <link href="css/style.css" rel="stylesheet" type="text/css" />
-        <link href="css/bootstrap.min.css" rel="stylesheet">
-        <script src='js/script.js'></script>
+<html ng-app="app">
+    <head ng-controller = "appController as app">
+        <script src="libs/angular.min.js"></script>
+        <p>The name is {{app.title}}</p>
     </head>
+    <div ng-controller="hey">
+        <p>The name is {{title}}</p>
+    </div>
 
-    <body>
-    	<div id="header">
-    		<img id="logo"/>
-    		<h1 id="title">Recherche par concept</h1>
-    		
-    		<div id="menu">
-    			<a href="reading.html">Lecture des écrits</a>
-    			<a href="conceptsearch.html">Recherche de concept</a>
-    		</div>
-    	</div>
+    <body ng-controller = "appController as app">
+        
+    	<div ng-include="'./html/navbar.html'"></div>
+        Here comes the sun
     </body>
+    
 </html>

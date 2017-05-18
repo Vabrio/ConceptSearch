@@ -8,6 +8,9 @@ http.createServer(function (request, response) {
 
     // Print the name of the file for which request is made.
     console.log("Request for " + pathname + " received.");
+    if (pathname == "") {
+        pathname = "index.html";
+    }
     
     fs.readFile("../client/"+pathname.substr(1), function (err, data) {
       if (err) {
@@ -22,11 +25,12 @@ http.createServer(function (request, response) {
          response.writeHead(200, {'Content-Type': 'text/html'});	
          
          // Write the content of the file to response body
-         response.write(data.toString());		
+         response.write(data.toString());
       }
       // Send the response body 
       response.end();
-   });   
+    });
+
 }).listen(8081);
 
 // Console will print the message

@@ -1,0 +1,27 @@
+
+<div id="header">
+    <!--<img id="logo"/>-->
+    <h1 id="title">Recherche par concept</h1>
+
+    <div id="menu">
+        <a href="reading.html">Lecture des écrits</a>
+        <a href="conceptsearch.html">Recherche de concept</a>
+    </div>
+</div>
+
+<nav class="navbar-fixed-top botborder">
+
+	<ul class="nav nav-pills pull-right">
+
+		<li >
+			<!-- Here goes the context button, see directive of app.js -->
+			<context-button></context-button>
+		</li>
+
+	</ul>
+
+	<div class="nav nav-pills pull-left">
+		<!-- Here goes the title, whose content is bound to a variable via AngularJS -->
+		<span class="btn btn-lg linknodeco transibutton">{{app.title}}</span>
+	</div>
+</nav>
