@@ -2,15 +2,12 @@
 exports.__esModule = true;
 var fs = require('fs');
 var SQL = require('sql.js');
-// Read the database
 var filebuffer = fs.readFileSync('../db/CS.sqlite');
 var db = new SQL.Database(filebuffer);
 var Manager = (function () {
     function Manager() {
     }
-    // Giving a concept id, returns the adresss of the writing
     Manager.getWriting = function (id) {
-        // Prepare a statement
         var writing = db.exec("SELECT address FROM wri_writings WHERE id=" + id);
         var concepts = db.exec("SELECT name, id FROM cod_concepts_draft WHERE writingid=" + id);
         var address = writing[0].values[0][0];
@@ -24,6 +21,7 @@ var Manager = (function () {
     Manager.getWritingList = function () {
         var res = db.exec("SELECT id, name, writer, address FROM wri_writings");
         var list = res[0].values;
+        console.log(res);
         return JSON.stringify(list);
     };
     Manager.addConcept = function (concept, writingId, firstCh, lastCh) {
@@ -36,3 +34,4 @@ var Manager = (function () {
     return Manager;
 }());
 exports.Manager = Manager;
+//# sourceMappingURL=db_communication.js.map

@@ -8,38 +8,46 @@ declare function require(name:string): any;
 let express = require('express');
 let app = express();
 
-app.get('/search/', function (req: any, res: any) {
-    let id = req.query.id;
+app.all('/*', function(req: any, res: any, next: any) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
+
+app.get('/search', function (req: any, res: any) {
+    let request = req.query.request;
+
+	let list = JSON.parse(Manager.getWritingList());
+	let regE = new RegExp(request,'ig');
+	let research = simpleSearch(regE, list);
     // String sent to client, header is necessary to get the accents
     res.header("Content-Type", "text/plain; charset=utf-8");
     
-    let resp = Manager.getWriting(id);
-    res.end(resp);
+	res.status(200).send(research);
+	
+	console.log("Research requested : " + request)
 })
 app.get('/list', function (req: any, res: any) {
     // Return a JSON list of all writings, to be used afterwards
     res.header("Content-Type", "text/plain; charset=utf-8");
-    res.end(Manager.getWritingList());
+	//
+	res.send(Manager.getWritingList());
+	
+	console.log("List requested and sent \n");
 })
-app.post('/concept/', function(req: any, res: any){
+app.post('/concept', function(req: any, res: any){
     let query = req.query;
     let id = query.id;
-    let name = query.name;
-    let begin = query.begin;
+   	let name = query.name;
+	console.log(req.body)
+    /*let begin = query.begin;
     let end = query.end;
-    let response = Manager.addConcept(name, id, begin, end);
-    res.end(response);
+    let response = Manager.addConcept(name, id, begin, end);*/
+	res.end(/*response*/name);
     
+	console.log("Concept added : " + name)
 })
 
-let list = JSON.parse(Manager.getWritingList());
-let addressList: string[] = [];
-for (let l of list){
-    addressList.push(l[3]);
-}
-
-let regE = new RegExp('justice','ig');
-simpleSearch(regE, addressList);
 
 var server = app.listen(8081, function () {
 

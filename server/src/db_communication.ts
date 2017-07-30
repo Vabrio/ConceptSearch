@@ -1,3 +1,5 @@
+import { DB_LOCATION } from "./const";
+
 declare function require(name:string): any;
 declare const Buffer: any;
 const fs = require('fs');
@@ -26,13 +28,14 @@ class Manager {
         return response;
     }
     
+	// Return the writings table
     static getWritingList(){
         let res = db.exec("SELECT id, name, writer, address FROM wri_writings");
         let list =res[0].values;
-        
-        return JSON.stringify(list);
+		return JSON.stringify(list);
     }
     
+	// Adds a concept to the DB
     static addConcept(concept: string, writingId: string, firstCh: string, lastCh: string){
         
         db.run('INSERT INTO cod_concepts_draft (name, writingid, begin, end) VALUES (?,?,?,?)', [concept, writingId, firstCh, lastCh]);

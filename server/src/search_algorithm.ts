@@ -1,67 +1,98 @@
+import { EXTRACT_SEPARATOR, EXTRACT_SIZE } from "./const";
+	
 declare function require(name:string): any;
 const fs = require('fs');
-const SQL = require('sql.js');
-
-// Read the database
-const filebuffer = fs.readFileSync('../db/CS.sqlite');
-let db = new SQL.Database(filebuffer);
-
-
-// Giving a concept id, returns the adresss of the writing
-function getAddress(id: number){
-    // Prepare a statement
-    let stmt = db.prepare("SELECT address FROM wri_writings WHERE id="+id);
-    let res = stmt.getAsObject();
-    
-    // Bind new values
-    stmt.step()
-    var row = stmt.getAsObject();
-    return row.address;
-}
-
-// Given an adress and the passage of the writing gives the extract
-function getExtract(address: string, begin?: number, end?: number){
-    var iconvlite = require('iconv-lite');
-    var filebuffer = fs.readFileSync(address);
-    var result = iconvlite.decode(filebuffer,"latin1");
-    
-    // Check parameters
-    if (begin && end){ return result.substring(begin, end); }
-    else if (begin){ return result.substring(begin); }
-    else if (end){ return result.substring(0, end); }
-    else { return result; }
-}
-// Example of use : console.log(getExtract(getAddress(20), undefined, 150));
-// To get full extract, put last two param at undefined
 
 
 /* Deals with the research 
 * @param request : RegExp of the request
 * @param writingList : list of writing addresses to be searched on
 
-* TODO : currently, it only find the occurence, we need to use these data to recover correct text
+* @return : [[extract, pattern, index],
+			[id, name, writer, address]]
 */
-let simpleSearch = function(request: object, writingList: string[]){
-    let results: Array<[number[], string]> = [];
+let simpleSearch = function(request: RegExp, writingList: Array<[number, string, string, string]>){
+    let response: Array<[any[], [number, string, string, string]]> = [];
     for (let link of writingList){
-        console.log(link);
         if (link != undefined){
-            var iconvlite = require('iconv-lite');
-            var filebuffer = fs.readFileSync(link);
-            var result = iconvlite.decode(filebuffer,"latin1");
-
-            var found: number[];
-            found = result.match(request);
-            
-            if (found != null){
-                console.log(found.length);
-                results.push([found, link]);
+			
+			// Get the writing as text
+            let iconvlite = require('iconv-lite');
+            let filebuffer = fs.readFileSync(link[3]);
+            let writingText = iconvlite.decode(filebuffer,"latin1");
+			
+			// Find the pattern
+			let found: any,
+				result: any[] = [];
+			while ((found = request.exec(writingText)) != null){
+				result.push([found[0], found.index]);
+			}
+			
+			// Add the data found 
+			if (result.length != 0){
+                response.push([getExtracts(result, writingText), link]);
            }
         }
     }
-    
-    return results;
+    response.sort(sortFunction);
+    return response;
 };
+
+// Compare two texts from the number of occurence of the pattern found
+let sortFunction = function(a: any, b: any){
+	return b[0].length - a[0].length;
+}
+
+
+/**
+* Get the extracts according to the indexes entered and the text
+*
+* @return an array with each element containing the extract, the pattern found and where in the extract to find it
+*/
+let getExtracts = function(indexes: Array<[string, number]>, text: string) : Array<[string, string, number]>{
+	// Create the result array
+	let result: Array<[string, string, number]> = [];
+	
+	// Split the text according to the separator wanted
+	let splittedText = text.split(EXTRACT_SEPARATOR);
+	// Array of the cummulative sum
+	let sumSize = [splittedText[0].length];
+	
+	// Order the list of index and start a counter
+	indexes.sort(function(a: any, b:any){return a[1]-b[1];});
+	let currentId = 0;
+	while (currentId < indexes.length && indexes[currentId][1] < sumSize[0]){
+		let s = "";
+		for (let k=0; k < EXTRACT_SIZE; k++){
+			if (splittedText.length > k){
+				s = s + splittedText[k] + ".";
+			}
+		}
+		result.push([s,indexes[currentId][0], indexes[currentId][1]]);
+		currentId += 1;
+	}
+		
+	// Loop on the splitted array
+	let currentSize = sumSize[0];
+	for (let k=1; k<splittedText.length; k++){
+		currentSize = currentSize + splittedText[k].length + 1;
+		sumSize.push(currentSize);
+		while (currentId < indexes.length && indexes[currentId][1] < currentSize){
+			let s = "";
+			for (let l=0; l < EXTRACT_SIZE; l++){
+				if (splittedText.length > k+l){
+					s = s + splittedText[k+l] + ".";
+				}
+			}
+			result.push([s,indexes[currentId][0], indexes[currentId][1] -  currentSize + splittedText[k].length]);
+			
+			currentId += 1;
+		}
+	}
+	
+	return result;
+}
+
 
 
 export {simpleSearch};

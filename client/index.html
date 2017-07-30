@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html ng-app="app">
+<html>
     <head>
         <title>Concept Search</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         
-        <script src="main.js"></script>
+        <script src="lib/vue.min.js"></script>
     </head>
     <div>
-        <h1><span class="label label-default">Searching</span></h1>
+        <h1><span class="label label-default">Search</span></h1>
     </div>
 
     <body>
-        
-    	<div</div>
-        <input/>
+    	<div id="app">
+				<input name="research" v-model="research"/>
+				<button v-on:click="search">Send</button>
+		</div>
+		<div id="showON">
+			{{ message }}
+		</div>
     </body>
+	
+	
+	<!-- Script must be at the end for it to recognize the objects -->
+	<script src="js/main.js"></script>
     
 </html>
