@@ -21,7 +21,6 @@ var Manager = (function () {
     Manager.getWritingList = function () {
         var res = db.exec("SELECT id, name, writer, address FROM wri_writings");
         var list = res[0].values;
-        console.log(res);
         return JSON.stringify(list);
     };
     Manager.addConcept = function (concept, writingId, firstCh, lastCh) {

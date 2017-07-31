@@ -1,35 +1,21 @@
-
 var url = "http://localhost:8081/";
+
+Vue.component('extract', {
+	props: ['text', 'id'],
+	template: '<li v-show="id<10 "><a>{{ text }}</a></li>'
+})
+
+Vue.component('book', {
+  props: ['metadata'],
+  template: '<div><h1>{{ metadata[1][1] }}</h1><h2>{{ metadata[1 ][2] }}</h2> <br/><ul><extract v-for="extr in metadata[0]" v-bind:text="extr[0]" v-bind:id="metadata[0].indexOf(extr)"></extract></div></ul>'
+})
+
+
+
 function callback(param) {
 	data = JSON.parse(param);
-    show.message = data[0][0][0][0];
+	show.books = data;
 }
-
-
-function httpPostAsync(theUrl, params, callback) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            callback(xmlHttp.responseText);
-        }
-    };
-    xmlHttp.open("POST", theUrl + params, true);
-    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlHttp.send(null);
-}
-function httpGetAsync(theUrl, callback) {
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.onreadystatechange = function () {
-        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-            callback(xmlHttp.responseText);
-        }
-    };
-    xmlHttp.open("GET", theUrl, true);
-    xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xmlHttp.send(null);
-}
-
-
 var app = new Vue({
     el: '#app',
     data: {
@@ -37,13 +23,13 @@ var app = new Vue({
     },
 	methods: {
 		search: function () {
-			httpGetAsync(url + "search?request="+app.research, callback);
+			httpAsync(url + "search?request="+app.research,"", callback, "GET");
 		}
   	}
 });
 var show = new Vue({
     el: '#showON',
     data: {
-        message: ""
+		books: [[[["oh my !"]],["","Name 1","Author 1"]],[[["It's me !"]],["","Name 2","Author 2"]]],
     }
 });

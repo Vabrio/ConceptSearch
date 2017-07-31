@@ -8,6 +8,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         
         <script src="lib/vue.min.js"></script>
+        <script src="js/http_requests.js"></script>
     </head>
     <div>
         <h1><span class="label label-default">Search</span></h1>
@@ -19,7 +20,10 @@
 				<button v-on:click="search">Send</button>
 		</div>
 		<div id="showON">
-			{{ message }}
+			<book
+				v-for="b in books"
+				v-bind:metadata="b">
+			</book>
 		</div>
     </body>
 	
