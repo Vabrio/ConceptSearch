@@ -3,6 +3,10 @@ import { simpleSearch } from "./search_algorithm";
 // DB communication
 import { Manager } from "./db_communication";
 
+declare function require(name:string): any;
+declare const Buffer: any;
+const fs = require('fs');
+
 // STARTING REST SERVER
 declare function require(name:string): any;
 let express = require('express');
@@ -19,7 +23,10 @@ app.get('/search', function (req: any, res: any) {
 
 	let list = JSON.parse(Manager.getWritingList());
 	let regE = new RegExp(request,'ig');
+	console.log("COUCOU 1");
 	let research = simpleSearch(regE, list);
+	
+	console.log("2 !!!")
     // String sent to client, header is necessary to get the accents
     res.header("Content-Type", "text/plain; charset=utf-8");
     
@@ -46,6 +53,14 @@ app.post('/concept', function(req: any, res: any){
 	res.end(/*response*/name);
     
 	console.log("Concept added : " + name)
+})
+app.get('/read', function(req:any, res: any){
+   	let address = req.query.address;
+	console.log(address);
+	let iconvlite = require('iconv-lite');
+	let filebuffer = fs.readFileSync(address);
+	let writingText = iconvlite.decode(filebuffer,"latin1");
+	res.end(writingText);
 })
 
 

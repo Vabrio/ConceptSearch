@@ -2,6 +2,7 @@
 exports.__esModule = true;
 var search_algorithm_1 = require("./search_algorithm");
 var db_communication_1 = require("./db_communication");
+var fs = require('fs');
 var express = require('express');
 var app = express();
 app.all('/*', function (req, res, next) {
@@ -13,7 +14,9 @@ app.get('/search', function (req, res) {
     var request = req.query.request;
     var list = JSON.parse(db_communication_1.Manager.getWritingList());
     var regE = new RegExp(request, 'ig');
+    console.log("COUCOU 1");
     var research = search_algorithm_1.simpleSearch(regE, list);
+    console.log("2 !!!");
     res.header("Content-Type", "text/plain; charset=utf-8");
     res.status(200).send(research);
     console.log("Research requested : " + request);
@@ -30,6 +33,14 @@ app.post('/concept', function (req, res) {
     console.log(req.body);
     res.end(name);
     console.log("Concept added : " + name);
+});
+app.get('/read', function (req, res) {
+    var address = req.query.address;
+    console.log(address);
+    var iconvlite = require('iconv-lite');
+    var filebuffer = fs.readFileSync(address);
+    var writingText = iconvlite.decode(filebuffer, "latin1");
+    res.end(writingText);
 });
 var server = app.listen(8081, function () {
     var host = server.address().address;

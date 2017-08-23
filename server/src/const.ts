@@ -3,7 +3,7 @@ const DB_LOCATION = '../db/CS.sqlite';
 
 
 // Extracting parameters
-const EXTRACT_SEPARATOR = "."; // 2 sentences are separated with "."
+const EXTRACT_SEPARATOR = ". "; // 2 sentences are separated with "."
 const EXTRACT_SIZE = 3; // number of sentences
 
 

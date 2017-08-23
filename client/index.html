@@ -14,16 +14,21 @@
         <h1><span class="label label-default">Search</span></h1>
     </div>
 
-    <body>
+    <body id="gui">
     	<div id="app">
 				<input name="research" v-model="research"/>
 				<button v-on:click="search">Send</button>
 		</div>
-		<div id="showON">
+		<div id="research_results" v-show="isResearch">
 			<book
 				v-for="b in books"
 				v-bind:metadata="b">
 			</book>
+		</div>
+		<div id="complete_text" v-show="isWriting">
+			<button v-on:click="back">Back</button>
+			<br/>
+			<textarea rows="30" cols="150" v-on:click.prevent="printIt()" v-html=" text " id="texteee"></textarea>
 		</div>
     </body>
 	
