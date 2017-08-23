@@ -14,9 +14,7 @@ app.get('/search', function (req, res) {
     var request = req.query.request;
     var list = JSON.parse(db_communication_1.Manager.getWritingList());
     var regE = new RegExp(request, 'ig');
-    console.log("COUCOU 1");
     var research = search_algorithm_1.simpleSearch(regE, list);
-    console.log("2 !!!");
     res.header("Content-Type", "text/plain; charset=utf-8");
     res.status(200).send(research);
     console.log("Research requested : " + request);
