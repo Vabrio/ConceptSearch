@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 var DB_LOCATION = '../db/CS.sqlite';
 exports.DB_LOCATION = DB_LOCATION;
 var EXTRACT_SEPARATOR = ". ";
