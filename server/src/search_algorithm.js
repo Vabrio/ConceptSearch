@@ -1,9 +1,11 @@
+"use strict";
+exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var simpleSearch = function (request, writingList) {
     var response = [];
-    for (var _i = 0; _i < writingList.length; _i++) {
-        var link = writingList[_i];
+    for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
+        var link = writingList_1[_i];
         if (link != undefined) {
             var iconvlite = require('iconv-lite');
             var filebuffer = fs.readFileSync(link[3]);
