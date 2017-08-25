@@ -50,7 +50,7 @@ var gui = new Vue({
 var app = new Vue({
     el: '#app',
     data: {
-        research: "Joie"
+        research: "Courage"
     },
 	methods: {
 		search: function () {
