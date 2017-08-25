@@ -19,7 +19,7 @@
 				<input name="research" v-model="research"/>
 				<button v-on:click="search">Send</button>
 		</div>
-		<div id="research_results" v-show="isResearch">
+		<div id="research_results" v-show="isResearch & dataReceived">
 			<book
 				v-for="b in books"
 				v-bind:metadata="b">

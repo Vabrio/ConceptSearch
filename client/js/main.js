@@ -18,6 +18,7 @@ function callback(param) {
 	if (data == "") {
 		show.books = [[[[""]],["","No writing found",""]]]
 	}
+	show.dataReceived = true;
 }
 function getwriting(address){
 	httpAsync(url+"read?address="+address, "", link, "GET");
@@ -62,7 +63,8 @@ var show = new Vue({
     el: '#research_results',
     data: {
 		books: [[[[]],["","","No request yet"]]],
-		isResearch: !gui.isWriting
+		isResearch: !gui.isWriting,
+		dataReceived: false
     }
 });
 var completeText = new Vue({
