@@ -3,15 +3,22 @@ exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var simpleSearch = function (request, writingList) {
+    var authorCount = {};
     var response = [];
     for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
         var link = writingList_1[_i];
-        if (link != undefined) {
+        if (authorCount[link[2]] != undefined) {
+            authorCount[link[2]] += 1;
+        }
+        else {
+            authorCount[link[2]] = 1;
+        }
+        if (link != undefined && authorCount[link[2]] <= const_1.MAX_PER_AUTHOR) {
             var iconvlite = require('iconv-lite');
             var filebuffer = fs.readFileSync(link[3]);
             var writingText = iconvlite.decode(filebuffer, "latin1");
             var found = void 0, result = [];
-            while ((found = request.exec(writingText)) != null) {
+            while ((found = request.exec(writingText)) != null && result.length < const_1.MAX_PER_WRITING) {
                 result.push([found[0], found.index]);
             }
             if (result.length != 0) {

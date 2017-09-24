@@ -1,5 +1,5 @@
-import { EXTRACT_SEPARATOR, EXTRACT_SIZE } from "./const";
-	
+import { EXTRACT_SEPARATOR, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR } from "./const";
+
 declare function require(name:string): any;
 const fs = require('fs');
 
@@ -12,10 +12,20 @@ const fs = require('fs');
 			[id, name, writer, address]]
 */
 let simpleSearch = function(request: RegExp, writingList: Array<[number, string, string, string]>){
+	
+	let authorCount : {[id: string]: number} = {};
     let response: Array<[any[], [number, string, string, string]]> = [];
     for (let link of writingList){
-        if (link != undefined){
-			
+		
+		// Do count by author
+		if (authorCount[link[2]] != undefined){
+			authorCount[link[2]] += 1;
+		}
+		else{
+			authorCount[link[2]] = 1;
+		}
+		
+		if (link != undefined && authorCount[link[2]] <= MAX_PER_AUTHOR){
 			// Get the writing as text
             let iconvlite = require('iconv-lite');
             let filebuffer = fs.readFileSync(link[3]);
@@ -24,7 +34,7 @@ let simpleSearch = function(request: RegExp, writingList: Array<[number, string,
 			// Find the pattern
 			let found: any,
 				result: any[] = [];
-			while ((found = request.exec(writingText)) != null){
+			while ((found = request.exec(writingText)) != null && result.length < MAX_PER_WRITING){
 				result.push([found[0], found.index]);
 			}
 			

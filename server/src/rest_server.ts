@@ -19,6 +19,7 @@ app.all('/*', function(req: any, res: any, next: any) {
 });
 
 app.get('/search', function (req: any, res: any) {
+	// Return the list of extracts matching request
     let request = req.query.request;
 
 	let list = JSON.parse(Manager.getWritingList());
