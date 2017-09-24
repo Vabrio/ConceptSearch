@@ -77,7 +77,7 @@ var completeText = new Vue({
 	methods: {
 		printIt: function(){
 			var a = document.getElementById("texteee");
-			alert(a.selectionStart);
+			//alert(a.selectionStart);
 		},
 		back: function(){
 			switch_vue();
