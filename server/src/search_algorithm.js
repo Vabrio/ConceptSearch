@@ -43,7 +43,7 @@ var getExtracts = function (indexes, text) {
         var s = "";
         for (var k = 0; k < const_1.EXTRACT_SIZE; k++) {
             if (splittedText.length > k) {
-                s = s + splittedText[k] + ".";
+                s = s + splittedText[k] + const_1.EXTRACT_SEPARATOR;
             }
         }
         result.push([s, indexes[currentId][0], indexes[currentId][1]]);
@@ -51,13 +51,13 @@ var getExtracts = function (indexes, text) {
     }
     var currentSize = sumSize[0];
     for (var k = 1; k < splittedText.length; k++) {
-        currentSize = currentSize + splittedText[k].length + 1;
+        currentSize = currentSize + splittedText[k].length + const_1.EXTRACT_SEPARATOR.length;
         sumSize.push(currentSize);
         while (currentId < indexes.length && indexes[currentId][1] < currentSize) {
             var s = "";
             for (var l = 0; l < const_1.EXTRACT_SIZE; l++) {
                 if (splittedText.length > k + l) {
-                    s = s + splittedText[k + l] + ".";
+                    s = s + splittedText[k + l] + const_1.EXTRACT_SEPARATOR;
                 }
             }
             result.push([s, indexes[currentId][0], indexes[currentId][1] - currentSize + splittedText[k].length]);

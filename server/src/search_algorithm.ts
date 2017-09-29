@@ -75,7 +75,7 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 		let s = "";
 		for (let k=0; k < EXTRACT_SIZE; k++){
 			if (splittedText.length > k){
-				s = s + splittedText[k] + ".";
+				s = s + splittedText[k] + EXTRACT_SEPARATOR;
 			}
 		}
 		result.push([s,indexes[currentId][0], indexes[currentId][1]]);
@@ -85,13 +85,13 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 	// Loop on the splitted array
 	let currentSize = sumSize[0];
 	for (let k=1; k<splittedText.length; k++){
-		currentSize = currentSize + splittedText[k].length + 1;
+		currentSize = currentSize + splittedText[k].length + EXTRACT_SEPARATOR.length;
 		sumSize.push(currentSize);
 		while (currentId < indexes.length && indexes[currentId][1] < currentSize){
 			let s = "";
 			for (let l=0; l < EXTRACT_SIZE; l++){
 				if (splittedText.length > k+l){
-					s = s + splittedText[k+l] + ".";
+					s = s + splittedText[k+l] + EXTRACT_SEPARATOR;
 				}
 			}
 			result.push([s,indexes[currentId][0], indexes[currentId][1] -  currentSize + splittedText[k].length]);
