@@ -1,2 +1,12 @@
 h1 {
 }
+
+#main-page-body{
+	position: absolute;
+	height: 100%;
+	
+}
+.main-page-block{
+	height : 100%;
+	overflow: auto;
+}

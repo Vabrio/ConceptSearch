@@ -19,16 +19,16 @@
 				<input name="research" v-model="research"/>
 				<button v-on:click="search">Send</button>
 		</div>
-		<div id="research_results" v-show="isResearch & dataReceived">
-			<book
-				v-for="b in books"
-				v-bind:metadata="b">
-			</book>
-		</div>
-		<div id="complete_text" v-show="isWriting">
-			<button v-on:click="back">Back</button>
-			<br/>
-			<textarea rows="30" cols="150" v-on:click.prevent="printIt()" v-html=" text " id="texteee"></textarea>
+		<div id="main-page-body">
+			<div id="research_results" v-show="dataReceived" class="col-sm-4 main-page-block">
+				<book
+					v-for="b in books"
+					v-bind:metadata="b">
+				</book>
+			</div>
+			<div id="complete_text" v-show="writingChosed" class="col-sm-8 main-page-block">
+				<div id="texteee" v-on:click="printIt()" v-html=" text "></div>
+			</div>
 		</div>
     </body>
 	

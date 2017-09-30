@@ -25,30 +25,10 @@ function getwriting(address){
 	httpAsync(url+"read?address="+address, "", link, "GET");
 }
 function link(writing){
-	gui.isWriting = true;
-	completeText.text = writing//.replace(/(\r\n|\n|\r)/g,"<br />");
-	completeText.isWriting = true;
-	show.isResearch = false;
-}
-function switch_vue(){
-	gui.isWriting = false;
-	completeText.isWriting = false;
-	show.isResearch = true;
+	completeText.text = writing.replace(/(\r\n|\n|\r)/g,"<br />");
+	completeText.writingChosed = true;
 }
 
-
-var gui = new Vue({
-	el: "#gui",
-	data: {
-		isWriting : false
-	},
-	watch: {
-		isWriting: function (isIt) {
-			completeText.isWrtiting = isIt;
-			show.isResearch = !isIt;
-    	}
-	}
-})
 var app = new Vue({
     el: '#app',
     data: {
@@ -60,27 +40,25 @@ var app = new Vue({
 		}
   	}
 });
+
 var show = new Vue({
     el: '#research_results',
     data: {
 		books: [[[[]],["","","No request yet"]]],
-		isResearch: !gui.isWriting,
 		dataReceived: false
     }
 });
 var completeText = new Vue({
     el: '#complete_text',
     data: {
-		isWriting: gui.isWriting,
+		writingChosed: false,
 		text: ""
     },
 	methods: {
 		printIt: function(){
 			var a = document.getElementById("texteee");
-			//alert(a.selectionStart);
-		},
-		back: function(){
-			switch_vue();
+			//alert(document.getSelection().focusOffset + " " + document.getSelection().anchorOffset);
+			//alert(completeText.text[a.selectionStart]);
 		}
 	}
 });
