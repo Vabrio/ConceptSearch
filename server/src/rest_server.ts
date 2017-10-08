@@ -54,12 +54,23 @@ app.post('/concept', function(req: any, res: any){
 	console.log("Concept added : " + name)
 })
 app.get('/read', function(req:any, res: any){
+	// Params
    	let address = req.query.address;
-	console.log(address);
+	let pattern = req.query.pattern;
+	let index = parseInt(req.query.index);
+	let author = req.query.author;
+	let title = req.query.title;
+	
+	// Reading from address
 	let iconvlite = require('iconv-lite');
 	let filebuffer = fs.readFileSync(address);
 	let writingText = iconvlite.decode(filebuffer,"latin1");
-	res.end(writingText);
+	
+	// Change text to put the extract in bold
+	let result =writingText.substring(0, index) + "<span id='extract'><b>" +  writingText.substring(index, index + pattern.length) + "</b></span>" + writingText.substring(index+pattern.length); 
+	
+	// Return the text + the author + the name of the writing
+	res.end(JSON.stringify([result, author, title]));
 })
 
 

@@ -1,4 +1,4 @@
-import { EXTRACT_SEPARATOR, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR } from "./const";
+import { EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR } from "./const";
 
 declare function require(name:string): any;
 const fs = require('fs');
@@ -8,24 +8,26 @@ const fs = require('fs');
 * @param request : RegExp of the request
 * @param writingList : list of writing addresses to be searched on
 
-* @return : [[extract, pattern, index],
-			[id, name, writer, address]]
+* @return : [writer, [name,address,id,[extract, pattern, index]]]
 */
 let simpleSearch = function(request: RegExp, writingList: Array<[number, string, string, string]>){
 	
-	let authorCount : {[id: string]: number} = {};
-    let response: Array<[any[], [number, string, string, string]]> = [];
+	let authorDict : {[id: string]: number} = {};
+let response: Array<[string, any[]]> = [];
     for (let link of writingList){
-		
+		let idAuthor: number;
 		// Do count by author
-		if (authorCount[link[2]] != undefined){
-			authorCount[link[2]] += 1;
+		if (authorDict[link[2]] != undefined){
+			idAuthor = authorDict[link[2]];
 		}
 		else{
-			authorCount[link[2]] = 1;
+			idAuthor = response.length;
+			authorDict[link[2]] = idAuthor;
+			let arr: any[] = [];
+			response.push([link[2], arr]);
 		}
 		
-		if (link != undefined && authorCount[link[2]] <= MAX_PER_AUTHOR){
+		if (link != undefined && idAuthor != -1 && response[idAuthor][1].length <= MAX_PER_AUTHOR){
 			// Get the writing as text
             let iconvlite = require('iconv-lite');
             let filebuffer = fs.readFileSync(link[3]);
@@ -35,12 +37,12 @@ let simpleSearch = function(request: RegExp, writingList: Array<[number, string,
 			let found: any,
 				result: any[] = [];
 			while ((found = request.exec(writingText)) != null && result.length < MAX_PER_WRITING){
-				result.push([found[0], found.index]);
+				result.push([found[0] , found.index]);
 			}
 			
 			// Add the data found 
 			if (result.length != 0){
-                response.push([getExtracts(result, writingText), link]);
+				response[idAuthor][1].push([link[1], link[3], link[0], getExtracts(result, writingText)]);
            }
         }
     }
@@ -50,19 +52,20 @@ let simpleSearch = function(request: RegExp, writingList: Array<[number, string,
 
 // Compare two texts from the number of occurence of the pattern found
 let sortFunction = function(a: any, b: any){
-	return b[0].length - a[0].length;
+	return b[0] - a[0];
 }
 
 
 /**
 * Get the extracts according to the indexes entered and the text
 *
-* @return an array with each element containing the extract, the pattern found and where in the extract to find it
+* @return : Array<[extract, pattern, index]>
 */
 let getExtracts = function(indexes: Array<[string, number]>, text: string) : Array<[string, string, number]>{
 	// Create the result array
 	let result: Array<[string, string, number]> = [];
 	
+	/*
 	// Split the text according to the separator wanted
 	let splittedText = text.split(EXTRACT_SEPARATOR);
 	// Array of the cummulative sum
@@ -99,7 +102,12 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 			currentId += 1;
 		}
 	}
-	
+	*/
+	for (let k=0; k<indexes.length; k++){
+		let n = indexes[k][1];
+		let w = indexes[k][0];
+		result.push([text.substring(n - EXTRACT_SIZE, n + EXTRACT_SIZE + w.length), w, n]);
+	}
 	return result;
 }
 

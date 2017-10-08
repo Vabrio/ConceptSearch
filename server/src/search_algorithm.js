@@ -3,17 +3,21 @@ exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var simpleSearch = function (request, writingList) {
-    var authorCount = {};
+    var authorDict = {};
     var response = [];
     for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
         var link = writingList_1[_i];
-        if (authorCount[link[2]] != undefined) {
-            authorCount[link[2]] += 1;
+        var idAuthor = void 0;
+        if (authorDict[link[2]] != undefined) {
+            idAuthor = authorDict[link[2]];
         }
         else {
-            authorCount[link[2]] = 1;
+            idAuthor = response.length;
+            authorDict[link[2]] = idAuthor;
+            var arr = [];
+            response.push([link[2], arr]);
         }
-        if (link != undefined && authorCount[link[2]] <= const_1.MAX_PER_AUTHOR) {
+        if (link != undefined && idAuthor != -1 && response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR) {
             var iconvlite = require('iconv-lite');
             var filebuffer = fs.readFileSync(link[3]);
             var writingText = iconvlite.decode(filebuffer, "latin1");
@@ -22,7 +26,7 @@ var simpleSearch = function (request, writingList) {
                 result.push([found[0], found.index]);
             }
             if (result.length != 0) {
-                response.push([getExtracts(result, writingText), link]);
+                response[idAuthor][1].push([link[1], link[3], link[0], getExtracts(result, writingText)]);
             }
         }
     }
@@ -31,38 +35,14 @@ var simpleSearch = function (request, writingList) {
 };
 exports.simpleSearch = simpleSearch;
 var sortFunction = function (a, b) {
-    return b[0].length - a[0].length;
+    return b[0] - a[0];
 };
 var getExtracts = function (indexes, text) {
     var result = [];
-    var splittedText = text.split(const_1.EXTRACT_SEPARATOR);
-    var sumSize = [splittedText[0].length];
-    indexes.sort(function (a, b) { return a[1] - b[1]; });
-    var currentId = 0;
-    while (currentId < indexes.length && indexes[currentId][1] < sumSize[0]) {
-        var s = "";
-        for (var k = 0; k < const_1.EXTRACT_SIZE; k++) {
-            if (splittedText.length > k) {
-                s = s + splittedText[k] + const_1.EXTRACT_SEPARATOR;
-            }
-        }
-        result.push([s, indexes[currentId][0], indexes[currentId][1]]);
-        currentId += 1;
-    }
-    var currentSize = sumSize[0];
-    for (var k = 1; k < splittedText.length; k++) {
-        currentSize = currentSize + splittedText[k].length + const_1.EXTRACT_SEPARATOR.length;
-        sumSize.push(currentSize);
-        while (currentId < indexes.length && indexes[currentId][1] < currentSize) {
-            var s = "";
-            for (var l = 0; l < const_1.EXTRACT_SIZE; l++) {
-                if (splittedText.length > k + l) {
-                    s = s + splittedText[k + l] + const_1.EXTRACT_SEPARATOR;
-                }
-            }
-            result.push([s, indexes[currentId][0], indexes[currentId][1] - currentSize + splittedText[k].length]);
-            currentId += 1;
-        }
+    for (var k = 0; k < indexes.length; k++) {
+        var n = indexes[k][1];
+        var w = indexes[k][0];
+        result.push([text.substring(n - const_1.EXTRACT_SIZE, n + const_1.EXTRACT_SIZE + w.length), w, n]);
     }
     return result;
 };

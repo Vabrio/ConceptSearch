@@ -34,11 +34,15 @@ app.post('/concept', function (req, res) {
 });
 app.get('/read', function (req, res) {
     var address = req.query.address;
-    console.log(address);
+    var pattern = req.query.pattern;
+    var index = parseInt(req.query.index);
+    var author = req.query.author;
+    var title = req.query.title;
     var iconvlite = require('iconv-lite');
     var filebuffer = fs.readFileSync(address);
     var writingText = iconvlite.decode(filebuffer, "latin1");
-    res.end(writingText);
+    var result = writingText.substring(0, index) + "<span id='extract'><b>" + writingText.substring(index, index + pattern.length) + "</b></span>" + writingText.substring(index + pattern.length);
+    res.end(JSON.stringify([result, author, title]));
 });
 var server = app.listen(8081, function () {
     var host = server.address().address;
