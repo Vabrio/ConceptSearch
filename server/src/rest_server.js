@@ -1,3 +1,5 @@
+"use strict";
+exports.__esModule = true;
 var search_algorithm_1 = require("./search_algorithm");
 var db_communication_1 = require("./db_communication");
 var fs = require('fs');
@@ -32,14 +34,19 @@ app.post('/concept', function (req, res) {
 });
 app.get('/read', function (req, res) {
     var address = req.query.address;
-    var pattern = req.query.pattern;
-    var index = parseInt(req.query.index);
+    var list = JSON.parse(req.query.list);
     var author = req.query.author;
     var title = req.query.title;
     var iconvlite = require('iconv-lite');
     var filebuffer = fs.readFileSync(address);
     var writingText = iconvlite.decode(filebuffer, "latin1");
-    var result = writingText.substring(0, index) + "<span id='extract'><b>" + writingText.substring(index, index + pattern.length) + "</b></span>" + writingText.substring(index + pattern.length);
+    var n = list.length, index, pattern;
+    for (var k = n - 1; k >= 0; k--) {
+        pattern = list[k][1];
+        index = list[k][2];
+        writingText = writingText.substring(0, index) + "<a class='extract' name='" + index.toString() + "'><b>" + writingText.substring(index, index + pattern.length) + "</b></a>" + writingText.substring(index + pattern.length);
+    }
+    var result = writingText;
     res.end(JSON.stringify([result, author, title]));
 });
 var server = app.listen(8081, function () {

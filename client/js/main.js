@@ -2,43 +2,40 @@
 var url = "http://212.194.144.183:8081/";
 
 Vue.component('extract', {
-	props: ['text', 'pattern', 'index', 'address', 'author', 'title'],
-	template: '<li><a v-on:click="getwriting(address, pattern, index, author, title)">{{ text }}</a></li>'
+	props: ['list','text', 'index', 'address', 'author', 'title'],
+	template: '<li><a v-bind:href="\'#\'+index" v-on:click="getwriting(address, list, author, title)">{{ text }}</a></li>'
 })
 
 Vue.component('writing', {
 	props: ['list', 'title', 'address', 'author'],
-	template: '<div><h2>{{ title }}</h2> <br/><ul><extract v-for="extr in list" v-bind:text="extr[0]"  v-bind:pattern="extr[1]" v-bind:index="extr[2]" v-bind:address="address" v-bind:author="author" v-bind:title="title"></extract></ul></div>'
+	template: '<li><div><a class="writingTitle" href="#writingHead" v-on:click="searchRes.changeWriting(address, list, author, title)" >{{ title }}</a> <br/><ul v-show="title == searchRes.writingName"><extract v-for="extr in list" v-bind:list="list" v-bind:text="extr[0]" v-bind:index="extr[2]" v-bind:address="address" v-bind:author="author" v-bind:title="title"></extract></ul></div></li>'
 })
 
-
-/*Vue.component('book', {
-  props: ['metadata'],
-  template: '<div><h1>{{ metadata[0] }}</h1><h2>{{ metadata[1][0][0] }}</h2> <br/><ul><extract v-for="extr in metadata[0]" v-bind:text="extr[0]" v-bind:id="metadata[0].indexOf(extr)" v-bind:address="metadata[1][3]"></extract></div></ul>'
-})*/
 
 Vue.component('book', {
-  props: ['metadata'],
-  template: '<div><h1>{{ metadata[0] }}</h1> <writing v-for="writ in metadata[1]" v-bind:list="writ[3]"  v-bind:title="writ[0]" v-bind:address="writ[1]" v-bind:author="metadata[0]"></writing></div>'
+	props: ['metadata'],
+	template: '<div><a class="author" v-on:click="searchRes.changeAuthor(metadata[0])">{{ metadata[0] }}</a><ul v-show="metadata[0] == searchRes.author"><writing v-for="writ in metadata[1]" v-bind:list="writ[3]"  v-bind:title="writ[0]" v-bind:address="writ[1]" v-bind:author="metadata[0]"></writing></ul></div>'
 })
 
 
-function callback(param) {
+function search_results(param) {
 	data = JSON.parse(param);
-	show.books = data;
+	searchRes.books = data;
 	if (data == "") {
-		show.books = [[[[""]],["","No writing found",""]]]
+		searchRes.books = [[[[""]],["","No writing found",""]]]
 	}
-	show.dataReceived = true;
+	searchRes.dataReceived = true;
+	searchRes.author = searchRes.books[0][0];
+	searchRes.writingName = searchRes.books[0][1][0][0];
+	getwriting(book[1][1], book[1][3], book[0], book[1][0][0]);
 }
 // TODO : use pattern and index
-function getwriting(address, pattern, index, author, title){
-	httpAsync(url+"read?address="+address+"&pattern="+pattern +"&index="+index +"&author="+author +"&title="+title, "", link, "GET");
+function getwriting(address, list, author, title){
+	httpAsync(url+"read?address="+address+"&list="+JSON.stringify(list) +"&author="+author +"&title="+title, "", link, "GET");
 }
 function link(writ){
 	writing=JSON.parse(writ);
 	completeText.text = writing[0].replace(/(\r\n|\n|\r)/g,"<br />");
-	completeText.writingChosed = true;
 	completeText.author = writing[1];
 	completeText.title = writing[2];
 	/*var extr = document.getElementById("extract");	
@@ -52,33 +49,44 @@ var app = new Vue({
     },
 	methods: {
 		search: function () {
-			httpAsync(url + "search?request="+app.research,"", callback, "GET");
+			httpAsync(url + "search?request="+app.research,"", search_results, "GET");
 		}
   	}
 });
 
-var show = new Vue({
+var searchRes = new Vue({
     el: '#research_results',
     data: {
 		books: [[[[]],["","","No request yet"]]],
-		dataReceived: false
-    }
+		dataReceived: false,
+		author: "",
+		writingName: ""
+    },
+	methods: {
+		changeAuthor: function(name){
+			searchRes.author = name;
+			var b=0;
+			for (b=0; b<searchRes.books.length; b++){
+				var book = searchRes.books[b];
+				if (book[0] == name) {
+					searchRes.writingName = book[1][0][0];
+					getwriting(book[1][0][1], book[1][0][3], book[0], book[1][0][0]);
+				};
+			}
+		},
+		changeWriting: function(address, list, author, title){
+			searchRes.writingName = title;
+			getwriting(address, list, author, title);
+		}
+	}
 });
 var completeText = new Vue({
     el: '#complete_text',
     data: {
-		writingChosed: false,
 		text: "",
 		author: "",
 		title: ""
-    },
-	methods: {
-		printIt: function(){
-			var a = document.getElementById("texteee");
-			//alert(document.getSelection().focusOffset + " " + document.getSelection().anchorOffset);
-			//alert(completeText.text[a.selectionStart]);
-		}
-	}
+    }
 });
 
 document.addEventListener('copy', function(e){

@@ -65,48 +65,19 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 	// Create the result array
 	let result: Array<[string, string, number]> = [];
 	
-	/*
-	// Split the text according to the separator wanted
-	let splittedText = text.split(EXTRACT_SEPARATOR);
-	// Array of the cummulative sum
-	let sumSize = [splittedText[0].length];
-	
-	// Order the list of index and start a counter
-	indexes.sort(function(a: any, b:any){return a[1]-b[1];});
-	let currentId = 0;
-	while (currentId < indexes.length && indexes[currentId][1] < sumSize[0]){
-		let s = "";
-		for (let k=0; k < EXTRACT_SIZE; k++){
-			if (splittedText.length > k){
-				s = s + splittedText[k] + EXTRACT_SEPARATOR;
-			}
-		}
-		result.push([s,indexes[currentId][0], indexes[currentId][1]]);
-		currentId += 1;
-	}
-		
-	// Loop on the splitted array
-	let currentSize = sumSize[0];
-	for (let k=1; k<splittedText.length; k++){
-		currentSize = currentSize + splittedText[k].length + EXTRACT_SEPARATOR.length;
-		sumSize.push(currentSize);
-		while (currentId < indexes.length && indexes[currentId][1] < currentSize){
-			let s = "";
-			for (let l=0; l < EXTRACT_SIZE; l++){
-				if (splittedText.length > k+l){
-					s = s + splittedText[k+l] + EXTRACT_SEPARATOR;
-				}
-			}
-			result.push([s,indexes[currentId][0], indexes[currentId][1] -  currentSize + splittedText[k].length]);
-			
-			currentId += 1;
-		}
-	}
-	*/
 	for (let k=0; k<indexes.length; k++){
+		// The extract index
 		let n = indexes[k][1];
+		// The word wanted
 		let w = indexes[k][0];
-		result.push([text.substring(n - EXTRACT_SIZE, n + EXTRACT_SIZE + w.length), w, n]);
+		
+		let swap_left = 0;
+		while (text[n - EXTRACT_SIZE - swap_left] != ' ') {swap_left ++;}
+		let swap_right = 0;
+		while (text[n + EXTRACT_SIZE + swap_right + w.length] != ' ') {swap_right ++;}
+		
+		// Add a result
+		result.push([text.substring(n - EXTRACT_SIZE - swap_left, n + EXTRACT_SIZE + w.length + swap_right), w, n]);
 	}
 	return result;
 }

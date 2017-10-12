@@ -1,10 +1,12 @@
+"use strict";
+exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var simpleSearch = function (request, writingList) {
     var authorDict = {};
     var response = [];
-    for (var _i = 0; _i < writingList.length; _i++) {
-        var link = writingList[_i];
+    for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
+        var link = writingList_1[_i];
         var idAuthor = void 0;
         if (authorDict[link[2]] != undefined) {
             idAuthor = authorDict[link[2]];
@@ -40,7 +42,15 @@ var getExtracts = function (indexes, text) {
     for (var k = 0; k < indexes.length; k++) {
         var n = indexes[k][1];
         var w = indexes[k][0];
-        result.push([text.substring(n - const_1.EXTRACT_SIZE, n + const_1.EXTRACT_SIZE + w.length), w, n]);
+        var swap_left = 0;
+        while (text[n - const_1.EXTRACT_SIZE - swap_left] != ' ') {
+            swap_left++;
+        }
+        var swap_right = 0;
+        while (text[n + const_1.EXTRACT_SIZE + swap_right + w.length] != ' ') {
+            swap_right++;
+        }
+        result.push([text.substring(n - const_1.EXTRACT_SIZE - swap_left, n + const_1.EXTRACT_SIZE + w.length + swap_right), w, n]);
     }
     return result;
 };

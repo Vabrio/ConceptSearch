@@ -25,7 +25,7 @@ while (paths.length > 0) {
         }
     }
 }
-var data = db.export();
+var data = db["export"]();
 var buffer = new Buffer(data);
 fs.writeFileSync("CS.sqlite", buffer);
 //# sourceMappingURL=db_creation.js.map

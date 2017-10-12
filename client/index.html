@@ -4,21 +4,28 @@
         <title>Concept Search</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
         
         <script src="lib/vue.min.js"></script>
         <script src="js/http_requests.js"></script>
     </head>
-    <div>
-        <h1><span class="label label-default">Search</span></h1>
-    </div>
 
     <body id="gui">
-    	<div id="app">
-				<input name="research" v-model="research"/>
-				<button v-on:click="search">Send</button>
+		<div id="header">
+			<div class="row">
+				<div class="col-sm-4"></div><div class="col-sm-4">
+					<span class="col-sm-12 label label-default" id ="main_title">Concept Search</span>
+				</div><div class="col-sm-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-sm-3"></div><div id="app" class="col-sm-6">
+					<input name="research" class="col-sm-10" v-model="research"/>
+					<button v-on:click="search" class="col-sm-2">Send</button>
+				</div><div class="col-sm-3"></div>
+			</div>
 		</div>
+		
 		<div id="main-page-body">
 			<div id="research_results" v-show="dataReceived" class="col-sm-4 main-page-block">
 				<book
@@ -26,8 +33,9 @@
 					v-bind:metadata="b">
 				</book>
 			</div>
-			<div id="complete_text" v-show="writingChosed" class="col-sm-8 main-page-block">
-				<div id="texteee" v-on:click="printIt()" v-html=" text "></div>
+			<div id="complete_text" class="col-sm-8 main-page-block">
+				<a class="row" name="writingHead" v-show="text!=''">Auteur : {{ author }}; <u>{{ title }}</u></a>
+				<div style="overflow: auto;" class="row" v-on:click="printIt()" v-html=" text "></div>
 			</div>
 		</div>
     </body>

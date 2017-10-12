@@ -56,8 +56,7 @@ app.post('/concept', function(req: any, res: any){
 app.get('/read', function(req:any, res: any){
 	// Params
    	let address = req.query.address;
-	let pattern = req.query.pattern;
-	let index = parseInt(req.query.index);
+	let list = JSON.parse(req.query.list);
 	let author = req.query.author;
 	let title = req.query.title;
 	
@@ -67,7 +66,15 @@ app.get('/read', function(req:any, res: any){
 	let writingText = iconvlite.decode(filebuffer,"latin1");
 	
 	// Change text to put the extract in bold
-	let result =writingText.substring(0, index) + "<span id='extract'><b>" +  writingText.substring(index, index + pattern.length) + "</b></span>" + writingText.substring(index+pattern.length); 
+	let n = list.length,
+		index: number,
+		pattern: string;
+	for (let k=n-1; k>=0; k--){
+		pattern = list[k][1];
+		index = list[k][2];
+		writingText = writingText.substring(0, index) + "<a class='extract' name='" + index.toString() +  "'><b>" +  writingText.substring(index, index + pattern.length) + "</b></a>" + writingText.substring(index+pattern.length); 	
+	}
+	let result =writingText
 	
 	// Return the text + the author + the name of the writing
 	res.end(JSON.stringify([result, author, title]));
