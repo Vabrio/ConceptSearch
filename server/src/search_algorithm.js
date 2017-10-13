@@ -1,17 +1,29 @@
-"use strict";
-exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var globalSearch = function (request, writingList) {
     var authorDict = {};
     var request_data = JSON.parse(request);
     var response = [];
-    for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
-        var link = writingList_1[_i];
-        if ((request_data['author_research'] == "" || request_data['author_research'] == link[2]) && (request_data['title_research'] == "" || request_data['title_research'] == link[1])) {
-            var idAuthor = void 0;
-            if (authorDict[link[2]] != undefined) {
-                idAuthor = authorDict[link[2]];
+    for (var _i = 0; _i < writingList.length; _i++) {
+        var link = writingList[_i];
+        var idAuthor = void 0;
+        if (authorDict[link[2]] != undefined) {
+            idAuthor = authorDict[link[2]];
+        }
+        else {
+            idAuthor = response.length;
+            authorDict[link[2]] = idAuthor;
+            var arr = [];
+            response.push([link[2], arr]);
+        }
+        if (link != undefined && idAuthor != -1 && response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR) {
+            var iconvlite = require('iconv-lite');
+            var filebuffer = fs.readFileSync(link[3]);
+            var writingText = iconvlite.decode(filebuffer, "latin1");
+            var found = void 0, result = [];
+            while ((found = request.exec(writingText)) != null && result.length < const_1.MAX_PER_WRITING) {
+                result.push([found[0], found.index]);
+>>>>>>> 897b9f30327b5df07d33508705ff906e02719892
             }
             else {
                 idAuthor = response.length;
