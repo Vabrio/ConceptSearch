@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 var fs = require('fs');
 var SQL = require('sql.js');
 var filebuffer = fs.readFileSync('../db/CS.sqlite');
@@ -25,12 +23,12 @@ var Manager = (function () {
     };
     Manager.addConcept = function (concept, writingId, firstCh, lastCh) {
         db.run('INSERT INTO cod_concepts_draft (name, writingid, begin, end) VALUES (?,?,?,?)', [concept, writingId, firstCh, lastCh]);
-        var data = db["export"]();
+        var data = db.export();
         var buffer = new Buffer(data);
         fs.writeFileSync("../db/CS.sqlite", buffer);
         return true;
     };
     return Manager;
-}());
+})();
 exports.Manager = Manager;
 //# sourceMappingURL=db_communication.js.map
