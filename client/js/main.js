@@ -27,7 +27,8 @@ function search_results(param) {
 	searchRes.dataReceived = true;
 	searchRes.author = searchRes.books[0][0];
 	searchRes.writingName = searchRes.books[0][1][0][0];
-	getwriting(book[1][1], book[1][3], book[0], book[1][0][0]);
+	var book = data[0];
+	getwriting(book[1][0][1], book[1][0][3], book[0], book[1][0][0]);
 }
 // TODO : use pattern and index
 function getwriting(address, list, author, title){
