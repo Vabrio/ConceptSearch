@@ -12,12 +12,11 @@ app.all('/*', function (req, res, next) {
 });
 app.get('/search', function (req, res) {
     var request = req.query.request;
+    console.log("Research requested : " + request);
     var list = JSON.parse(db_communication_1.Manager.getWritingList());
-    var regE = new RegExp(request, 'ig');
-    var research = search_algorithm_1.simpleSearch(regE, list);
+    var research = search_algorithm_1.globalSearch(request, list);
     res.header("Content-Type", "text/plain; charset=utf-8");
     res.status(200).send(research);
-    console.log("Research requested : " + request);
 });
 app.get('/list', function (req, res) {
     res.header("Content-Type", "text/plain; charset=utf-8");

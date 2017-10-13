@@ -42,17 +42,40 @@ function link(writ){
 	extr.scrollIntoView();*/
 }
 
-var app = new Vue({
-    el: '#app',
+var researchIn = new Vue({
+    el: '#research_input',
     data: {
-        research: "Courage"
+        research: "Courage",
+		author_research: "",
+		title_research: ""
     },
 	methods: {
 		search: function () {
-			httpAsync(url + "search?request="+app.research,"", search_results, "GET");
+			var data = {};
+			if (researchIn.research[0] == "<" && researchIn.research[researchIn.research.length - 1] == ">"){
+				data = splitResearch(researchIn.$data);
+			}else{
+				data = researchIn.$data;
+			}
+			httpAsync(url + "search?request="+JSON.stringify(data),"", search_results, "GET");
 		}
   	}
 });
+
+/*** If everything was in the request field for a simple search
+* From the data extract it in the three fields <Author;Writing name;Research string>
+*/
+
+function splitResearch(dataGiven){
+	var text = dataGiven['research'];
+	var n = text.length;
+	informations = text.substring(1, n-1).split(';');
+	alert(informations);
+	dataGiven['author_research'] = informations[0];
+	dataGiven['title_research'] = informations[1];
+	dataGiven['research'] = informations[2];
+	return dataGiven;
+}
 
 var searchRes = new Vue({
     el: '#research_results',
