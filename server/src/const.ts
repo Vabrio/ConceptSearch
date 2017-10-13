@@ -7,8 +7,8 @@ const DB_LOCATION = '../db/CS.sqlite';
 //const EXTRACT_SEPARATOR = ". "; // 2 sentences are separated with "."
 const EXTRACT_SIZE = 40; // number of characters before and after the word found
 
-const MAX_PER_WRITING = 100; // number of extracts per writing
-const MAX_PER_AUTHOR = 100; // Number of writinges per author
+const MAX_PER_WRITING = -1; // number of extracts per writing
+const MAX_PER_AUTHOR = -1; // Number of writinges per author
 
 // Default boolean expression
 const DEFAULT_BOOLEAN = 'AND';

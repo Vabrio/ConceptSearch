@@ -1,17 +1,37 @@
-"use strict";
-exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var globalSearch = function (request, writingList) {
     var authorDict = {};
     var request_data = JSON.parse(request);
     var response = [];
+<<<<<<< HEAD
     for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
         var link = writingList_1[_i];
         if ((request_data['author_research'] == "" || request_data['author_research'] == link[2]) && (request_data['title_research'] == "" || request_data['title_research'] == link[1])) {
             var idAuthor = void 0;
             if (authorDict[link[2]] != undefined) {
                 idAuthor = authorDict[link[2]];
+=======
+    for (var _i = 0; _i < writingList.length; _i++) {
+        var link = writingList[_i];
+        var idAuthor = void 0;
+        if (authorDict[link[2]] != undefined) {
+            idAuthor = authorDict[link[2]];
+        }
+        else {
+            idAuthor = response.length;
+            authorDict[link[2]] = idAuthor;
+            var arr = [];
+            response.push([link[2], arr]);
+        }
+        if (link != undefined && idAuthor != -1 && response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR) {
+            var iconvlite = require('iconv-lite');
+            var filebuffer = fs.readFileSync(link[3]);
+            var writingText = iconvlite.decode(filebuffer, "latin1");
+            var found = void 0, result = [];
+            while ((found = request.exec(writingText)) != null && result.length < const_1.MAX_PER_WRITING) {
+                result.push([found[0], found.index]);
+>>>>>>> 897b9f30327b5df07d33508705ff906e02719892
             }
             else {
                 idAuthor = response.length;
@@ -19,7 +39,7 @@ var globalSearch = function (request, writingList) {
                 var arr = [];
                 response.push([link[2], arr]);
             }
-            if (link != undefined && (response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR || const_1.MAX_PER_AUTHOR == -1)) {
+            if (link != undefined && response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR) {
                 var iconvlite = require('iconv-lite');
                 var filebuffer = fs.readFileSync(link[3]);
                 var writingText = iconvlite.decode(filebuffer, "latin1");
@@ -38,8 +58,6 @@ var sortFunction = function (a, b) {
     return b[0] - a[0];
 };
 var doTheSearch = function (text, request) {
-    request = request.replace("?", "\\w");
-    request = request.replace("*", "\\w*");
     var req;
     if (request[0] == '(') {
         req = exprToArray(request);
@@ -49,7 +67,7 @@ var doTheSearch = function (text, request) {
     }
     var regE = new RegExp(array_to_regExp(req), 'ig');
     var found, result = [];
-    while ((found = regE.exec(text)) != null && (result.length < const_1.MAX_PER_WRITING || const_1.MAX_PER_WRITING == -1)) {
+    while ((found = regE.exec(text)) != null && result.length < const_1.MAX_PER_WRITING) {
         result.push([found[0], found.index]);
     }
     return result;
@@ -128,25 +146,15 @@ var getExtracts = function (indexes, text) {
     for (var k = 0; k < indexes.length; k++) {
         var n = indexes[k][1];
         var w = indexes[k][0];
-        var swap_left = const_1.EXTRACT_SIZE;
-        if (n - swap_left < 0) {
-            swap_left = 0;
+        var swap_left = 0;
+        while (text[n - const_1.EXTRACT_SIZE - swap_left] != ' ') {
+            swap_left++;
         }
-        else {
-            while (text[n - swap_left] != ' ' && n - swap_left > 0) {
-                swap_left++;
-            }
+        var swap_right = 0;
+        while (text[n + const_1.EXTRACT_SIZE + swap_right + w.length] != ' ') {
+            swap_right++;
         }
-        var swap_right = const_1.EXTRACT_SIZE;
-        if (n + swap_right + w.length > text.length) {
-            swap_right = text.length - n - w.length;
-        }
-        else {
-            while (text[n + swap_right + w.length] != ' ' && n + swap_right + w.length < text.length) {
-                swap_right++;
-            }
-        }
-        result.push([text.substring(n - swap_left, n + w.length + swap_right), w, n]);
+        result.push([text.substring(n - const_1.EXTRACT_SIZE - swap_left, n + const_1.EXTRACT_SIZE + w.length + swap_right), w, n]);
     }
     return result;
 };

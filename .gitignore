@@ -3,5 +3,5 @@
 ./start.sh
 */.htaccess
 */.htpasswd
-/server/*.js
-/server/*.js.map
+/server/src/*.js
+/server/src/*.js.map

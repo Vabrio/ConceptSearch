@@ -34,12 +34,11 @@ let globalSearch = function(request: string, writingList: Array<[number, string,
 				response.push([link[2], arr]);
 			}
 
-			if (link != undefined && response[idAuthor][1].length <= MAX_PER_AUTHOR){
+			if (link != undefined &&  (response[idAuthor][1].length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1)){
 				// Get the writing as text
 				let iconvlite = require('iconv-lite');
 				let filebuffer = fs.readFileSync(link[3]);
 				let writingText = iconvlite.decode(filebuffer,"latin1");
-				
 				// Find the pattern
 				let result = doTheSearch(writingText, request_data['research']);
 				// Add the data found 
@@ -60,6 +59,8 @@ let sortFunction = function(a: any, b: any){
 
 // From a text, return the result found
 let doTheSearch = function(text: string, request: string){
+	request = request.replace("?","\\w");
+	request = request.replace("*","\\w*")
 	let req: any[];
 	if (request[0] == '('){
 		req = exprToArray(request);
@@ -69,7 +70,7 @@ let doTheSearch = function(text: string, request: string){
 	let regE = new RegExp(array_to_regExp(req),'ig');
 	let found: any,
 		result: any[] = [];
-	while ((found = regE.exec(text)) != null && result.length < MAX_PER_WRITING){
+	while ((found = regE.exec(text)) != null && (result.length < MAX_PER_WRITING || MAX_PER_WRITING == -1)){
 		result.push([found[0] , found.index]);
 	}
 	return result;
@@ -166,13 +167,23 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 		// The word wanted
 		let w = indexes[k][0];
 		
-		let swap_left = 0;
-		while (text[n - EXTRACT_SIZE - swap_left] != ' ') {swap_left ++;}
-		let swap_right = 0;
-		while (text[n + EXTRACT_SIZE + swap_right + w.length] != ' ') {swap_right ++;}
+		// Swap on the left side
+		let swap_left = EXTRACT_SIZE;
+		if (n- swap_left <0){
+			swap_left =0;
+		}else{
+			while (text[n - swap_left] != ' ' && n- swap_left > 0) {swap_left ++;}
+		}		
 		
+		// Swap on the right side
+		let swap_right = EXTRACT_SIZE;
+		if (n+swap_right+w.length>text.length){
+			swap_right = text.length - n - w.length;
+		}else{
+			while (text[n + swap_right + w.length] != ' ' && n+swap_right+w.length<text.length) {swap_right ++;}
+		}	
 		// Add a result
-		result.push([text.substring(n - EXTRACT_SIZE - swap_left, n + EXTRACT_SIZE + w.length + swap_right), w, n]);
+		result.push([text.substring(n - swap_left, n + w.length + swap_right), w, n]);
 	}
 	return result;
 }
