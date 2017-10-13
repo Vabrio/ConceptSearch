@@ -1,5 +1,5 @@
-var url = "http://localhost:8081/"
-//var url = "http://212.194.144.183:8081/";
+//var url = "http://localhost:8081/"
+var url = "http://212.194.144.183:8081/";
 
 Vue.component('extract', {
 	props: ['list','text', 'index', 'address', 'author', 'title'],
