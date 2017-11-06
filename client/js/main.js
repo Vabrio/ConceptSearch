@@ -1,5 +1,5 @@
-//var url = "http://localhost:8081/"
-var url = "http://212.194.144.183:8081/";
+var url = "http://localhost:8081/"
+//var url = "http://212.194.144.183:8081/";
 
 Vue.component('extract', {
 	props: ['list','text', 'index', 'address', 'author', 'title'],
@@ -22,7 +22,7 @@ function search_results(param) {
 	data = JSON.parse(param);
 	searchRes.books = data;
 	if (data == "") {
-		searchRes.books = [[[[""]],["","No writing found",""]]]
+		searchRes.books = []
 	}
 	searchRes.dataReceived = true;
 	searchRes.author = searchRes.books[0][0];
@@ -81,7 +81,7 @@ function splitResearch(dataGiven){
 var searchRes = new Vue({
     el: '#research_results',
     data: {
-		books: [[[[]],["","","No request yet"]]],
+		books: [[[[]],[]]],
 		dataReceived: false,
 		author: "",
 		writingName: ""

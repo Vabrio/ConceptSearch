@@ -29,12 +29,9 @@ let globalSearch = function(request: string, writingList: Array<[number, string,
 			}
 			else{
 				idAuthor = response.length;
-				authorDict[link[2]] = idAuthor;
-				let arr: any[] = [];
-				response.push([link[2], arr]);
 			}
 
-			if (link != undefined &&  (response[idAuthor][1].length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1)){
+			if (link != undefined && (idAuthor == response.length ||  (response[idAuthor][1].length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1))){
 				// Get the writing as text
 				let iconvlite = require('iconv-lite');
 				let filebuffer = fs.readFileSync(link[3]);
@@ -43,8 +40,15 @@ let globalSearch = function(request: string, writingList: Array<[number, string,
 				let result = doTheSearch(writingText, request_data['research']);
 				// Add the data found 
 				if (result.length != 0){
-					response[idAuthor][1].push([link[1], link[3], link[0], getExtracts(result, writingText)]);
-			   }
+					let extr = getExtracts(result, writingText);
+					if (idAuthor == response.length){
+						authorDict[link[2]] = idAuthor;
+						response.push([link[2], [[link[1], link[3], link[0], extr]]]);
+					}else{
+						response[idAuthor][1].push([link[1], link[3], link[0], extr]);
+	
+					}
+				}
 			}
 		}
     }

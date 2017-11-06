@@ -15,17 +15,21 @@ var globalSearch = function (request, writingList) {
             }
             else {
                 idAuthor = response.length;
-                authorDict[link[2]] = idAuthor;
-                var arr = [];
-                response.push([link[2], arr]);
             }
-            if (link != undefined && (response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR || const_1.MAX_PER_AUTHOR == -1)) {
+            if (link != undefined && (idAuthor == response.length || (response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR || const_1.MAX_PER_AUTHOR == -1))) {
                 var iconvlite = require('iconv-lite');
                 var filebuffer = fs.readFileSync(link[3]);
                 var writingText = iconvlite.decode(filebuffer, "latin1");
                 var result = doTheSearch(writingText, request_data['research']);
                 if (result.length != 0) {
-                    response[idAuthor][1].push([link[1], link[3], link[0], getExtracts(result, writingText)]);
+                    var extr = getExtracts(result, writingText);
+                    if (idAuthor == response.length) {
+                        authorDict[link[2]] = idAuthor;
+                        response.push([link[2], [[link[1], link[3], link[0], extr]]]);
+                    }
+                    else {
+                        response[idAuthor][1].push([link[1], link[3], link[0], extr]);
+                    }
                 }
             }
         }
