@@ -9,6 +9,8 @@
         
         <script src="lib/vue.min.js"></script>
         <script src="js/http_requests.js"></script>
+		<script src="http://code.jquery.com/jquery-latest.js"></script>
+		<script src="lib/jquery.selection.js"></script>
     </head>
 
     <body id="gui">
@@ -19,23 +21,38 @@
 				</div><div class="col-sm-4"></div>
 			</div>
 			<div class="row">
-				<div class="col-sm-3"></div><div id="research_input" class="col-sm-6">
+				<div class="col-sm-3"></div>
+				<form id="research_input" class="col-sm-6">
 					<input name="research" class="col-sm-10" v-model="research"/>
 					<button v-on:click="search" class="col-sm-2">Send</button>
-				</div><div class="col-sm-3"></div>
+				</form>
+				<div class="col-sm-3"></div>
 			</div>
 		</div>
 		
 		<div id="main-page-body">
-			<div id="research_results" v-show="dataReceived" class="col-sm-4 main-page-block">
-				<book
-					v-for="b in books"
-					v-bind:metadata="b">
-				</book>
+			<div id="side_bar" class="col-sm-4 main-page-block">
+				<div id="research_results" v-show="dataReceived" >
+					<book
+						v-for="b in books"
+						v-bind:metadata="b">
+					</book>
+				</div>
+				
+				<div id="add_concept" v-show="show()">
+					<button v-on:click="searchRes.$data.dataReceived=true">Return</button>
+					<form>
+						<p>Adding concept in : {{ title }} by {{ author }}</p>
+						<label for="concept">Concept : </label><input type="text" name="concept" v-model="concept" placeholder="Courage" id="concept"/>
+						<p id="extract">Extract : <span v-html="extract"></span></p>
+						<label for="user">User : </label><input type="text" name="user" v-model="user" placeholder="Bob" id="user"/>
+						<button id="sendConcept">Add concept</button>
+					</form>
+				</div>
 			</div>
 			<div id="complete_text" class="col-sm-8 main-page-block">
 				<a class="row" name="writingHead" v-show="text!=''">Auteur : {{ author }}; <u>{{ title }}</u></a>
-				<div style="overflow: auto;" class="row" v-on:click="printIt()" v-html=" text "></div>
+				<div style="overflow: auto;" id="text_chosen" class="row" v-html=" text " v-on:select="onClick()"></div>
 			</div>
 		</div>
     </body>
@@ -43,5 +60,6 @@
 	
 	<!-- Script must be at the end for it to recognize the objects -->
 	<script src="js/main.js"></script>
+	<script src="js/read.js"></script>
     
 </html>
