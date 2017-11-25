@@ -1,5 +1,3 @@
-"use strict";
-exports.__esModule = true;
 var search_algorithm_1 = require("./search_algorithm");
 var db_communication_1 = require("./db_communication");
 var fs = require('fs');
