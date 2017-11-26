@@ -1,13 +1,11 @@
-"use strict";
-exports.__esModule = true;
 var const_1 = require("./const");
 var fs = require('fs');
 var globalSearch = function (request, writingList) {
     var authorDict = {};
     var request_data = JSON.parse(request);
     var response = [];
-    for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
-        var link = writingList_1[_i];
+    for (var _i = 0; _i < writingList.length; _i++) {
+        var link = writingList[_i];
         if ((request_data['author_research'] == "" || request_data['author_research'] == link[2]) && (request_data['title_research'] == "" || request_data['title_research'] == link[1])) {
             var idAuthor = void 0;
             if (authorDict[link[2]] != undefined) {
