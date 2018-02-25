@@ -12,6 +12,7 @@ text_chosen.addEventListener('click', onClick);
 
 function changeSelection(e){
 	addConcept.extract = $.selection("html");
+	addConcept.wordSelected = $.selection("html");
 }
 function onClick(e){
 	searchRes.dataReceived = false;
@@ -86,3 +87,35 @@ function onClick(e){
     var str = range.toString().trim();
     alert(str);
 }*/
+
+
+
+
+/* ANOTHER idea that seems to work
+if(!window.Kolich){
+  Kolich = {};
+}
+
+Kolich.Selector = {};
+Kolich.Selector.getSelected = function(){
+  var t = '';
+  if(window.getSelection){
+    t = window.getSelection();
+  }else if(document.getSelection){
+    t = document.getSelection();
+  }else if(document.selection){
+    t = document.selection.createRange().text;
+  }
+  return t;
+}
+
+Kolich.Selector.mouseup = function(){
+  var st = Kolich.Selector.getSelected();
+  if(st!=''){
+    alert("You selected:\n"+st);
+  }
+}
+
+$(document).ready(function(){
+  $(document).bind("mouseup", Kolich.Selector.mouseup);
+});*/

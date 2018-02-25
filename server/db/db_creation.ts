@@ -7,7 +7,7 @@ let SQL = require('sql.js');
 let db = new SQL.Database();
 // Run a query without reading the results
 db.run("CREATE TABLE wri_writings (id integer primary key, address text, name text, writer text);");
-db.run("CREATE TABLE cod_concepts_draft (id integer primary key, name text, writingid integer, begin integer, end integer, userid text, strength integer);");
+db.run("CREATE TABLE cod_concepts_draft (id integer primary key, name text, writingid integer, begin integer, end integer, extract text, userid text, strength integer);");
 db.run("CREATE TABLE coo_concepts_ordered (id integer primary key, name text, writingid integer, begin integer, end integer, force integer);");
 db.run("CREATE TABLE gra_graphe_concepts (conceptname text, neighbors text[]);");
 

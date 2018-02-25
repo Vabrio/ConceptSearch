@@ -22,10 +22,10 @@
 			</div>
 			<div class="row">
 				<div class="col-sm-3"></div>
-				<form id="research_input" class="col-sm-6">
-					<input name="research" class="col-sm-10" v-model="research"/>
+				<div id="research_input" class="col-sm-6">
+					<input @keyup.enter="search" name="research" class="col-sm-10" v-model="research" />
 					<button v-on:click="search" class="col-sm-2">Send</button>
-				</form>
+				</div>
 				<div class="col-sm-3"></div>
 			</div>
 		</div>
@@ -41,13 +41,11 @@
 				
 				<div id="add_concept" v-show="show()">
 					<button v-on:click="searchRes.$data.dataReceived=true">Return</button>
-					<form>
-						<p>Adding concept in : {{ title }} by {{ author }}</p>
-						<label for="concept">Concept : </label><input type="text" name="concept" v-model="concept" placeholder="Courage" id="concept"/>
-						<p id="extract">Extract : <span v-html="extract"></span></p>
-						<label for="user">User : </label><input type="text" name="user" v-model="user" placeholder="Bob" id="user"/>
-						<button id="sendConcept">Add concept</button>
-					</form>
+					<p>Adding concept in : {{ completeText.title }} by {{ completeText.author }}</p>
+					<label for="concept">Concept : </label><input type="text" name="concept" v-model="concept" placeholder="Courage" id="concept"/>
+					<p id="extract">Extract : <span v-html="extract"></span></p>
+					<label for="user">User : </label><input type="text" name="user" v-model="user" placeholder="Bob" id="user"/>
+					<button id="sendConcept" v-on:click="addAConcept">Add concept</button>
 				</div>
 			</div>
 			<div id="complete_text" class="col-sm-8 main-page-block">

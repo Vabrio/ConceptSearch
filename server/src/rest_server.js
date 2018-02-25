@@ -36,28 +36,48 @@ app.get('/list', function (req, res) {
 });
 app.post('/concept', function (req, res) {
     var query = req.query;
-    var id = query.id;
     var name = query.name;
-    console.log(req.body);
-    res.end(name);
+    var idWri = query.idWri;
+    var extract = query.extract;
+    var userId = query.userId;
+    var strength = query.strength;
+    var begin = -1, end = -1;
+    var response = db_communication_1.Manager.addConcept(name, idWri, begin, end, extract, userId, strength);
+    res.send(response);
     console.log("Concept added : " + name);
 });
 app.get('/read', function (req, res) {
-    var address = req.query.address;
+    var idWri = req.query.idWri;
     var list = JSON.parse(req.query.list);
     var author = req.query.author;
     var title = req.query.title;
-    var iconvlite = require('iconv-lite');
-    var filebuffer = fs.readFileSync(address);
-    var writingText = iconvlite.decode(filebuffer, "latin1");
+    var response = db_communication_1.Manager.getWriting(idWri);
+    var writingText = response[0], concepts = response[1];
+    var htmlFormatting = [], found;
+    for (var _i = 0, concepts_1 = concepts; _i < concepts_1.length; _i++) {
+        var c = concepts_1[_i];
+        htmlFormatting.push([c[2], '<span class="hoverItem"><span class="hiddenText">' + c[1] + '</span>']);
+        htmlFormatting.push([c[3], '</span>']);
+    }
     var n = list.length, index, pattern;
     for (var k = n - 1; k >= 0; k--) {
         pattern = list[k][1];
         index = list[k][2];
-        writingText = writingText.substring(0, index) + "<a class='extract' name='" + index.toString() + "'><b>" + writingText.substring(index, index + pattern.length) + "</b></a>" + writingText.substring(index + pattern.length);
+        htmlFormatting.push([index, "<a class='extract' name='" + index.toString() + "'><b>"]);
+        htmlFormatting.push([index + pattern.length, '</b></a>']);
+    }
+    var customSortFunction = function (a, b) {
+        return b[0] - a[0];
+    };
+    htmlFormatting.sort(customSortFunction);
+    console.log(htmlFormatting);
+    var m = htmlFormatting.length;
+    for (var _a = 0, htmlFormatting_1 = htmlFormatting; _a < htmlFormatting_1.length; _a++) {
+        var form = htmlFormatting_1[_a];
+        writingText = writingText.substring(0, form[0]) + form[1] + writingText.substring(form[0]);
     }
     var result = writingText;
-    res.end(JSON.stringify([result, author, title]));
+    res.end(JSON.stringify([result, author, title, idWri]));
 });
 var server = app.listen(const_1.PORT, function () {
     var port = server.address().port;

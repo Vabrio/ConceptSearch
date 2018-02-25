@@ -9,12 +9,15 @@ var Manager = (function () {
     }
     Manager.getWriting = function (id) {
         var writing = db.exec("SELECT address FROM wri_writings WHERE id=" + id);
-        var concepts = db.exec("SELECT name, id FROM cod_concepts_draft WHERE writingid=" + id);
+        var concepts = db.exec("SELECT id, name, begin, end, extract, userid, strength FROM cod_concepts_draft WHERE writingid=" + id);
         var address = writing[0].values[0][0];
         var iconvlite = require('iconv-lite');
         var filebuffer = fs.readFileSync(address);
         var writingText = iconvlite.decode(filebuffer, 'ISO-8859-1');
-        var conceptList = concepts[0].values[0];
+        var conceptList = [];
+        if (concepts[0]) {
+            conceptList = concepts[0].values;
+        }
         var response = [writingText, conceptList];
         return response;
     };
@@ -23,8 +26,27 @@ var Manager = (function () {
         var list = res[0].values;
         return JSON.stringify(list);
     };
-    Manager.addConcept = function (concept, writingId, firstCh, lastCh) {
-        db.run('INSERT INTO cod_concepts_draft (name, writingid, begin, end) VALUES (?,?,?,?)', [concept, writingId, firstCh, lastCh]);
+    Manager.getWritingsIdOnCondition = function (addr, wri_name, author) {
+        var addrS = "", wriS = "", authorS = "";
+        if (addr != "") {
+            addrS = 'address="' + addr + '"';
+        }
+        ;
+        if (wri_name != "") {
+            wriS = " AND name='" + wri_name + "'";
+        }
+        ;
+        if (author != "") {
+            authorS = " AND writer='" + author + "'";
+        }
+        ;
+        var req = "SELECT id, address FROM wri_writings WHERE " + addrS + wriS + authorS;
+        var res = db.exec(req);
+        var list = res[0].values;
+        return JSON.stringify(list);
+    };
+    Manager.addConcept = function (concept, writingId, firstCh, lastCh, extract, userId, strength) {
+        db.run('INSERT INTO cod_concepts_draft (name, writingid, begin, end, extract, userid, strength) VALUES (?,?,?,?,?,?,?)', [concept, writingId, firstCh, lastCh, extract, userId, strength]);
         var data = db["export"]();
         var buffer = new Buffer(data);
         fs.writeFileSync("../db/CS.sqlite", buffer);

@@ -10,7 +10,7 @@ declare const Buffer: any;
 declare const process: any;
 const fs = require('fs');
 
-// Starting filed log if wanted
+// Starting filed log depending on LOG_FILE const
 if (LOG_FILE){
 	let util = require('util');
 	var logFile = fs.createWriteStream('log.txt', { flags: 'a' });
@@ -68,32 +68,44 @@ app.get('/list', function (req: any, res: any) {
 	console.log("List requested and sent \n");
 })
 
-//ADD A CONCEPT
+//ADD A CONCEPT IN DB
 app.post('/concept', function(req: any, res: any){
     let query = req.query;
-    let id = query.id;
    	let name = query.name;
-	console.log(req.body)
-    /*let begin = query.begin;
-    let end = query.end;
-    let response = Manager.addConcept(name, id, begin, end);*/
-	res.end(/*response*/name);
-    
+	let idWri = query.idWri;
+   	let extract = query.extract;
+   	let userId = query.userId;
+   	let strength = query.strength;
+	
+	// TODO : Getting begin and end index with a regexp.
+	// not done yet because we have to define if the beginning is in HTML or in text...
+	
+    let begin = -1, end = -1;
+    let response = Manager.addConcept(name, idWri, begin, end, extract, userId, strength);
+	
+	res.send(response);
 	console.log("Concept added : " + name)
 })
 
 // GET A SPECIFIED WRITING
 app.get('/read', function(req:any, res: any){
 	// Params
-   	let address = req.query.address;
+   	let idWri = req.query.idWri;
 	let list = JSON.parse(req.query.list);
 	let author = req.query.author;
 	let title = req.query.title;
 	
-	// Reading from address
-	let iconvlite = require('iconv-lite');
-	let filebuffer = fs.readFileSync(address);
-	let writingText = iconvlite.decode(filebuffer,"latin1");
+	// Getting text and associated concepts 
+	let response = Manager.getWriting(idWri);
+	
+	let writingText = response[0], concepts = response[1];
+	
+	// Getting the index for every concept
+	let htmlFormatting: any[] = [], found: any;
+	for (let c of concepts){
+		htmlFormatting.push([c[2], '<span class="hoverItem"><span class="hiddenText">'+c[1]+'</span>']);
+		htmlFormatting.push([c[3], '</span>']);
+	}
 	
 	// Change text to put the extract in bold
 	let n = list.length,
@@ -102,12 +114,38 @@ app.get('/read', function(req:any, res: any){
 	for (let k=n-1; k>=0; k--){
 		pattern = list[k][1];
 		index = list[k][2];
-		writingText = writingText.substring(0, index) + "<a class='extract' name='" + index.toString() +  "'><b>" +  writingText.substring(index, index + pattern.length) + "</b></a>" + writingText.substring(index+pattern.length); 	
+		htmlFormatting.push([index, "<a class='extract' name='" + index.toString() +  "'><b>"]);
+		htmlFormatting.push([index+pattern.length, '</b></a>']);
 	}
-	let result =writingText
+
+	// Order from bigger index to smaller
+	let customSortFunction = function(a: any, b: any){
+		return b[0] - a[0];
+	}
+    htmlFormatting.sort(customSortFunction);
+
 	
+	console.log(htmlFormatting);
+
+	let m= htmlFormatting.length;
+	for (let form of htmlFormatting){
+writingText = writingText.substring(0, form[0]) + form[1] +  writingText.substring(form[0]);
+	}
+	
+	/* OLD WAY
+	let n = list.length,
+		index: number,
+		pattern: string;
+	for (let k=n-1; k>=0; k--){
+		pattern = list[k][1];
+		index = list[k][2];
+		writingText = writingText.substring(0, index) + "<a class='extract' name='" + index.toString() +  "'><b>" +  writingText.substring(index, index + pattern.length) + "</b></a>" + writingText.substring(index+pattern.length); 	
+	}*/
+
+	
+	let result =writingText
 	// Return the text + the author + the name of the writing
-	res.end(JSON.stringify([result, author, title]));
+	res.end(JSON.stringify([result, author, title, idWri]));
 })
 
 
