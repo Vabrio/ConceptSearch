@@ -6647,3 +6647,8 @@ Research requested : {"research":"Courage","author_research":"","title_research"
   [ 200, '</span>' ],
   [ 150,
     '<span class="hoverItem"><span class="hiddenText">courage</span>' ] ]
+Server listening on port : 8081
+Server listening on port : 8081
+Research requested : {"research":"Courage","author_research":"","title_research":""}
+Research requested : {"research":"Amour","author_research":"","title_research":""}
+Research requested : {"research":"Amour","author_research":"","title_research":""}

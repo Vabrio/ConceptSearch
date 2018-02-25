@@ -124,9 +124,6 @@ app.get('/read', function(req:any, res: any){
 	}
     htmlFormatting.sort(customSortFunction);
 
-	
-	console.log(htmlFormatting);
-
 	let m= htmlFormatting.length;
 	for (let form of htmlFormatting){
 writingText = writingText.substring(0, form[0]) + form[1] +  writingText.substring(form[0]);

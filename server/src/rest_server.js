@@ -70,7 +70,6 @@ app.get('/read', function (req, res) {
         return b[0] - a[0];
     };
     htmlFormatting.sort(customSortFunction);
-    console.log(htmlFormatting);
     var m = htmlFormatting.length;
     for (var _a = 0, htmlFormatting_1 = htmlFormatting; _a < htmlFormatting_1.length; _a++) {
         var form = htmlFormatting_1[_a];

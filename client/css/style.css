@@ -46,6 +46,7 @@ a:hover{
 .hoverItem {
 	position: relative;
     text-decoration: underline;
+	text-decoration-style: dashed;
 }
 .hiddenText {
 	position: absolute;

@@ -1,9 +1,9 @@
 //var url = "http://212.194.144.183:8081/";
 var version="DEV"; // "PROD" is the one for the server
-if (version == "DEV"){
-	var url = "http://localhost:8081/";
+if (version == "PROD"){
+	var url = "http://localhost:8080/";
 }else{
-	var url = "http://concept-search.org:8081/"
+	var url = "http://concept-search.org:8080/"
 }
 
 var completeText;
