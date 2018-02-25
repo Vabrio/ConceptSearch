@@ -1,6 +1,19 @@
+"use strict";
+exports.__esModule = true;
 var search_algorithm_1 = require("./search_algorithm");
 var db_communication_1 = require("./db_communication");
+var const_1 = require("./const");
 var fs = require('fs');
+if (const_1.LOG_FILE) {
+    var util_1 = require('util');
+    var logFile = fs.createWriteStream('log.txt', { flags: 'a' });
+    var logStdout = process.stdout;
+    console.log = function () {
+        logFile.write(util_1.format.apply(null, arguments) + '\n');
+        logStdout.write(util_1.format.apply(null, arguments) + '\n');
+    };
+    console.error = console.log;
+}
 var express = require('express');
 var app = express();
 app.all('/*', function (req, res, next) {
@@ -10,11 +23,11 @@ app.all('/*', function (req, res, next) {
 });
 app.get('/search', function (req, res) {
     var request = req.query.request;
-    console.log("Research requested : " + request);
     var list = JSON.parse(db_communication_1.Manager.getWritingList());
     var research = search_algorithm_1.globalSearch(request, list);
     res.header("Content-Type", "text/plain; charset=utf-8");
     res.status(200).send(research);
+    console.log("Research requested : " + request);
 });
 app.get('/list', function (req, res) {
     res.header("Content-Type", "text/plain; charset=utf-8");
@@ -46,9 +59,8 @@ app.get('/read', function (req, res) {
     var result = writingText;
     res.end(JSON.stringify([result, author, title]));
 });
-var server = app.listen(8081, function () {
-    var host = server.address().address;
+var server = app.listen(const_1.PORT, function () {
     var port = server.address().port;
-    console.log("Server listening at http://%s:%s", host, port);
+    console.log("Server listening on port : %s", port);
 });
 //# sourceMappingURL=rest_server.js.map
