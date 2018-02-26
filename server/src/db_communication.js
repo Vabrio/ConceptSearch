@@ -22,7 +22,7 @@ var Manager = (function () {
         return response;
     };
     Manager.getWritingList = function () {
-        var res = db.exec("SELECT id, name, writer, address FROM wri_writings");
+        var res = db.exec("SELECT id, name, writer, address FROM wri_writings;");
         var list = res[0].values;
         return JSON.stringify(list);
     };

@@ -33,11 +33,9 @@ let conceptList : any[] = [];
     
 	// Return the writings table
     static getWritingList(){
-		console.log("pb-1");
-        let res = db.exec("SELECT id, name, writer, address FROM wri_writings");
-		console.log("pb0");
+		// Seems to be a problem with this line on the first execution : "writeStringToMemory is deprecated and should not be called! Use stringToUTF8() instead!"
+        let res = db.exec("SELECT id, name, writer, address FROM wri_writings;");
         let list =res[0].values;
-		console.log("pb1");
 		return JSON.stringify(list);
     }
 	

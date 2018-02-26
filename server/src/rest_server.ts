@@ -46,7 +46,6 @@ app.all('/*', function(req: any, res: any, next: any) {
 app.get('/search', function (req: any, res: any) {
     let request = req.query.request;
 	let list = JSON.parse(Manager.getWritingList());
-		console.log("pb2");
 	let research = globalSearch(request, list);
     // String sent to client, header is necessary to get the accents
     res.header("Content-Type", "text/plain; charset=utf-8");
