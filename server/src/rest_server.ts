@@ -96,11 +96,13 @@ app.get('/read', function(req:any, res: any){
 	let response = Manager.getWriting(idWri);
 	
 	let writingText = response[0], concepts = response[1];
-	
 	// Getting the index for every concept that can be found
 	let htmlFormatting: any[] = [], found: any;
 	for (let c of concepts){
-		let regExp = new RegExp(c[4], 'ig');
+		let request = c[4];
+		
+		request = request.replace(new RegExp("\n", 'g'), "(\n|\r|\r\n)+");
+		let regExp = new RegExp(request, 'im');
 		if (found = regExp.exec(writingText)){
 			htmlFormatting.push([found.index, '<span class="hoverItem"><span class="hiddenText">'+c[1]+'</span>']);
 			htmlFormatting.push([found.index + (found[0]).length, '</span>']);

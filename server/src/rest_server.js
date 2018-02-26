@@ -56,7 +56,9 @@ app.get('/read', function (req, res) {
     var htmlFormatting = [], found;
     for (var _i = 0, concepts_1 = concepts; _i < concepts_1.length; _i++) {
         var c = concepts_1[_i];
-        var regExp = new RegExp(c[4], 'ig');
+        var request = c[4];
+        request = request.replace(new RegExp("\n", 'g'), "(\n|\r|\r\n)+");
+        var regExp = new RegExp(request, 'im');
         if (found = regExp.exec(writingText)) {
             htmlFormatting.push([found.index, '<span class="hoverItem"><span class="hiddenText">' + c[1] + '</span>']);
             htmlFormatting.push([found.index + (found[0]).length, '</span>']);
