@@ -44,20 +44,15 @@ app.all('/*', function(req: any, res: any, next: any) {
 // SEARCH IN DATABASE FOR THE REQUEST
 // Return the list of extracts matching request
 app.get('/search', function (req: any, res: any) {
-	console.log("pb0");
     let request = req.query.request;
-	console.log("pb0.1");
 	let list = JSON.parse(Manager.getWritingList());
-	console.log("pb0.2");
+		console.log("pb2");
 	let research = globalSearch(request, list);
-	console.log("pb1");
     // String sent to client, header is necessary to get the accents
     res.header("Content-Type", "text/plain; charset=utf-8");
     
 	// Send answer
 	res.status(200).send(research);
-	
-	console.log("pb2");
 	// Show in console or log in file
 	console.log("Research requested : " + request)
 })

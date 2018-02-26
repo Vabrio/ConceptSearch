@@ -33,8 +33,11 @@ let conceptList : any[] = [];
     
 	// Return the writings table
     static getWritingList(){
+		console.log("pb-1");
         let res = db.exec("SELECT id, name, writer, address FROM wri_writings");
+		console.log("pb0");
         let list =res[0].values;
+		console.log("pb1");
 		return JSON.stringify(list);
     }
 	
