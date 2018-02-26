@@ -1,5 +1,8 @@
-var url = "http://localhost:8081/"
+var url = "http://localhost:8081/";
+//var url = "http://concept-search.org:8081/"
 //var url = "http://212.194.144.183:8081/";
+
+var completeText;
 
 Vue.component('extract', {
 	props: ['list','text', 'index', 'address', 'author', 'title'],
@@ -36,6 +39,7 @@ function getwriting(address, list, author, title){
 }
 function link(writ){
 	writing=JSON.parse(writ);
+	completeText.initialText = writing[0];
 	completeText.text = writing[0].replace(/(\r\n|\n|\r)/g,"<br />");
 	completeText.author = writing[1];
 	completeText.title = writing[2];
@@ -56,6 +60,8 @@ var researchIn = new Vue({
 			if (researchIn.research[0] == "<" && researchIn.research[researchIn.research.length - 1] == ">"){
 				data = splitResearch(researchIn.$data);
 			}else{
+				researchIn.author_research = "";
+				researchIn.title_research = "";
 				data = researchIn.$data;
 			}
 			httpAsync(url + "search?request="+JSON.stringify(data),"", search_results, "GET");
@@ -104,17 +110,34 @@ var searchRes = new Vue({
 		}
 	}
 });
-var completeText = new Vue({
+
+completeText = new Vue({
     el: '#complete_text',
     data: {
+		initialText: "",
 		text: "",
 		author: "",
 		title: ""
     }
 });
 
-document.addEventListener('copy', function(e){
-    e.clipboardData.setData('text/plain', window.getSelection()+'\n\n\t('+completeText.author+', '+completeText.title+')');
-    e.preventDefault();
-	// We want our data, not data from any selection, to be written to the clipboard
+var addConcept = new Vue({
+    el: '#add_concept',
+    data: {
+		concept: "",
+		wordSelected: "",
+		title: completeText.title,
+		author: completeText.author,
+		concept: "",
+		extract: "",
+		user: ""
+    },
+	methods: {
+		show: function(){
+			return  !searchRes.$data.dataReceived && completeText.$data.text != "";
+		},
+		addAConcept: function(){
+			
+		}
+	}
 });

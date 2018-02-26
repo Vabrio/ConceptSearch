@@ -82,7 +82,7 @@ let doTheSearch = function(text: string, request: string){
 
 // From a boolean string, return the correct array definition
 let exprToArray = function myself(text: string): any[]{
-	let id=0, id0=0, id1=0, count=-1, result = [];
+	let id=0, id0=0, id1=0, count=-1, result: any[] = [];
 
 	while (id<text.length){
 		if (text[id]=='(' && count==-1){
