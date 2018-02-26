@@ -4,7 +4,7 @@ const DB_LOCATION = '../db/CS.sqlite';
 // Server port
 const PORT = 8080;
 // Show the console (true) or put in a file  (false)
-const LOG_FILE = true;
+const LOG_FILE = false;
 
 // Extracting parameters
 //var result = str.match( /[^\.!\?]+[\.!\?]+/g );

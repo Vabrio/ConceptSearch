@@ -1,6 +1,6 @@
 //var url = "http://212.194.144.183:8081/";
 var version="DEV"; // "PROD" is the one for the server
-if (version == "PROD"){
+if (version == "DEV"){
 	var url = "http://localhost:8080/";
 }else{
 	var url = "http://concept-search.org:8080/"
@@ -131,7 +131,7 @@ var completeText = new Vue({
 });
 
 function concept_added(ans){
-	alert(ans);
+	//alert(ans);
 }
 
 var addConcept = new Vue({
@@ -148,8 +148,7 @@ var addConcept = new Vue({
 			return  !searchRes.$data.dataReceived && completeText.$data.text != "";
 		},
 		addAConcept: function(){
-			alert(addConcept.wordSelected);
-			httpAsync(url+"concept?name="+addConcept.concept+"&idWri="+completeText.idWri+"&extract="+addConcept.wordSelected+"&userId="+addConcept.user+"&strength=1", "", concept_added, "POST");
+			httpAsync(url+"concept?name="+addConcept.concept+"&idWri="+completeText.idWri+"&extract="+JSON.stringify(addConcept.wordSelected)+"&userId="+addConcept.user+"&strength=1", "", concept_added, "POST");
 		}
 	}
 });

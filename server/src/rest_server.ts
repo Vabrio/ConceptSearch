@@ -73,18 +73,17 @@ app.post('/concept', function(req: any, res: any){
     let query = req.query;
    	let name = query.name;
 	let idWri = query.idWri;
-   	let extract = query.extract;
+	let extract = JSON.parse(query.extract);
    	let userId = query.userId;
    	let strength = query.strength;
 	
 	// TODO : Getting begin and end index with a regexp.
 	// not done yet because we have to define if the beginning is in HTML or in text...
-	
     let begin = -1, end = -1;
     let response = Manager.addConcept(name, idWri, begin, end, extract, userId, strength);
 	
 	res.send(response);
-	console.log("Concept added : " + name)
+	console.log("Concept added : " + name + "\n\tIN : " + idWri);
 })
 
 // GET A SPECIFIED WRITING
@@ -100,12 +99,21 @@ app.get('/read', function(req:any, res: any){
 	
 	let writingText = response[0], concepts = response[1];
 	
-	// Getting the index for every concept
+	// Getting the index for every concept that can be found
 	let htmlFormatting: any[] = [], found: any;
 	for (let c of concepts){
-		htmlFormatting.push([c[2], '<span class="hoverItem"><span class="hiddenText">'+c[1]+'</span>']);
-		htmlFormatting.push([c[3], '</span>']);
+		let regExp = new RegExp(c[4], 'ig');
+		if (found = regExp.exec(writingText)){
+			console.log(found[0]);
+			console.log("Index : " +found.index);
+			htmlFormatting.push([found.index, '<span class="hoverItem"><span class="hiddenText">'+c[1]+'</span>']);
+			htmlFormatting.push([found.index + (found[0]).length, '</span>']);
+		}
 	}
+
+
+	console.log(htmlFormatting);
+	
 	
 	// Change text to put the extract in bold
 	let n = list.length,
@@ -117,7 +125,6 @@ app.get('/read', function(req:any, res: any){
 		htmlFormatting.push([index, "<a class='extract' name='" + index.toString() +  "'><b>"]);
 		htmlFormatting.push([index+pattern.length, '</b></a>']);
 	}
-
 	// Order from bigger index to smaller
 	let customSortFunction = function(a: any, b: any){
 		return b[0] - a[0];
@@ -126,7 +133,7 @@ app.get('/read', function(req:any, res: any){
 
 	let m= htmlFormatting.length;
 	for (let form of htmlFormatting){
-writingText = writingText.substring(0, form[0]) + form[1] +  writingText.substring(form[0]);
+		writingText = writingText.substring(0, form[0]) + form[1] +  writingText.substring(form[0]);
 	}
 	
 	/* OLD WAY

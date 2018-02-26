@@ -38,13 +38,13 @@ app.post('/concept', function (req, res) {
     var query = req.query;
     var name = query.name;
     var idWri = query.idWri;
-    var extract = query.extract;
+    var extract = JSON.parse(query.extract);
     var userId = query.userId;
     var strength = query.strength;
     var begin = -1, end = -1;
     var response = db_communication_1.Manager.addConcept(name, idWri, begin, end, extract, userId, strength);
     res.send(response);
-    console.log("Concept added : " + name);
+    console.log("Concept added : " + name + "\n\tIN : " + idWri);
 });
 app.get('/read', function (req, res) {
     var idWri = req.query.idWri;
@@ -56,9 +56,15 @@ app.get('/read', function (req, res) {
     var htmlFormatting = [], found;
     for (var _i = 0, concepts_1 = concepts; _i < concepts_1.length; _i++) {
         var c = concepts_1[_i];
-        htmlFormatting.push([c[2], '<span class="hoverItem"><span class="hiddenText">' + c[1] + '</span>']);
-        htmlFormatting.push([c[3], '</span>']);
+        var regExp = new RegExp(c[4], 'ig');
+        if (found = regExp.exec(writingText)) {
+            console.log(found[0]);
+            console.log("Index : " + found.index);
+            htmlFormatting.push([found.index, '<span class="hoverItem"><span class="hiddenText">' + c[1] + '</span>']);
+            htmlFormatting.push([found.index + (found[0]).length, '</span>']);
+        }
     }
+    console.log(htmlFormatting);
     var n = list.length, index, pattern;
     for (var k = n - 1; k >= 0; k--) {
         pattern = list[k][1];

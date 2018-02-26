@@ -2,7 +2,7 @@
 exports.__esModule = true;
 var DB_LOCATION = '../db/CS.sqlite';
 exports.DB_LOCATION = DB_LOCATION;
-var PORT = 8081;
+var PORT = 8080;
 exports.PORT = PORT;
 var LOG_FILE = true;
 exports.LOG_FILE = LOG_FILE;
