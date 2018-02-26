@@ -5,17 +5,16 @@ document.addEventListener('copy', function(e){
 	// We want our data, not data from any selection, to be written to the clipboard
 });
 
-
-document.addEventListener('selectionchange', changeSelection);
+//document.addEventListener('selectionchange', changeSelection);
 var text_chosen = document.getElementById('text_chosen');
 text_chosen.addEventListener('click', onClick);
 
-function changeSelection(e){
-	addConcept.extract = $.selection("html");
-	addConcept.wordSelected = $.selection("text");
-}
+//function changeSelection(e){}
+
 function onClick(e){
 	searchRes.dataReceived = false;
+	addConcept.extract = $.selection("html");
+	addConcept.wordSelected = $.selection("text");
 }
 
 
