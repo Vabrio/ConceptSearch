@@ -30,7 +30,6 @@ function search_results(param) {
 	searchRes.books = data;
 	if (data == "") {
 		searchRes.books = [];
-		alert(0);
 	}else{
 		searchRes.dataReceived = true;
 		searchRes.changeAuthor(searchRes.books[0][0]);
