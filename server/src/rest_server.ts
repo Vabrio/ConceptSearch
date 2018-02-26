@@ -44,16 +44,20 @@ app.all('/*', function(req: any, res: any, next: any) {
 // SEARCH IN DATABASE FOR THE REQUEST
 // Return the list of extracts matching request
 app.get('/search', function (req: any, res: any) {
+	console.log("pb0");
     let request = req.query.request;
+	console.log("pb0.1");
 	let list = JSON.parse(Manager.getWritingList());
+	console.log("pb0.2");
 	let research = globalSearch(request, list);
-	
+	console.log("pb1");
     // String sent to client, header is necessary to get the accents
     res.header("Content-Type", "text/plain; charset=utf-8");
     
 	// Send answer
 	res.status(200).send(research);
 	
+	console.log("pb2");
 	// Show in console or log in file
 	console.log("Research requested : " + request)
 })
@@ -104,15 +108,10 @@ app.get('/read', function(req:any, res: any){
 	for (let c of concepts){
 		let regExp = new RegExp(c[4], 'ig');
 		if (found = regExp.exec(writingText)){
-			console.log(found[0]);
-			console.log("Index : " +found.index);
 			htmlFormatting.push([found.index, '<span class="hoverItem"><span class="hiddenText">'+c[1]+'</span>']);
 			htmlFormatting.push([found.index + (found[0]).length, '</span>']);
 		}
 	}
-
-
-	console.log(htmlFormatting);
 	
 	
 	// Change text to put the extract in bold

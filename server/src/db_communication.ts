@@ -22,7 +22,7 @@ class Manager {
         let filebuffer = fs.readFileSync(address);
         let writingText = iconvlite.decode(filebuffer, 'ISO-8859-1');
         
-		let conceptList = [];
+let conceptList : any[] = [];
 		if (concepts[0]){
         	conceptList = concepts[0].values;
 		}
