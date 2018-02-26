@@ -7,7 +7,7 @@ document.addEventListener('copy', function(e){
 
 //document.addEventListener('selectionchange', changeSelection);
 var text_chosen = document.getElementById('text_chosen');
-text_chosen.addEventListener('click', onClick);
+text_chosen.addEventListener('mouseup', onClick);
 
 //function changeSelection(e){}
 
