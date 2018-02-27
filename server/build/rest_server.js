@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-global.__base = __dirname + '/';
 var const_1 = require("./const/const");
 var search_algorithm_1 = require("./research/search_algorithm");
 var manager_1 = require("./managers/manager");

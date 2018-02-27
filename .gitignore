@@ -8,3 +8,4 @@
 /server/db/**.js
 /server/db/**.js.map
 /server/src/*.log
+/client/js/version.js
