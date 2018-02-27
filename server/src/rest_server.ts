@@ -1,6 +1,3 @@
-declare const global: any;
-global.__base = __dirname + '/';
-
 // Const
 import { PORT, LOG_FILE } from "./const/const";
 
