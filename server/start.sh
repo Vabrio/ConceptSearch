@@ -1,5 +1,5 @@
 #!/bin/bash
 
-tsc
-cd src
+tsc --target ES5
+cd build
 nodejs rest_server.js

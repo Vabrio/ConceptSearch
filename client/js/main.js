@@ -147,7 +147,7 @@ var addConcept = new Vue({
 			return  !searchRes.$data.dataReceived && completeText.$data.text != "";
 		},
 		addAConcept: function(){
-			httpAsync(url+"concept?name="+addConcept.concept+"&idWri="+completeText.idWri+"&extract="+JSON.stringify(addConcept.wordSelected)+"&userId="+addConcept.user+"&strength=1", "", concept_added, "POST");
+			httpAsync(url+"concept?name="+addConcept.concept+"&idWri="+completeText.idWri+"&begin=-1&end=-1"+"&extract="+JSON.stringify(addConcept.wordSelected)+"&userId="+addConcept.user+"&strength=1", "", concept_added, "POST");
 		}
 	}
 });
