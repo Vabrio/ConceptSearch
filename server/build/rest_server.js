@@ -35,7 +35,6 @@ app.get('/search', function (req, res) {
             var research = search_algorithm_1.globalSearch(request, rows);
             res.header("Content-Type", "text/plain; charset=utf-8");
             res.status(200).send(research);
-            console.log("Research requested : " + request);
         }
     });
 });

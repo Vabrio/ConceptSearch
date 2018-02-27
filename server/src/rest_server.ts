@@ -64,7 +64,7 @@ app.get('/search', function (req: any, res: any) {
 
 			// Send answer
 			res.status(200).send(research);
-			console.log("Research requested : " + request);
+			//console.log("Research requested : " + request);
 		}
 	});
 })
