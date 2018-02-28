@@ -21,6 +21,9 @@ var ConceptsService = (function () {
     ConceptsService.listFromWritingId = function (writingid, cb) {
         return concepts_dao_mysql_1.ConceptsDAO.listFromWritingId(writingid, cb);
     };
+    ConceptsService.listFromUserName = function (name, cb) {
+        return concepts_dao_mysql_1.ConceptsDAO.listFromUserName(name, cb);
+    };
     return ConceptsService;
 }());
 exports.ConceptsService = ConceptsService;

@@ -5,6 +5,35 @@ if (version == "DEV"){
 	var url = "http://concept-search.org:8080/"
 }
 
+
+var searchRes = new Vue({
+    el: '#research_results',
+    data: {
+		books: [[[[]],[]]],
+		dataReceived: false,
+		author: "",
+		writingName: "",
+		idWri: 0
+    },
+	methods: {
+		changeAuthor: function(name){
+			searchRes.author = name;
+			var b=0;
+			for (b=0; b<searchRes.books.length; b++){
+				var book = searchRes.books[b];
+				if (book[0] == name) {
+					searchRes.writingName = book[1][0][0];
+					getwriting(book[1][0][2], book[1][0][3], book[0], book[1][0][0]);
+				};
+			}
+		},
+		changeWriting: function(idWri, list, author, title){
+			searchRes.writingName = title;
+			getwriting(idWri, list, author, title);
+		}
+	}
+});
+
 var completeText;
 
 Vue.component('extract', {
@@ -17,10 +46,19 @@ Vue.component('writing', {
 	template: '<li><div><a class="writingTitle" href="#writingHead" v-on:click="searchRes.changeWriting(idWri, list, author, title)" >{{ title }}</a> <br/><ul v-show="title == searchRes.writingName"><extract v-for="extr in list" v-bind:list="list" v-bind:text="extr[0]" v-bind:index="extr[2]" v-bind:idWri="idWri" v-bind:author="author" v-bind:title="title"></extract></ul></div></li>'
 })
 
-
 Vue.component('book', {
 	props: ['metadata'],
 	template: '<div><a class="author" v-on:click="searchRes.changeAuthor(metadata[0])">{{ metadata[0] }}</a><ul v-show="metadata[0] == searchRes.author"><writing v-for="writ in metadata[1]" v-bind:list="writ[3]"  v-bind:title="writ[0]" v-bind:idWri="writ[2]" v-bind:author="metadata[0]"></writing></ul></div>'
+})
+
+Vue.component('concept', {
+	props: ['c'],
+	template: '<li>Name : {{ c.name }}, writing id : {{ c.writingid }}, extract : {{ c.extract }}</li>'
+})
+
+Vue.component('user', {
+	props: ['metadata'],
+	template: '<div><ul><li>Name : {{ metadata.name }}</li><li>Firstname : {{ metadata.firstname }}</li><li>lastname : {{ metadata.lastname }}</li><li>Creation date : {{ metadata.created_at }}</li><li>Email : {{ metadata.email }}</li></ul></div>'
 })
 
 
@@ -89,34 +127,6 @@ function splitResearch(dataGiven){
 	return dataGiven;
 }
 
-var searchRes = new Vue({
-    el: '#research_results',
-    data: {
-		books: [[[[]],[]]],
-		dataReceived: false,
-		author: "",
-		writingName: "",
-		idWri: 0
-    },
-	methods: {
-		changeAuthor: function(name){
-			searchRes.author = name;
-			var b=0;
-			for (b=0; b<searchRes.books.length; b++){
-				var book = searchRes.books[b];
-				if (book[0] == name) {
-					searchRes.writingName = book[1][0][0];
-					getwriting(book[1][0][2], book[1][0][3], book[0], book[1][0][0]);
-				};
-			}
-		},
-		changeWriting: function(idWri, list, author, title){
-			searchRes.writingName = title;
-			getwriting(idWri, list, author, title);
-		}
-	}
-});
-
 var completeText = new Vue({
     el: '#complete_text',
     data: {
@@ -129,7 +139,7 @@ var completeText = new Vue({
 });
 
 function concept_added(ans){
-	//alert(ans);
+	console.log(ans);
 }
 
 var addConcept = new Vue({
@@ -150,3 +160,107 @@ var addConcept = new Vue({
 		}
 	}
 });
+
+
+
+
+
+
+
+var usercontent = new Vue({
+    el: '#usercontent',
+	data: {
+		userData: {
+			name: "",
+			firstname: "",
+			lastname: "",
+			email: "",
+			birth_date: "",
+			created_at: ""
+		},
+		concepts: []
+	}
+});
+
+
+var auth = new Vue({
+    el: '#auth',
+	data: {
+		token: "",
+		logged: false
+	}
+});
+var main_part = new Vue({
+    el: '#main_part',
+	data: {
+		
+	},
+	methods: {
+		
+	}
+});
+
+
+// Function to call when login
+function logged(ans){
+	var ansJson = JSON.parse(ans);
+	if (!ansJson.success){
+		console.log( ansJson.message);
+		if (ansJson.type == 0){
+			login_form.state_login = "has-error";
+		}else{
+			login_form.state_login = "";
+			login_form.state_pwd = "has-error";
+		}
+	} else{
+		console.log( ansJson.message + ansJson.token );
+		auth.toker=ansJson.token;
+		auth.logged=true;
+		usercontent.concepts=ansJson.concepts;
+		usercontent.userData=ansJson.user;
+		console.log(usercontent.concepts[0]);
+		$("#loginModal").modal("toggle");
+	}
+}
+var login_form = new Vue({
+    el: '#login_form',
+	data: {
+		log_login: "Alice",
+		log_pwd: "1234",
+		state_login: "",
+		state_pwd: ""
+	},
+	methods: {
+		submit: function(){
+			httpAsync(url+"users/authenticate?name="+this.log_login+"&password="+this.log_pwd, "", logged, "POST");
+		}
+	}
+});
+
+function subscribed(ans){
+	var ansJson = JSON.parse(ans);
+	if (!ansJson.success) {
+		console.log(ansJson.message);
+		if (ansJson.type) {
+			subscribe_form.state = "has-error";
+		}
+	}else {
+		console.log("created ! " + ans);
+		$("#loginModal").modal("toggle");
+	}
+}
+var subscribe_form = new Vue({
+    el: '#subscribe_form',
+	data: {
+		sub_login: "Alice",
+		sub_pwd: "1234",
+		sub_pwd_check: "1234",
+		state: ""
+	},
+	methods: {
+		submit: function(){
+			httpAsync(url+"users/subscribe?name="+this.sub_login+"&password="+this.sub_pwd, "", subscribed, "POST");
+		}
+	}
+});
+

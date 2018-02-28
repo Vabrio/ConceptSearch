@@ -1,13 +1,13 @@
-import { DB_LOCATION } from "../const/const";
-
 declare function require(name:string): any;
 declare const Buffer: any;
-import fs = require('fs');
+var fs = require('fs');
 
 import {WritingsService} from "./services/writings.service";
 import {ConceptsService} from "./services/concepts.service";
+import {UsersService} from "./services/users.service";
 import {WritingModel} from "./models/writing.model";
 import {ConceptModel} from "./models/concept.model";
+import {UserModel} from "./models/user.model";
 
 class Manager {
 	
@@ -52,6 +52,27 @@ class Manager {
 			}
 		});
     }
+	
+	
+	// Add a user in the DB
+	static addUser(user: UserModel, res: any){
+		UsersService.create(user, res);
+	}
+	
+	// Get a list of all users
+	static getUsers(res: any){
+		UsersService.list(res);
+	}
+	
+	// Find a user by its name
+	static findUserByName(name : string, res: any){
+		UsersService.findByName(name, res);
+	}
+	
+	// Find a user by its name
+	static findConceptsByUser(name : string, res: any){
+		ConceptsService.listFromUserName(name, res);
+	}
 }
 
 export {Manager}

@@ -1,5 +1,5 @@
 // Const
-import { PORT, LOG_FILE } from "./const/const";
+import { PORT, LOG_FILE, SECRET } from "./const/const";
 
 // Research Function
 import { globalSearch } from "./research/search_algorithm";
@@ -13,13 +13,18 @@ createTables();
 
 // Models
 import {ConceptModel} from "./managers/models/concept.model";
+import {UserModel} from "./managers/models/user.model";
 
 
 declare function require(name:string): any;
 declare const Buffer: any;
 declare const process: any;
 
-import fs = require('fs');
+var fs = require('fs');
+var bcrypt = require('bcrypt');
+var bodyParser  = require('body-parser');
+var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
+const saltRounds = 10;
 
 // Starting filed log depending on LOG_FILE const
 if (LOG_FILE){
@@ -35,11 +40,11 @@ if (LOG_FILE){
 	console.error=console.log;
 }
 
-
-
 // STARTING REST SERVER
 let express = require('express');
 let app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.all('/*', function(req: any, res: any, next: any) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -64,27 +69,6 @@ app.get('/search', function (req: any, res: any) {
 			//console.log("Research requested : " + request);
 		}
 	});
-})
-
-
-//ADD A CONCEPT IN DB
-app.post('/concept', function(req: any, res: any){
-    
-	let query = req.query;
-	
-	let concept = new ConceptModel({
-		'name': query.name,
-		'writingid': query.idWri,
-		'begin': query.begin,
-		'end': query.end,
-		'extract': JSON.parse(query.extract),
-		'userid': query.userId,
-		'strength': query.strength
-	});
-	
-	Manager.addConcept(concept, res);
-	
-	//console.log("Concept added : " + name + "\tIn writing with id : " + idWri);
 })
 
 // GET A SPECIFIED WRITING
@@ -142,6 +126,146 @@ app.get('/read', function(req:any, res: any){
 	});
 	
 })
+
+
+//ADD A CONCEPT IN DB
+app.post('/concept', function(req: any, res: any){
+    
+	let query = req.query;
+	
+	let concept = new ConceptModel({
+		'name': query.name,
+		'writingid': query.idWri,
+		'begin': query.begin,
+		'end': query.end,
+		'extract': JSON.parse(query.extract),
+		'userid': query.userId,
+		'strength': query.strength
+	});
+	
+	Manager.addConcept(concept, res);
+	
+	//console.log("Concept added : " + name + "\tIn writing with id : " + idWri);
+})
+
+
+
+
+// ROUTES FOR THE USER MANAGEMENT
+var userRoutes = express.Router();
+
+
+//add a user in db
+userRoutes.post('/subscribe', function(req: any, res: any){
+	let query = req.query;
+	
+	bcrypt.hash(query.password, saltRounds).then(function(hash: string) {
+		let user = new UserModel({
+			'name': query.name,
+			'password': hash,
+			'firstname': query.firstname,
+			'lastname': query.lastname,
+			'email': query.email,
+			'birth_date': new Date(query.birthdate)
+		});	
+		Manager.addUser(user, res);
+	});
+	
+	//console.log("Concept added : " + name + "\tIn writing with id : " + idWri);
+});
+
+
+// authenticate and give the token back
+userRoutes.post('/authenticate', function(req: any, res: any) {
+
+  	// find the user
+  	Manager.findUserByName(req.query.name, (err: any, user: UserModel)=> {
+
+		if (err) throw err;
+		
+		if (!user) {
+		  	res.json({ success: false, message: 'Authentication failed. User not found.', type: 0 });
+		} else if (user) {
+			
+			// check if password matches
+			bcrypt.compare(req.query.password, user.password).then(function(cond : boolean) {
+				if (!cond){
+					res.json({ success: false, message: 'Authentication failed. Wrong password.', type: 1});
+				}else {
+					const payload = {
+						status: user.status
+					};
+
+					var token = jwt.sign(payload, SECRET, {
+						expiresIn: "1d" // expires in 24 hours
+					});
+					
+					Manager.findConceptsByUser(user.name, (err: any, rows: any) =>{
+						if (err) throw err;
+						// return the information including token as JSON
+						res.json({
+							success: true,
+							message: 'Enjoy your token!',
+							token: token,
+							concepts: rows,
+							user: user.toJSON()
+						});
+					})
+				}
+			});
+		}
+  	});
+});
+
+
+userRoutes.get('/', function(req: any, res: any) {
+  	res.json({ message: 'Welcome to the coolest API on earth!' });
+});
+
+userRoutes.use(function(req: any, res: any, next: any) {
+	
+	// check header or url parameters or post parameters for token
+  	var token = req.body.token || req.query.token || req.headers['x-access-token'];
+
+  	// decode token
+  	if (token) {
+
+    	// verifies secret and checks exp
+    	jwt.verify(token, SECRET, function(err: any, decoded: any) {      
+      		if (err) {
+        		return res.json({ success: false, message: 'Failed to authenticate token.' });    
+      		} else {
+				// if everything is good, save to request for use in other routes
+				req.decoded = decoded;    
+				next();
+      		}
+    	});
+
+  	} else {
+
+		// if there is no token
+		// return an error
+		return res.status(403).send({ 
+			success: false, 
+			message: 'No token provided.' 
+		});
+
+  }
+});
+
+// route to return all users (GET http://localhost:8080/api/users)
+userRoutes.get('/list', function(req: any, res: any) {
+  	Manager.getUsers((err: any, users: any) => {
+    	res.json(users);
+  	});
+});   
+
+// apply the routes to our application with the prefix /api
+app.use('/users', userRoutes);
+
+
+
+
 
 // START LISTENING TO A SPECIFIED PORT
 var server = app.listen(PORT, function () {

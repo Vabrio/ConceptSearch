@@ -34,6 +34,10 @@ class ConceptsService
 	static listFromWritingId(writingid: number, cb: any) {
         return ConceptsDAO.listFromWritingId(writingid, cb);
     }
+	
+	static listFromUserName(name: string, cb: any) {
+        return ConceptsDAO.listFromUserName(name, cb);
+    }
 }
 
 export {ConceptsService};

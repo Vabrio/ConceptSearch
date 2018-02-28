@@ -1,7 +1,3 @@
-// DB communication
-const DB_LOCATION = '../db/CS.sqlite';
-const DB_TYPE = 'sqlite';
-
 // Server port
 const PORT = 8080;
 // Show the console (true) or put in a file  (false)
@@ -18,4 +14,7 @@ const MAX_PER_AUTHOR = -1; // Number of writinges per author
 // Default boolean expression
 const DEFAULT_BOOLEAN = 'AND';
 
-export{DB_LOCATION, DB_TYPE, PORT, LOG_FILE, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN}
+// Secret to be kept
+const SECRET = "ABIGSECRET";
+
+export{PORT, LOG_FILE, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN, SECRET}

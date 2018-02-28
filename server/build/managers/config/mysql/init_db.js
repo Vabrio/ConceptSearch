@@ -9,7 +9,7 @@ function createTables() {
             console.log("WRITINGS TABLE INITIALIZED");
         }
         else if (err) {
-            console.log("error while accessing result : " + err);
+            console.log("error while accessing wri_writings table : " + err);
         }
     });
     mysql_db_1.db.query("SHOW TABLES LIKE 'con_concepts'", function (err, result) {
@@ -18,7 +18,16 @@ function createTables() {
             console.log("CONCEPTS TABLE INITIALIZED");
         }
         else if (err) {
-            console.log("error while accessing cod_concepts_draft table : " + err);
+            console.log("error while accessing con_concepts table : " + err);
+        }
+    });
+    mysql_db_1.db.query("SHOW TABLES LIKE 'use_users'", function (err, result) {
+        if (result.length == 0) {
+            mysql_db_1.db.query("CREATE TABLE use_users (id integer primary key auto_increment, name text, password text, firstname text, lastname text, email text, birth_date datetime, status integer default 1, created_at datetime default current_timestamp);");
+            console.log("USERS TABLE INITIALIZED");
+        }
+        else if (err) {
+            console.log("error while accessing use_users table : " + err);
         }
     });
 }

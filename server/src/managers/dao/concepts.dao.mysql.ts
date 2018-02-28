@@ -53,6 +53,14 @@ class ConceptsDAO
             }));
         });
     }
+	
+	static listFromUserName(name: string, cb:any) {
+		db.query('SELECT * FROM con_concepts WHERE userid = ?', [name], (err: any, rows: any) => {
+			cb(err, rows.map((row: any) => {
+                return new ConceptModel(row).toJSON();
+            }));
+        });
+    }
 }
 
 export {ConceptsDAO};

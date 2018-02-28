@@ -1,8 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var fs = require("fs");
+var fs = require('fs');
 var writings_service_1 = require("./services/writings.service");
 var concepts_service_1 = require("./services/concepts.service");
+var users_service_1 = require("./services/users.service");
 var Manager = (function () {
     function Manager() {
     }
@@ -39,6 +40,18 @@ var Manager = (function () {
                 res.json({ 'success': 'Concept created !', 'concept': conceptR });
             }
         });
+    };
+    Manager.addUser = function (user, res) {
+        users_service_1.UsersService.create(user, res);
+    };
+    Manager.getUsers = function (res) {
+        users_service_1.UsersService.list(res);
+    };
+    Manager.findUserByName = function (name, res) {
+        users_service_1.UsersService.findByName(name, res);
+    };
+    Manager.findConceptsByUser = function (name, res) {
+        concepts_service_1.ConceptsService.listFromUserName(name, res);
     };
     return Manager;
 }());

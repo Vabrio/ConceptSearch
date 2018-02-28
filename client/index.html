@@ -4,21 +4,31 @@
         <title>Concept Search</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="css/bootstrap.min.css">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
-        
-        <script src="lib/vue.min.js"></script>
-        <script src="js/http_requests.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
 		<script src="lib/jquery.selection.js"></script>
+        <script src="lib/vue.min.js"></script>
+        <script src="js/http_requests.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		
     </head>
-
+	
     <body id="gui">
+				
 		<div id="header">
 			<div class="row">
 				<div class="col-sm-4"></div><div class="col-sm-4">
 					<span class="col-sm-12 label label-default" id ="main_title">Concept Search</span>
-				</div><div class="col-sm-4"></div>
+				</div>
+				<div class="col-sm-4" id="auth">
+					<div class="col-sm-1"></div>
+					<button v-show="!logged"  class="col-sm-3 btn btn-info btn-lg" id="loginBut" data-toggle="modal" data-target="#loginModal">login</button>
+					<span v-show="logged">Welcome {{ usercontent.userData.name }} !</span>
+				</div>
 			</div>
 			<div class="row">
 				<div class="col-sm-3"></div>
@@ -30,27 +40,104 @@
 			</div>
 		</div>
 		
-		<div id="main-page-body">
-			<div id="side_bar" class="col-sm-4 main-page-block">
-				<div id="research_results" v-show="dataReceived" >
-					<book
-						v-for="b in books"
-						v-bind:metadata="b">
-					</book>
-				</div>
-				
-				<div id="add_concept" v-show="show()">
-					<button v-on:click="searchRes.$data.dataReceived=true">Return</button>
-					<p>Adding concept in : {{ completeText.title }} by {{ completeText.author }}</p>
-					<label for="concept">Concept : </label><input type="text" name="concept" v-model="concept" placeholder="Courage" id="concept"/>
-					<p id="extract">Extract : <span v-html="extract"></span></p>
-					<label for="user">User : </label><input type="text" name="user" v-model="user" placeholder="Bob" id="user"/>
-					<button id="sendConcept" v-on:click="addAConcept">Add concept</button>
+		
+		<!-- Popup for login / subscribe -->
+		<div class="modal fade" id="loginModal" role="dialog">
+			<div class="modal-dialog">
+
+			<!-- Modal content-->
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button> 
+						<ul class="nav nav-pills">
+					  		<li class="active"><a data-toggle="pill" href="#login_form">Login</a></li>
+						  	<li><a data-toggle="pill" href="#subscribe_form">Subscribe</a></li>
+						</ul>
+					</div>
+					
+					<div class="modal-body tab-content">
+				  		
+						<div id="login_form" class="tab-pane fade in active">
+							<div class="form-group" v-bind:class="state_login">
+								<label for="login">Login :</label>
+								<input class="form-control" id="login" v-model="log_login" />
+							</div>
+							<div class="form-group" v-bind:class="state_pwd">
+								<label for="password">Password :</label>
+								<input type="password" class="form-control" id="password" v-model="log_pwd" />
+							</div>
+							<button class="btn" v-on:click="submit">Submit</button>
+				  		</div>
+						
+						
+						<div id="subscribe_form" class="tab-pane fade">
+							<div class="form-group" v-bind:class="state">
+								<label for="login">Login :</label>
+								<input type="text" class="form-control" id="login" v-model="sub_login">
+							</div>
+							<div class="form-group">
+								<label for="password">Password :</label>
+								<input type="password" class="form-control" id="password" v-model="sub_pwd">
+							</div>
+							<div class="form-group">
+								<label for="passwordCheck">Repeat password :</label>
+								<input type="password" class="form-control" id="passwordCheck" v-model="sub_pwd_check">
+							</div>
+							<button class="btn" v-on:click="submit">Submit</button>
+				  		</div>
+					</div>
+					
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
 				</div>
 			</div>
-			<div id="complete_text" class="col-sm-8 main-page-block">
-				<a class="row" name="writingHead" v-show="text!=''">Auteur : {{ author }}; <u>{{ title }}</u></a>
-				<div style="overflow: auto;" id="text_chosen" class="row" v-html=" text " v-on:select="onClick()"></div>
+		</div>
+		
+			
+		<ul class="nav nav-tabs" id="main_part">
+			<li class="active"><a data-toggle="tab" href="#mainPageBody">Search Result</a></li>
+			<li><a data-toggle="tab" v-show="auth.logged" href="#userpage">User page</a></li>
+		</ul>
+			
+		<div class="tab-content">
+			<div id="mainPageBody" class="tab-pane fade in active">
+				<div id="side_bar" class="col-sm-4 main-page-block">
+					<div id="research_results" v-show="dataReceived" >
+						<book v-for="b in books" v-bind:metadata="b"/>
+					</div>
+
+					<div id="add_concept" v-show="show()">
+						<button v-on:click="searchRes.$data.dataReceived=true">Return</button>
+						<p>Adding concept in : {{ completeText.title }} by {{ completeText.author }}</p>
+						<label for="concept">Concept : </label><input type="text" name="concept" v-model="concept" placeholder="Courage" id="concept"/>
+						<p id="extract">Extract : <span v-html="extract"></span></p>
+						<label for="user">User : </label><input type="text" name="user" v-model="user" placeholder="Bob" id="user"/>
+						<button id="sendConcept" v-on:click="addAConcept">Add concept</button>
+					</div>
+				</div>
+				<div id="complete_text" class="col-sm-8 main-page-block">
+					<a class="row" name="writingHead" v-show="text!=''">Auteur : {{ author }}; <u>{{ title }}</u></a>
+					<div style="overflow: auto;" id="text_chosen" class="row" v-html=" text " v-on:select="onClick()"></div>
+				</div>
+			</div>
+			
+			<div id="userpage" class="tab-pane fade">
+				<ul class="nav nav-pills">
+				  	<li class="active"><a data-toggle="pill" href="#concepts">Concepts added</a></li>
+				  	<li><a data-toggle="pill" href="#userinfo">My account</a></li>
+				</ul>
+
+				<div class="tab-content" id="usercontent">
+				  	<div id="concepts" class="tab-pane fade in active">
+						<ul>
+							<concept v-for="con in concepts" v-bind:c="con"/>
+						</ul>
+				  	</div>
+				  	<div id="userinfo" class="tab-pane fade">
+						<user v-bind:metadata="userData"/>
+				  	</div>
+				</div>
 			</div>
 		</div>
     </body>

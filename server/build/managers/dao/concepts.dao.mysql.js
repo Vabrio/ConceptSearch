@@ -35,6 +35,13 @@ var ConceptsDAO = (function () {
             }));
         });
     };
+    ConceptsDAO.listFromUserName = function (name, cb) {
+        mysql_db_1.db.query('SELECT * FROM con_concepts WHERE userid = ?', [name], function (err, rows) {
+            cb(err, rows.map(function (row) {
+                return new concept_model_1.ConceptModel(row).toJSON();
+            }));
+        });
+    };
     return ConceptsDAO;
 }());
 exports.ConceptsDAO = ConceptsDAO;

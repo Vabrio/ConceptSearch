@@ -1,9 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var DB_LOCATION = '../db/CS.sqlite';
-exports.DB_LOCATION = DB_LOCATION;
-var DB_TYPE = 'sqlite';
-exports.DB_TYPE = DB_TYPE;
 var PORT = 8080;
 exports.PORT = PORT;
 var LOG_FILE = false;
@@ -16,4 +12,6 @@ var MAX_PER_AUTHOR = -1;
 exports.MAX_PER_AUTHOR = MAX_PER_AUTHOR;
 var DEFAULT_BOOLEAN = 'AND';
 exports.DEFAULT_BOOLEAN = DEFAULT_BOOLEAN;
+var SECRET = "ABIGSECRET";
+exports.SECRET = SECRET;
 //# sourceMappingURL=const.js.map
