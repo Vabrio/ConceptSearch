@@ -37,7 +37,6 @@ class UsersDAO
             }));
         });
     }
-
 	static find(id: number, cb: any) {
 		db.query('SELECT * FROM use_users WHERE id = ? LIMIT 1', [id], (err: any, rows: any) => {
             cb(err, new UserModel(rows[0]));

@@ -5,8 +5,9 @@
 // au reste du code de l'application.
 //=========================================================================
 
-import {db} from "../config/mysql/mysql.db";
-import {ConceptModel} from '../models/concept.model';
+import { db } from "../config/mysql/mysql.db";
+import { ConceptModel } from '../models/concept.model';
+import { NAMES_UNAVAILABLE } from '../../const/const';
 
 
 class ConceptsDAO
@@ -46,8 +47,11 @@ class ConceptsDAO
         });
     }
 	
-	static listFromWritingId(writingid: number, cb:any) {
-		db.query('SELECT * FROM con_concepts WHERE writingid = ?', [writingid], (err: any, rows: any) => {
+	static listFromWritingId(writingid: number, name: string, cb:any) {
+		let names = " '" + name + "' ";
+		for (let n of NAMES_UNAVAILABLE){ names = names + " , '" + n +"' "};
+		
+		db.query('SELECT * FROM con_concepts WHERE writingid = ? AND userid in ( '+names+' )', [writingid], (err: any, rows: any) => {
 			cb(err, rows.map((row: any) => {
                 return new ConceptModel(row)
             }));

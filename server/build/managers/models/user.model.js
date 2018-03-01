@@ -1,109 +1,72 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var UserModel = (function () {
-    function UserModel(row) {
+class UserModel {
+    constructor(row) {
         this.row = row;
     }
-    Object.defineProperty(UserModel.prototype, "id", {
-        get: function () {
-            return this.row.id;
-        },
-        set: function (val) {
-            this.row.id = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "name", {
-        get: function () {
-            return this.row.name;
-        },
-        set: function (val) {
-            this.row.name = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "password", {
-        get: function () {
-            return this.row.password;
-        },
-        set: function (val) {
-            this.row.password = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "firstname", {
-        get: function () {
-            return this.row.firstname;
-        },
-        set: function (val) {
-            this.row.firstname = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "lastname", {
-        get: function () {
-            return this.row.lastname;
-        },
-        set: function (val) {
-            this.row.lastname = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "email", {
-        get: function () {
-            return this.row.email;
-        },
-        set: function (val) {
-            this.row.email = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "birth_date", {
-        get: function () {
-            return this.row.birth_date;
-        },
-        set: function (val) {
-            this.row.birth_date = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "status", {
-        get: function () {
-            return this.row.status;
-        },
-        set: function (val) {
-            this.row.status = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(UserModel.prototype, "created_at", {
-        get: function () {
-            return this.row.created_at;
-        },
-        set: function (val) {
-            this.row.created_at = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    UserModel.prototype.toJSON = function () {
+    get id() {
+        return this.row.id;
+    }
+    set id(val) {
+        this.row.id = val;
+    }
+    get name() {
+        return this.row.name;
+    }
+    set name(val) {
+        this.row.name = val;
+    }
+    get password() {
+        return this.row.password;
+    }
+    set password(val) {
+        this.row.password = val;
+    }
+    get firstname() {
+        return this.row.firstname;
+    }
+    set firstname(val) {
+        this.row.firstname = val;
+    }
+    get lastname() {
+        return this.row.lastname;
+    }
+    set lastname(val) {
+        this.row.lastname = val;
+    }
+    get email() {
+        return this.row.email;
+    }
+    set email(val) {
+        this.row.email = val;
+    }
+    get birth_date() {
+        return this.row.birth_date;
+    }
+    set birth_date(val) {
+        this.row.birth_date = val;
+    }
+    get status() {
+        return this.row.status;
+    }
+    set status(val) {
+        this.row.status = val;
+    }
+    get created_at() {
+        return this.row.created_at;
+    }
+    set created_at(val) {
+        this.row.created_at = val;
+    }
+    toJSON() {
         return this.row;
-    };
-    UserModel.prototype.isValid = function () {
+    }
+    isValid() {
         return !(this.row.name === '' ||
             this.row.name === undefined ||
             this.row.password === '' ||
             this.row.password === undefined);
-    };
-    return UserModel;
-}());
+    }
+}
 exports.UserModel = UserModel;
 //# sourceMappingURL=user.model.js.map

@@ -31,8 +31,8 @@ class ConceptsService
         return ConceptsDAO.list(cb);
     }
 	
-	static listFromWritingId(writingid: number, cb: any) {
-        return ConceptsDAO.listFromWritingId(writingid, cb);
+	static listFromWritingId(writingid: number, name: string, cb: any) {
+        return ConceptsDAO.listFromWritingId(writingid, name, cb);
     }
 	
 	static listFromUserName(name: string, cb: any) {

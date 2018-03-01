@@ -112,7 +112,6 @@
 						<p>Adding concept in : {{ completeText.title }} by {{ completeText.author }}</p>
 						<label for="concept">Concept : </label><input type="text" name="concept" v-model="concept" placeholder="Courage" id="concept"/>
 						<p id="extract">Extract : <span v-html="extract"></span></p>
-						<label for="user">User : </label><input type="text" name="user" v-model="user" placeholder="Bob" id="user"/>
 						<button id="sendConcept" v-on:click="addAConcept">Add concept</button>
 					</div>
 				</div>

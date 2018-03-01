@@ -1,34 +1,40 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var const_1 = require("../const/const");
-var fs = require('fs');
-var globalSearch = function (request, writingList) {
-    var authorDict = {};
-    var request_data = JSON.parse(request);
-    var response = [];
-    for (var _i = 0, writingList_1 = writingList; _i < writingList_1.length; _i++) {
-        var link = writingList_1[_i];
+const const_1 = require("../const/const");
+const fs = require('fs');
+let globalSearch = function (request, writingList) {
+    let authorDict = {};
+    let idAuthor = 0;
+    let request_data = JSON.parse(request);
+    let response = [];
+    for (let link of writingList) {
         if ((request_data['author_research'] == "" || request_data['author_research'] == link.writer) && (request_data['title_research'] == "" || request_data['title_research'] == link.name)) {
-            var idAuthor = void 0;
             if (authorDict[link.writer] != undefined) {
                 idAuthor = authorDict[link.writer];
             }
             else {
                 idAuthor = response.length;
             }
-            if (link != undefined && (idAuthor == response.length || (response[idAuthor][1].length <= const_1.MAX_PER_AUTHOR || const_1.MAX_PER_AUTHOR == -1))) {
-                var iconvlite = require('iconv-lite');
-                var filebuffer = fs.readFileSync(link.address);
-                var writingText = iconvlite.decode(filebuffer, "latin1");
-                var result = doTheSearch(writingText, request_data['research']);
+            if (link != undefined && (idAuthor == response.length || (response[idAuthor].books.length <= const_1.MAX_PER_AUTHOR || const_1.MAX_PER_AUTHOR == -1))) {
+                let iconvlite = require('iconv-lite');
+                let filebuffer = fs.readFileSync(link.address);
+                let writingText = iconvlite.decode(filebuffer, "latin1");
+                let result = doTheSearch(writingText, request_data['research']);
                 if (result.length != 0) {
-                    var extr = getExtracts(result, writingText);
+                    let extr = getExtracts(result, writingText);
                     if (idAuthor == response.length) {
                         authorDict[link.writer] = idAuthor;
-                        response.push([link.writer, [[link.name, link.address, link.id, extr]]]);
+                        response.push({ author: link.writer,
+                            books: [{ name: link.name,
+                                    address: link.address,
+                                    id: link.id,
+                                    extracts: extr }] });
                     }
                     else {
-                        response[idAuthor][1].push([link.name, link.address, link.id, extr]);
+                        response[idAuthor].books.push({ name: link.name,
+                            address: link.address,
+                            id: link.id,
+                            extracts: extr });
                     }
                 }
             }
@@ -38,28 +44,28 @@ var globalSearch = function (request, writingList) {
     return response;
 };
 exports.globalSearch = globalSearch;
-var sortFunction = function (a, b) {
-    return b[0] - a[0];
+let sortFunction = function (a, b) {
+    return b.name - a.name;
 };
-var doTheSearch = function (text, request) {
+let doTheSearch = function (text, request) {
     request = request.replace("?", "\\w");
     request = request.replace("*", "\\w*");
-    var req;
+    let req;
     if (request[0] == '(') {
         req = exprToArray(request);
     }
     else {
         req = stringToArray(request);
     }
-    var regE = new RegExp(array_to_regExp(req), 'ig');
-    var found, result = [];
+    let regE = new RegExp(array_to_regExp(req), 'ig');
+    let found, result = [];
     while ((found = regE.exec(text)) != null && (result.length < const_1.MAX_PER_WRITING || const_1.MAX_PER_WRITING == -1)) {
         result.push([found[0], found.index]);
     }
     return result;
 };
-var exprToArray = function myself(text) {
-    var id = 0, id0 = 0, id1 = 0, count = -1, result = [];
+let exprToArray = function myself(text) {
+    let id = 0, id0 = 0, id1 = 0, count = -1, result = [];
     while (id < text.length) {
         if (text[id] == '(' && count == -1) {
             id0 = id;
@@ -86,8 +92,8 @@ var exprToArray = function myself(text) {
     }
     return result;
 };
-var stringToArray = function myself(text) {
-    var index = text.search(" ");
+let stringToArray = function myself(text) {
+    let index = text.search(" ");
     if (index == -1) {
         return [text];
     }
@@ -95,8 +101,8 @@ var stringToArray = function myself(text) {
         return [myself(text.substring(0, index)), const_1.DEFAULT_BOOLEAN, text.substring(index + 1)];
     }
 };
-var array_to_regExp = function myself(arr) {
-    var res = "";
+let array_to_regExp = function myself(arr) {
+    let res = "";
     if (arr.length < 4) {
         if (arr.length == 1) {
             if (typeof arr[0] == 'string') {
@@ -107,16 +113,16 @@ var array_to_regExp = function myself(arr) {
             }
         }
         if (arr.length == 2 && (typeof arr[0] == 'string')) {
-            var a = myself(arr[1]);
-            var regE = new RegExp("not", 'ig');
+            let a = myself(arr[1]);
+            let regE = new RegExp("not", 'ig');
             if (regE.exec(arr[0]) != null) {
                 res += "^" + a;
             }
         }
         if (arr.length == 3 && (typeof arr[1] == 'string')) {
-            var a = myself([arr[0]]), b = myself([arr[2]]);
-            var regE = new RegExp("and", 'ig');
-            var regEx = new RegExp("or", 'ig');
+            let a = myself([arr[0]]), b = myself([arr[2]]);
+            let regE = new RegExp("and", 'ig');
+            let regEx = new RegExp("or", 'ig');
             if (regE.exec(arr[1]) != null) {
                 res += "((" + a + "\.*" + b + ")|(" + b + "\.*" + a + "))";
             }
@@ -127,12 +133,12 @@ var array_to_regExp = function myself(arr) {
     }
     return res;
 };
-var getExtracts = function (indexes, text) {
-    var result = [];
-    for (var k = 0; k < indexes.length; k++) {
-        var n = indexes[k][1];
-        var w = indexes[k][0];
-        var swap_left = const_1.EXTRACT_SIZE;
+let getExtracts = function (indexes, text) {
+    let result = [];
+    for (let k = 0; k < indexes.length; k++) {
+        let n = indexes[k][1];
+        let w = indexes[k][0];
+        let swap_left = const_1.EXTRACT_SIZE;
         if (n - swap_left < 0) {
             swap_left = 0;
         }
@@ -141,7 +147,7 @@ var getExtracts = function (indexes, text) {
                 swap_left++;
             }
         }
-        var swap_right = const_1.EXTRACT_SIZE;
+        let swap_right = const_1.EXTRACT_SIZE;
         if (n + swap_right + w.length > text.length) {
             swap_right = text.length - n - w.length;
         }
@@ -150,7 +156,7 @@ var getExtracts = function (indexes, text) {
                 swap_right++;
             }
         }
-        result.push([text.substring(n - swap_left, n + w.length + swap_right), w, n]);
+        result.push({ extract: text.substring(n - swap_left, n + w.length + swap_right), pattern: w, index: n });
     }
     return result;
 };

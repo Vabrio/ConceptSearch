@@ -1,100 +1,64 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-var ConceptModel = (function () {
-    function ConceptModel(row) {
+class ConceptModel {
+    constructor(row) {
         this.row = row;
     }
-    Object.defineProperty(ConceptModel.prototype, "id", {
-        get: function () {
-            return this.row.id;
-        },
-        set: function (val) {
-            this.row.id = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "name", {
-        get: function () {
-            return this.row.name;
-        },
-        set: function (val) {
-            this.row.name = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "writingid", {
-        get: function () {
-            return this.row.writingid;
-        },
-        set: function (val) {
-            this.row.writingid = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "begin", {
-        get: function () {
-            return this.row.begin;
-        },
-        set: function (val) {
-            this.row.begin = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "end", {
-        get: function () {
-            return this.row.end;
-        },
-        set: function (val) {
-            this.row.end = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "extract", {
-        get: function () {
-            return this.row.extract;
-        },
-        set: function (val) {
-            this.row.extract = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "userid", {
-        get: function () {
-            return this.row.userid;
-        },
-        set: function (val) {
-            this.row.userid = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "strength", {
-        get: function () {
-            return this.row.strength;
-        },
-        set: function (val) {
-            this.row.strength = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    Object.defineProperty(ConceptModel.prototype, "created_at", {
-        get: function () {
-            return this.row.created_at;
-        },
-        set: function (val) {
-            this.row.created_at = val;
-        },
-        enumerable: true,
-        configurable: true
-    });
-    ConceptModel.prototype.toJSON = function () {
+    get id() {
+        return this.row.id;
+    }
+    set id(val) {
+        this.row.id = val;
+    }
+    get name() {
+        return this.row.name;
+    }
+    set name(val) {
+        this.row.name = val;
+    }
+    get writingid() {
+        return this.row.writingid;
+    }
+    set writingid(val) {
+        this.row.writingid = val;
+    }
+    get begin() {
+        return this.row.begin;
+    }
+    set begin(val) {
+        this.row.begin = val;
+    }
+    get end() {
+        return this.row.end;
+    }
+    set end(val) {
+        this.row.end = val;
+    }
+    get extract() {
+        return this.row.extract;
+    }
+    set extract(val) {
+        this.row.extract = val;
+    }
+    get userid() {
+        return this.row.userid;
+    }
+    set userid(val) {
+        this.row.userid = val;
+    }
+    get strength() {
+        return this.row.strength;
+    }
+    set strength(val) {
+        this.row.strength = val;
+    }
+    get created_at() {
+        return this.row.created_at;
+    }
+    set created_at(val) {
+        this.row.created_at = val;
+    }
+    toJSON() {
         return {
             id: this.row.id,
             name: this.row.name,
@@ -106,12 +70,11 @@ var ConceptModel = (function () {
             strength: this.row.strength,
             created_at: this.created_at
         };
-    };
-    ConceptModel.prototype.isValid = function () {
+    }
+    isValid() {
         return !(this.row.extract === '' ||
             (this.row.begin === undefined && this.row.end === undefined));
-    };
-    return ConceptModel;
-}());
+    }
+}
 exports.ConceptModel = ConceptModel;
 //# sourceMappingURL=concept.model.js.map

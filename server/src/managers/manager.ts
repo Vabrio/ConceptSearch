@@ -1,6 +1,5 @@
-declare function require(name:string): any;
 declare const Buffer: any;
-var fs = require('fs');
+let fs = require('fs');
 
 import {WritingsService} from "./services/writings.service";
 import {ConceptsService} from "./services/concepts.service";
@@ -10,8 +9,13 @@ import {ConceptModel} from "./models/concept.model";
 import {UserModel} from "./models/user.model";
 
 class Manager {
+    
+	// Return the writings table
+	static getWritingList(res: any){
+		WritingsService.list(res);
+    }
 	
-	// Giving a concept id, returns the writing and its associated concepts
+	// Giving a writing id, returns the writing
 	static getWriting(id: number, res: any){
 		// Getting the writing in plain text
 		WritingsService.find(id, (err: any, writing: WritingModel) => {
@@ -23,24 +27,32 @@ class Manager {
 				let iconvlite = require('iconv-lite');
 				let filebuffer = fs.readFileSync(writing.address);
 				let writingText = iconvlite.decode(filebuffer, 'ISO-8859-1');
-				
-				// Then look for the list of concepts associated
-				ConceptsService.listFromWritingId(id, (err: any, concepts:any) => {
-					if (err){
-						console.log("test");
-						res(err, {"writing": writingText,"concepts":[] });
-					} else{
-						res(err, {"writing": writingText,"concepts":concepts});
-					}
-				})
+				res(err, writingText);
 			}
 		})
     }
-    
-	// Return the writings table
-	static getWritingList(res: any){
-		WritingsService.list(res);
-    }
+	
+	// Giver writingid, returns associated concepts
+	static getConcepts(id: number, token: any, res: any) {
+		ConceptsService.listFromWritingId(id, token.username, (err: any, concepts:any) => {
+			if (err){
+				res(err, []);
+			} else{
+				res(err, concepts);
+			}
+		})
+	}
+	
+	// Giver writingid, returns associated concepts
+	static getConceptList(res: any) {
+		ConceptsService.list((err: any, concepts:any) => {
+			if (err){
+				res.json({succes: false, message: "error occured while getting concepts"});
+			} else{
+				res.json({success: true, message: "succesfully retrived concepts", concepts: concepts});
+			}
+		})
+	}
     
 	// Adds a concept to the DB
 	static addConcept(concept: ConceptModel, res: any){

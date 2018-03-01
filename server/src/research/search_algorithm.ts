@@ -8,21 +8,32 @@ const fs = require('fs');
 * @param request : RegExp of the request
 * @param writingList : list of writing addresses to be searched on
 
-* @return : [writer, [name,address,id,[extract, pattern, index]]]
+* @return :  [{author: string, books: [{name: string, address: string, id: number,
+										extracts: [{extract: string, 
+												 	pattern: string,
+												 	index: number}]}]}]>
 */
-let globalSearch = function(request: string, writingList: Array<{id: number, address: string, name: string, writer: string}>){
+let globalSearch = function(request: string, writingList: Array<{id: number, address: string, name: string, writer: string}>) : Array<{author: string, 
+						  books: Array<{name: string, address: string, id: number,
+								extracts: Array<{extract: string, 
+												 pattern: string,
+												 index: number}>}>}>  {
 	// A dictionay associating the number of writing for each author
 	let authorDict : {[id: string]: number} = {};
+	let idAuthor = 0;
 	
 	// Data sent in request
 	let request_data = JSON.parse(request);
 	
 	// The returned data
-	let response: Array<[string, any[]]> = [];
+	let response: Array<{author: string, 
+						  books: Array<{name: string, address: string, id: number,
+								extracts: Array<{extract: string, 
+												 pattern: string,
+												 index: number}>}>}> = [];
     
 	for (let link of writingList){
 		if ((request_data['author_research'] == "" || request_data['author_research'] == link.writer) && (request_data['title_research'] == "" || request_data['title_research'] == link.name)){
-			let idAuthor: number;
 			// Do count by author
 			if (authorDict[link.writer] != undefined){
 				idAuthor = authorDict[link.writer];
@@ -31,7 +42,7 @@ let globalSearch = function(request: string, writingList: Array<{id: number, add
 				idAuthor = response.length;
 			}
 
-			if (link != undefined && (idAuthor == response.length ||  (response[idAuthor][1].length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1))){
+			if (link != undefined && (idAuthor == response.length ||  (response[idAuthor].books.length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1))){
 				// Get the writing as text
 				let iconvlite = require('iconv-lite');
 				let filebuffer = fs.readFileSync(link.address);
@@ -43,9 +54,16 @@ let globalSearch = function(request: string, writingList: Array<{id: number, add
 					let extr = getExtracts(result, writingText);
 					if (idAuthor == response.length){
 						authorDict[link.writer] = idAuthor;
-						response.push([link.writer, [[link.name, link.address, link.id, extr]]]);
+						response.push({author: link.writer,
+										books : [{name : link.name,
+												  address : link.address,
+												  id : link.id,
+												  extracts : extr}]});
 					}else{
-						response[idAuthor][1].push([link.name, link.address, link.id, extr]);
+						response[idAuthor].books.push({name : link.name,
+												  		address : link.address,
+												  		id : link.id,
+												  		extracts : extr});
 	
 					}
 				}
@@ -113,7 +131,7 @@ let globalSearch = function(request: string, writingList: Array<[number, string,
 
 // Compare two texts from the number of occurence of the pattern found
 let sortFunction = function(a: any, b: any){
-	return b[0] - a[0];
+	return b.name - a.name;
 }
 
 // From a text, return the result found
@@ -216,9 +234,9 @@ let array_to_regExp = function myself(arr: any[]): string{
 *
 * @return : Array<[extract, pattern, index]>
 */
-let getExtracts = function(indexes: Array<[string, number]>, text: string) : Array<[string, string, number]>{
+let getExtracts = function(indexes: Array<[string, number]>, text: string) : Array<{extract: string, pattern: string, index: number}>{
 	// Create the result array
-	let result: Array<[string, string, number]> = [];
+	let result: Array<{extract: string, pattern:  string, index: number}> = [];
 	
 	for (let k=0; k<indexes.length; k++){
 		// The extract index
@@ -242,7 +260,7 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 			while (text[n + swap_right + w.length] != ' ' && n+swap_right+w.length<text.length) {swap_right ++;}
 		}	
 		// Add a result
-		result.push([text.substring(n - swap_left, n + w.length + swap_right), w, n]);
+		result.push({extract: text.substring(n - swap_left, n + w.length + swap_right), pattern : w, index : n});
 	}
 	return result;
 }

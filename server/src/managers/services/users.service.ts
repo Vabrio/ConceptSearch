@@ -5,11 +5,15 @@
 
 import { UsersDAO } from '../dao/users.dao.mysql';
 import { UserModel } from '../models/user.model';
+import {NAMES_UNAVAILABLE} from "../../const/const";
 
 
 class UsersService
 {
 	static create(user: UserModel , res: any) {
+		if (NAMES_UNAVAILABLE.includes(user.name)){
+			res.json({ success: false, message: 'Login already token !', type: 1});
+		}
 		UsersDAO.findByName(user.name, (err: any, userF: UserModel)=>{
 			if (err) {
 				res.status(500).json({ success: false, message: 'db_error', type: 0 });

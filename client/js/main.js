@@ -9,7 +9,7 @@ if (version == "DEV"){
 var searchRes = new Vue({
     el: '#research_results',
     data: {
-		books: [[[[]],[]]],
+		books: [{}],
 		dataReceived: false,
 		author: "",
 		writingName: "",
@@ -21,9 +21,9 @@ var searchRes = new Vue({
 			var b=0;
 			for (b=0; b<searchRes.books.length; b++){
 				var book = searchRes.books[b];
-				if (book[0] == name) {
-					searchRes.writingName = book[1][0][0];
-					getwriting(book[1][0][2], book[1][0][3], book[0], book[1][0][0]);
+				if (book.author == name) {
+					searchRes.writingName = book.books[0].name;
+					getwriting(book.books[0].id, book.books[0].extracts, book.author, book.books[0].name);
 				};
 			}
 		},
@@ -43,12 +43,12 @@ Vue.component('extract', {
 
 Vue.component('writing', {
 	props: ['list', 'title', 'idWri', 'author'],
-	template: '<li><div><a class="writingTitle" href="#writingHead" v-on:click="searchRes.changeWriting(idWri, list, author, title)" >{{ title }}</a> <br/><ul v-show="title == searchRes.writingName"><extract v-for="extr in list" v-bind:list="list" v-bind:text="extr[0]" v-bind:index="extr[2]" v-bind:idWri="idWri" v-bind:author="author" v-bind:title="title"></extract></ul></div></li>'
+	template: '<li><div><a class="writingTitle" href="#writingHead" v-on:click="searchRes.changeWriting(idWri, list, author, title)" >{{ title }}</a> <br/><ul v-show="title == searchRes.writingName"><extract v-for="extr in list" v-bind:list="list" v-bind:text="extr.extract" v-bind:index="extr.index" v-bind:idWri="idWri" v-bind:author="author" v-bind:title="title"></extract></ul></div></li>'
 })
 
 Vue.component('book', {
 	props: ['metadata'],
-	template: '<div><a class="author" v-on:click="searchRes.changeAuthor(metadata[0])">{{ metadata[0] }}</a><ul v-show="metadata[0] == searchRes.author"><writing v-for="writ in metadata[1]" v-bind:list="writ[3]"  v-bind:title="writ[0]" v-bind:idWri="writ[2]" v-bind:author="metadata[0]"></writing></ul></div>'
+	template: '<div><a class="author" v-on:click="searchRes.changeAuthor(metadata.author)">{{ metadata.author }}</a><ul v-show="metadata.author == searchRes.author"><writing v-for="writ in metadata.books" v-bind:list="writ.extracts"  v-bind:title="writ.name" v-bind:idWri="writ.id" v-bind:author="metadata.author"></writing></ul></div>'
 })
 
 Vue.component('concept', {
@@ -69,23 +69,23 @@ function search_results(param) {
 		searchRes.books = [];
 	}else{
 		searchRes.dataReceived = true;
-		searchRes.changeAuthor(searchRes.books[0][0]);
-		searchRes.writingName = searchRes.books[0][1][0][0];
-		searchRes.idWri = searchRes.books[0][1][0][2];
+		searchRes.changeAuthor(searchRes.books[0].author);
+		searchRes.writingName = searchRes.books[0].books[0].name;
+		searchRes.idWri = searchRes.books[0].books[0].id;
 	}
 }
 // TODO : use pattern and index
 function getwriting(idWri, list, author, title){
-	httpAsync(url+"read?idWri="+idWri+"&list="+JSON.stringify(list) +"&author="+author +"&title="+title, "", link, "GET");
+	httpAsync(url+"writings/read?idWri="+idWri+"&list="+JSON.stringify(list) +"&token="+auth.token+"&author="+author +"&title="+title, "", link, "GET");
 }
 
 function link(writ){
 	writing=JSON.parse(writ);
-	completeText.initialText = writing[0];
-	completeText.text = writing[0].replace(/(\r\n|\n|\r)/g,"<br />");
-	completeText.author = writing[1];
-	completeText.title = writing[2];
-	completeText.idWri = writing[3];
+	completeText.initialText = writing.text;
+	completeText.text = writing.text.replace(/(\r\n|\n|\r)/g,"<br />");
+	completeText.author = writing.author;
+	completeText.title = writing.title;
+	completeText.idWri = writing.id;
 	/*var extr = document.getElementById("extract");	
 	extr.scrollIntoView();*/
 }
@@ -107,7 +107,7 @@ var researchIn = new Vue({
 				researchIn.title_research = "";
 				data = researchIn.$data;
 			}
-			httpAsync(url + "search?request="+JSON.stringify(data),"", search_results, "GET");
+			httpAsync(url + "writings/search?request="+JSON.stringify(data),"", search_results, "GET");
 		}
   	}
 });
@@ -156,7 +156,7 @@ var addConcept = new Vue({
 			return  !searchRes.$data.dataReceived && completeText.$data.text != "";
 		},
 		addAConcept: function(){
-			httpAsync(url+"concept?name="+addConcept.concept+"&idWri="+completeText.idWri+"&begin=-1&end=-1"+"&extract="+JSON.stringify(addConcept.wordSelected)+"&userId="+addConcept.user+"&strength=1", "", concept_added, "POST");
+			httpAsync(url+"concepts/add?name="+addConcept.concept+"&idWri="+completeText.idWri+"&begin=-1&end=-1"+"&extract="+JSON.stringify(addConcept.wordSelected)+"&strength=1", "", concept_added, "POST");
 		}
 	}
 });
@@ -214,11 +214,10 @@ function logged(ans){
 		}
 	} else{
 		console.log( ansJson.message + ansJson.token );
-		auth.toker=ansJson.token;
+		auth.token=ansJson.token;
 		auth.logged=true;
 		usercontent.concepts=ansJson.concepts;
 		usercontent.userData=ansJson.user;
-		console.log(usercontent.concepts[0]);
 		$("#loginModal").modal("toggle");
 	}
 }

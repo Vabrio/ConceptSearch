@@ -3,6 +3,8 @@ const PORT = 8080;
 // Show the console (true) or put in a file  (false)
 const LOG_FILE = false;
 
+const NAMES_UNAVAILABLE = ["default", "Alice"];
+
 // Extracting parameters
 //var result = str.match( /[^\.!\?]+[\.!\?]+/g );
 //const EXTRACT_SEPARATOR = ". "; // 2 sentences are separated with "."
@@ -17,4 +19,4 @@ const DEFAULT_BOOLEAN = 'AND';
 // Secret to be kept
 const SECRET = "ABIGSECRET";
 
-export{PORT, LOG_FILE, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN, SECRET}
+export{PORT, LOG_FILE, NAMES_UNAVAILABLE, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN, SECRET}
