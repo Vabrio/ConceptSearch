@@ -9,4 +9,7 @@ npm install bcrypt
 npm install body-parser
 npm install jsonwebtoken
 
+# Remove require pb
+npm install @types/node --save-dev
+
 #mysql -u conceptsearch -ppassword -e "create database cs;"
