@@ -1,9 +1,9 @@
-/server/node_modules/
+server/node_modules/
 *~
-./start.sh
+start.sh
 */.htaccess
 */.htpasswd
-/server/src/*.log
-/client/js/version.js
+server/src/*.log
+client/js/version.js
 server/build
 server/build/*
