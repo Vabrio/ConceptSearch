@@ -5,5 +5,5 @@
 */.htpasswd
 /server/src/*.log
 /client/js/version.js
-/server/build
-/server/build/*
+server/build
+server/build/*
