@@ -3,10 +3,6 @@
 ./start.sh
 */.htaccess
 */.htpasswd
-/server/src/**.js
-/server/src/**.js.map
-/server/db/**.js
-/server/db/**.js.map
 /server/src/*.log
 /client/js/version.js
-
+/build
