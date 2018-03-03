@@ -7,4 +7,5 @@ server/src/*.log
 client/js/version.js
 server/build
 server/build/*
-server/src/routes/server_start.ts
+#server/src/const/local.ts
+

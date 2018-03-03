@@ -1,5 +1,3 @@
-// Server port
-const PORT = 8080;
 // Show the console (true) or put in a file  (false)
 const LOG_FILE = false;
 
@@ -19,4 +17,4 @@ const DEFAULT_BOOLEAN = 'AND';
 // Secret to be kept
 const SECRET = "ABIGSECRET";
 
-export{PORT, LOG_FILE, NAMES_UNAVAILABLE, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN, SECRET}
+export{LOG_FILE, NAMES_UNAVAILABLE, EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN, SECRET}
