@@ -72,9 +72,20 @@ userRoutes.post('/authenticate', function(req: any, res: any) {
   	});
 });
 
-
-userRoutes.get('/', function(req: any, res: any) {
-  	res.json({ message: 'Welcome to the coolest API on earth!' });
+userRoutes.post('/update', function(req: any, res: any) {
+  	if (req.decoded.username != req.query.name || req.decoded.status < 1){
+		res.json({success: false, message:"You don't have that power dude"});
+	} else{
+		let user = new UserModel(req.query);
+		Manager.updateUser(user, (err: any, userUpdated: UserModel) => {
+			console.log(JSON.stringify(userUpdated));
+			if (err) { 
+				res.json({success: false, message: "server pb"})
+		 	} else{
+				res.json({success: true, message: "successfully updated user !"});
+			}
+		});
+	}
 });
 
 // route to return all users (GET http://localhost:8080/api/users)
@@ -83,7 +94,7 @@ userRoutes.get('/list', function(req: any, res: any) {
 		res.json({success: false, message: "you don't have the privileges"})
 	}else{
 		Manager.getUsers((err: any, users: any) => {
-			res.json(users);
+			res.json({users : users});
 		});
 	}
 });   

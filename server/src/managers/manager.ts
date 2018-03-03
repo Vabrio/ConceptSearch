@@ -71,6 +71,11 @@ class Manager {
 		UsersService.create(user, res);
 	}
 	
+	// Update userinfo in the DB
+	static updateUser(user: UserModel, res: any){
+		UsersService.update(user, res);
+	}
+	
 	// Get a list of all users
 	static getUsers(res: any){
 		UsersService.list(res);

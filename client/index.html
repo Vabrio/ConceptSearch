@@ -122,6 +122,7 @@
 			</div>
 			
 			<div id="userpage" class="tab-pane fade">
+				
 				<ul class="nav nav-pills">
 				  	<li class="active"><a data-toggle="pill" href="#concepts">Concepts added</a></li>
 				  	<li><a data-toggle="pill" href="#userinfo">My account</a></li>
@@ -134,9 +135,29 @@
 						</ul>
 				  	</div>
 				  	<div id="userinfo" class="tab-pane fade">
-						<user v-bind:metadata="userData"/>
+						<div v-show="!updater">
+							<ul>
+								<li>Name : {{ userData.name }}</li>
+								<li>Firstname : {{ userData.firstname }}</li>
+								<li>lastname : {{ userData.lastname }}</li>
+								<li>Email : {{ userData.email }}</li>
+								<li>Creation date : {{ userData.created_at }}</li>
+							</ul>
+							<button class="btn" v-on:click="updater=true" >Update user</button>
+						</div>
+						<div v-show="updater">
+							<ul>
+								<li>Name : {{ userData.name }}</li>
+								<li class="input-group"><span class="input-group-addon">Firstname :</span><input type="text" class="form-control" id="firstname" v-model="userData.firstname" /></li>
+								<li class="input-group"><span class="input-group-addon">Lastname : </span><input type="text" class="form-control" id="lastname" v-model="userData.lastname" /></li>
+								<li class="input-group"><span class="input-group-addon">Email : </span><input type="email" class="form-control" id="email" v-model="userData.email" /></li>
+								<li>Creation date : {{ userData.created_at }}</li>
+							</ul>
+							<button class="btn btn-primary" v-on:click="updateUser">UPDATE</button>
+						</div>
 				  	</div>
 				</div>
+				
 			</div>
 		</div>
     </body>

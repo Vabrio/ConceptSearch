@@ -53,8 +53,22 @@ userRoutes.post('/authenticate', function (req, res) {
         }
     });
 });
-userRoutes.get('/', function (req, res) {
-    res.json({ message: 'Welcome to the coolest API on earth!' });
+userRoutes.post('/update', function (req, res) {
+    if (req.decoded.username != req.query.name || req.decoded.status < 1) {
+        res.json({ success: false, message: "You don't have that power dude" });
+    }
+    else {
+        let user = new user_model_1.UserModel(req.query);
+        manager_1.Manager.updateUser(user, (err, userUpdated) => {
+            console.log(JSON.stringify(userUpdated));
+            if (err) {
+                res.json({ success: false, message: "server pb" });
+            }
+            else {
+                res.json({ success: true, message: "successfully updated user !" });
+            }
+        });
+    }
 });
 userRoutes.get('/list', function (req, res) {
     if (req.decoded.status < 1) {
@@ -62,7 +76,7 @@ userRoutes.get('/list', function (req, res) {
     }
     else {
         manager_1.Manager.getUsers((err, users) => {
-            res.json(users);
+            res.json({ users: users });
         });
     }
 });

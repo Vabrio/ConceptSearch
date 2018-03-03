@@ -56,10 +56,6 @@ Vue.component('concept', {
 	template: '<li>Name : {{ c.name }}, writing id : {{ c.writingid }}, extract : {{ c.extract }}</li>'
 })
 
-Vue.component('user', {
-	props: ['metadata'],
-	template: '<div><ul><li>Name : {{ metadata.name }}</li><li>Firstname : {{ metadata.firstname }}</li><li>lastname : {{ metadata.lastname }}</li><li>Creation date : {{ metadata.created_at }}</li><li>Email : {{ metadata.email }}</li></ul></div>'
-})
 
 
 function search_results(param) {
@@ -171,6 +167,7 @@ var usercontent = new Vue({
     el: '#usercontent',
 	data: {
 		userData: {
+			id: "",
 			name: "",
 			firstname: "",
 			lastname: "",
@@ -178,7 +175,14 @@ var usercontent = new Vue({
 			birth_date: "",
 			created_at: ""
 		},
+		updater: false,
 		concepts: []
+	},
+	methods: {
+		updateUser: function(){
+			console.log(this.userData.name);
+			httpAsync(url+"users/update?id="+this.userData.id+"&name="+this.userData.name+"&firstname="+this.userData.firstname+"&lastname="+this.userData.lastname+"&email="+this.userData.email+"&token="+auth.token, "", concept_added, "POST");
+		}
 	}
 });
 

@@ -54,6 +54,9 @@ class Manager {
     static addUser(user, res) {
         users_service_1.UsersService.create(user, res);
     }
+    static updateUser(user, res) {
+        users_service_1.UsersService.update(user, res);
+    }
     static getUsers(res) {
         users_service_1.UsersService.list(res);
     }
