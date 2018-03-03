@@ -1,5 +1,5 @@
 // Const
-import { PORT, LOG_FILE } from "./const/const";
+import { LOG_FILE } from "./const/const";
 
 // Initiailize db if needed (creation + adding of writing info)
 import {createTables} from "./managers/config/mysql/init_db";
@@ -47,10 +47,5 @@ app.use('/concepts', conceptRoutes);
 app.use('/users', userRoutes);
 app.use('/writings', writingRoutes);
 
-
-// START LISTENING TO A SPECIFIED PORT
-var server = app.listen(PORT, function () {
-	var port = server.address().port
-	console.log("Server listening on port : %s", port)
-
-})
+import { startServer } from "./routes/server_start";
+startServer(app);
