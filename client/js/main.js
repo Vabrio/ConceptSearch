@@ -1,6 +1,7 @@
 //var url = "http://212.194.144.183:8081/";
 if (version == "DEV"){
 	var url = ssl_status+"://localhost:"+PORT+"/";
+	//var url = ssl_status+"://localhost:"+PORT+"/";
 }else{
 	var url = ssl_status+"://concept-search.org:"+PORT+"/";
 }

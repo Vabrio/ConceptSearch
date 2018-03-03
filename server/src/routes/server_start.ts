@@ -21,8 +21,4 @@ function startServer(app: any){
 	}
 }
 
-function startServerSSL(app: any){
-	
-}
-
 export {startServer}

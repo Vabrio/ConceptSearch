@@ -12,7 +12,7 @@ function httpAsync(theUrl, params, callback, mode) {
             callback(xmlHttp.responseText);
         }
     };
-    xmlHttp.open(mode, theUrl +"/" + params, true);
+    xmlHttp.open(mode, theUrl+ params, true);
     xmlHttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     xmlHttp.send(null);
 }
