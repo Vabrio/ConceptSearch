@@ -10,7 +10,6 @@ function checkToken (req: any, res: any, next: any) {
 
   	// decode token
   	if (token) {
-
     	// verifies secret and checks exp
     	jwt.verify(token, SECRET, function(err: any, decoded: any) {      
       		if (err) {

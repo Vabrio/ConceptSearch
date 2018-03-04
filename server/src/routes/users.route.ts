@@ -94,7 +94,10 @@ userRoutes.get('/list', function(req: any, res: any) {
 		res.json({success: false, message: "you don't have the privileges"})
 	}else{
 		Manager.getUsers((err: any, users: any) => {
-			res.json({users : users});
+			if (err) {
+				res.json({success: false, message: "pb in getting list"})
+			}
+			res.json({success: true, users : users});
 		});
 	}
 });   

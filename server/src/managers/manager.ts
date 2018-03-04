@@ -46,24 +46,12 @@ class Manager {
 	
 	// Giver writingid, returns associated concepts
 	static getConceptList(res: any) {
-		ConceptsService.list((err: any, concepts:any) => {
-			if (err){
-				res.json({succes: false, message: "error occured while getting concepts"});
-			} else{
-				res.json({success: true, message: "succesfully retrived concepts", concepts: concepts});
-			}
-		})
+		ConceptsService.list(res)
 	}
     
 	// Adds a concept to the DB
 	static addConcept(concept: ConceptModel, res: any){
-		ConceptsService.create(concept, (err: any, conceptR: ConceptModel) => {
-			if (err) {
-				res.status(500).json({ 'error': 'Failed to create concept !' });
-			} else {
-				res.json({ 'success': 'Concept created !', 'concept': conceptR });
-			}
-		});
+		ConceptsService.create(concept, res);
     }
 	
 	

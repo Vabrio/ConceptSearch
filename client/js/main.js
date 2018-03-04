@@ -136,7 +136,13 @@ var completeText = new Vue({
 });
 
 function concept_added(ans){
-	console.log(ans);
+	let res = JSON.parse(res);
+	if (res.success){
+		searchRes.dataReceived = true;
+		console.log(res.message);
+	}else {
+		console.log(res.message);
+	}
 }
 
 var addConcept = new Vue({
@@ -153,7 +159,7 @@ var addConcept = new Vue({
 			return  !searchRes.$data.dataReceived && completeText.$data.text != "";
 		},
 		addAConcept: function(){
-			httpAsync(url+"concepts/add?name="+addConcept.concept+"&idWri="+completeText.idWri+"&begin=-1&end=-1"+"&extract="+JSON.stringify(addConcept.wordSelected)+"&strength=1", "", concept_added, "POST");
+			httpAsync(url+"concepts/add?name="+addConcept.concept+"&idWri="+completeText.idWri+"&begin=-1&end=-1"+"&extract="+JSON.stringify(addConcept.wordSelected)+"&strength=1&token="+auth.token, "", concept_added, "POST");
 		}
 	}
 });
@@ -249,8 +255,9 @@ function subscribed(ans){
 			subscribe_form.state = "has-error";
 		}
 	}else {
-		console.log("created ! " + ans);
-		$("#loginModal").modal("toggle");
+		login_form.log_login = subscribe_form.sub_login;
+		login_form.log_pwd = subscribe_form.sub_pwd;
+		login_form.submit();
 	}
 }
 var subscribe_form = new Vue({
@@ -267,4 +274,3 @@ var subscribe_form = new Vue({
 		}
 	}
 });
-

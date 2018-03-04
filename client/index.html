@@ -57,7 +57,7 @@
 					
 					<div class="modal-body tab-content">
 				  		
-						<div id="login_form" class="tab-pane fade in active">
+						<div class="tab-pane fade in active" id="login_form">
 							<div class="form-group" v-bind:class="state_login">
 								<label for="login">Login :</label>
 								<input class="form-control" id="login" v-model="log_login" />
@@ -70,7 +70,7 @@
 				  		</div>
 						
 						
-						<div id="subscribe_form" class="tab-pane fade">
+						<div class="tab-pane fade" id="subscribe_form">
 							<div class="form-group" v-bind:class="state">
 								<label for="login">Login :</label>
 								<input type="text" class="form-control" id="login" v-model="sub_login">
@@ -78,7 +78,7 @@
 							<div class="form-group">
 								<label for="password">Password :</label>
 								<input type="password" class="form-control" id="password" v-model="sub_pwd">
-							</div>
+							</div> 
 							<div class="form-group">
 								<label for="passwordCheck">Repeat password :</label>
 								<input type="password" class="form-control" id="passwordCheck" v-model="sub_pwd_check">
