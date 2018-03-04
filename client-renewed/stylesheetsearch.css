@@ -1,0 +1,31 @@
+#login{border: 1px solid none;
+text-align: right;
+padding-right: 10px;
+}
+.login{border: 1.5px solid rgb(1,110,245);
+background-color: rgb(70,130,250);
+font-size: 17px;
+color: black;
+padding: 3px 7px;
+}
+.login:hover{background-color: rgb(190,210,255);
+color: black;
+}
+
+#header{text-align: left;
+border: 1px solid none;
+padding: 20px 0 30px 20px;
+}
+.index{border: 1.5px solid rgb(245,0,0);
+background-color: white;
+font-size: 30px;
+color: rgb(245,0,0);
+padding: 3px 7px;
+}
+.index:hover{background-color: rgb(255,230,210);
+}
+.bar{width: 20%;
+height: 25px;
+font-size: 18px;
+padding-left: 10px;
+}
