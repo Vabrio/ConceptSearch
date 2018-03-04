@@ -25,7 +25,7 @@ if (LOG_FILE){
 	var logStdout = process.stdout;
 
 	console.log = function() { //
-	  logFile.write(util.format.apply(null, arguments) + '\n');
+	  logFile.write((new Date()).toJSON() + " --- "  + util.format.apply(null, arguments) + '\n');
 	  logStdout.write(util.format.apply(null, arguments) + '\n');	
 	};
 	console.error=console.log;
