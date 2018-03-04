@@ -1,4 +1,5 @@
 import { EXTRACT_SIZE, MAX_PER_WRITING, MAX_PER_AUTHOR, DEFAULT_BOOLEAN } from "../const/const";
+import { ROOT_DIR } from "../rest_server"
 
 declare function require(name:string): any;
 const fs = require('fs');
@@ -40,7 +41,7 @@ let globalSearch = function(request: string, writingList: Array<{id: number, add
 			if (link != undefined && (idAuthor == response.length ||  (response[idAuthor].books.length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1))){
 				// Get the writing as text
 				let iconvlite = require('iconv-lite');
-				let filebuffer = fs.readFileSync(link.address);
+				let filebuffer = fs.readFileSync(ROOT_DIR + link.address);
 				let writingText = iconvlite.decode(filebuffer,"latin1");
 				// Find the pattern
 				let result = doTheSearch(writingText, request_data['research']);

@@ -1,3 +1,7 @@
+// Path to root directory
+const ROOT_DIR = __dirname + '/';
+export { ROOT_DIR };
+
 // Const
 import { LOG_FILE } from "./const/local";
 // Db 
@@ -16,7 +20,7 @@ let express = require('express');
 // Starting filed log depending on LOG_FILE const
 if (LOG_FILE){
 	let util = require('util');
-	var logFile = fs.createWriteStream('log.txt', { flags: 'a' });
+	var logFile = fs.createWriteStream(ROOT_DIR+'log.txt', { flags: 'a' });
   	// Or 'w' to truncate the file every time the process starts.
 	var logStdout = process.stdout;
 

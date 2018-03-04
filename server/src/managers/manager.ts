@@ -1,12 +1,13 @@
 declare const Buffer: any;
 let fs = require('fs');
 
-import {WritingsService} from "./services/writings.service";
-import {ConceptsService} from "./services/concepts.service";
-import {UsersService} from "./services/users.service";
-import {WritingModel} from "./models/writing.model";
-import {ConceptModel} from "./models/concept.model";
-import {UserModel} from "./models/user.model";
+import { WritingsService } from "./services/writings.service";
+import { ConceptsService } from "./services/concepts.service";
+import { UsersService } from "./services/users.service";
+import { WritingModel } from "./models/writing.model";
+import { ConceptModel } from "./models/concept.model";
+import { UserModel } from "./models/user.model";
+import { ROOT_DIR } from "../rest_server"
 
 class Manager {
     
@@ -25,7 +26,7 @@ class Manager {
 				
 				//We extract the writing
 				let iconvlite = require('iconv-lite');
-				let filebuffer = fs.readFileSync(writing.address);
+				let filebuffer = fs.readFileSync(ROOT_DIR+writing.address);
 				let writingText = iconvlite.decode(filebuffer, 'ISO-8859-1');
 				res(err, writingText);
 			}
