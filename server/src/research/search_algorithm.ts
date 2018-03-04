@@ -240,23 +240,57 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 		// The word wanted
 		let w = indexes[k][0];
 		
-		// Swap on the left side
-		let swap_left = EXTRACT_SIZE;
+		let swap_left= EXTRACT_SIZE, swap_right=EXTRACT_SIZE*2;
 		if (n- swap_left <0){
-			swap_left =0;
-		}else{
-			while (text[n - swap_left] != ' ' && n- swap_left > 0) {swap_left ++;}
-		}		
+			swap_right += swap_left - n;
+			swap_left =n;
+		}else if (n+swap_right > text.length){
+			swap_right = text.length - n;
+			swap_left += swap_right - n + -text.length;
+		}
+		let index_left = n, index_right = n;
+		while (swap_left > 0 || swap_right >0){
+			if (swap_left > 0 && (text[index_left] == "." || text[index_left] == "!" || text[index_left] == "?")){
+				if (swap_right > 0){
+					swap_right += swap_left;
+				};
+				swap_left = 0;
+				index_left +=2;
+				index_right ++;
+				swap_right --;
+			}else if (swap_right> 0 && (text[index_right] == "." || text[index_right] == "!" || text[index_right] == "?" )){
+				if (swap_left > 0){
+					swap_left += swap_right;
+				};
+				swap_right = 0;
+				index_left --;
+				swap_left --;
+			}else if (swap_right == 0 && swap_left >0){
+				index_left --;
+				swap_left --;
+			}else if (swap_left == 0 && swap_right >0){
+				index_right ++;
+				swap_right --;
+			}else {
+				index_right ++;
+				swap_right --;
+				index_left --;
+				swap_left --;
+			}
+		}
+		while (index_left > 0 && text[index_left-1] != ' ') {index_left ++;}
+		while (index_right < text.length -1  && text[index_right+1] != ' ') {index_right --;}
 		
-		// Swap on the right side
-		let swap_right = EXTRACT_SIZE;
-		if (n+swap_right+w.length>text.length){
-			swap_right = text.length - n - w.length;
-		}else{
-			while (text[n + swap_right + w.length] != ' ' && n+swap_right+w.length<text.length) {swap_right ++;}
-		}	
+		var pre_text ="", post_text ="";
+		if (index_left>0 && !(text[index_left-2] == "." || text[index_left-2] == "!" || text[index_left-2] == "?")){
+			pre_text = "...";	
+		}
+		/*if (index_right<text.length && !(text[index_right] == "." || text[index_right] == "!" || text[index_right] == "?" )){
+			post_text="...";
+		}*/
+		
 		// Add a result
-		result.push({extract: text.substring(n - swap_left, n + w.length + swap_right), pattern : w, index : n});
+		result.push({extract: pre_text + text.substring(index_left, index_right+1)+ post_text, pattern : w, index : n});
 	}
 	return result;
 }
