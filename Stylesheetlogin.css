@@ -1,0 +1,21 @@
+#name{text-align: center;
+}
+#CSname{font-size: 50px;
+color: rgb(245,0,0);
+padding: 20px 0 30px 0;
+letter-spacing: 1px;
+}
+
+
+#connexionbar{text-align: center;
+padding: 0 0 10px 0;
+}
+#connexionbtn{text-align: center;
+padding: 0 0 40px 0;
+}
+
+#identitybar{text-align: center;
+padding: 0 0 10px 0;
+}
+#submitbtn{text-align: center;
+}
