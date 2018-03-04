@@ -13,25 +13,20 @@ const fs = require('fs');
 												 	pattern: string,
 												 	index: number}]}]}]>
 */
-let globalSearch = function(request: string, writingList: Array<{id: number, address: string, name: string, writer: string}>) : Array<{author: string, 
-						  books: Array<{name: string, address: string, id: number,
-								extracts: Array<{extract: string, 
-												 pattern: string,
-												 index: number}>}>}>  {
+let globalSearch = function(request: string, writingList: Array<{id: number, address: string, name: string, writer: string}>)  {
 	// A dictionay associating the number of writing for each author
 	let authorDict : {[id: string]: number} = {};
 	let idAuthor = 0;
 	
 	// Data sent in request
-	let request_data = JSON.parse(request);
-	
+	let request_data = JSON.parse(request);	
 	// The returned data
 	let response: Array<{author: string, 
 						  books: Array<{name: string, address: string, id: number,
 								extracts: Array<{extract: string, 
 												 pattern: string,
 												 index: number}>}>}> = [];
-    
+
 	for (let link of writingList){
 		if ((request_data['author_research'] == "" || request_data['author_research'] == link.writer) && (request_data['title_research'] == "" || request_data['title_research'] == link.name)){
 			// Do count by author
@@ -61,17 +56,17 @@ let globalSearch = function(request: string, writingList: Array<{id: number, add
 												  extracts : extr}]});
 					}else{
 						response[idAuthor].books.push({name : link.name,
-												  		address : link.address,
-												  		id : link.id,
-												  		extracts : extr});
-	
+														address : link.address,
+														id : link.id,
+														extracts : extr});
+
 					}
 				}
 			}
 		}
-    }
-    response.sort(sortFunction);
-    return response;
+	}
+	response.sort(sortFunction);
+	return response;
 };
 
 

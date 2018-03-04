@@ -1,12 +1,17 @@
 // Const
-import { LOG_FILE } from "./const/const";
-
-// Initiailize db if needed (creation + adding of writing info)
+import { LOG_FILE } from "./const/local";
+// Db 
 import {createTables} from "./managers/config/mysql/init_db";
-createTables();
-
+// Rest_api
+import { checkToken } from "./routes/token";
+import { conceptRoutes } from "./routes/concepts.route";
+import { userRoutes } from "./routes/users.route";
+import { writingRoutes } from "./routes/writings.route";
+import { startServer } from "./routes/server_start";
+// Libs
 let fs = require('fs');
 let bodyParser  = require('body-parser');
+let express = require('express');
 
 // Starting filed log depending on LOG_FILE const
 if (LOG_FILE){
@@ -22,15 +27,16 @@ if (LOG_FILE){
 	console.error=console.log;
 }
 
+// Initializing db
+createTables();
+
+
 // STARTING REST SERVER
-let express = require('express');
 let app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-
-// WE MAY USE A TOKEN
-import { checkToken } from "./routes/token";
+// WE MAY USE A TOKEN (authentication system)
 app.use(checkToken);
 
 app.all('/*', function(req: any, res: any, next: any) {
@@ -39,14 +45,10 @@ app.all('/*', function(req: any, res: any, next: any) {
   next();
 });
 
-
-import {conceptRoutes} from "./routes/concepts.route";
-import {userRoutes} from "./routes/users.route";
-import {writingRoutes} from "./routes/writings.route";
+// Initialize routes
 app.use('/concepts', conceptRoutes);
 app.use('/users', userRoutes);
 app.use('/writings', writingRoutes);
 
-
-import { startServer } from "./routes/server_start";
+// Start rest server
 startServer(app);

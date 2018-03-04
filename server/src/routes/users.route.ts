@@ -40,7 +40,7 @@ userRoutes.post('/authenticate', function(req: any, res: any) {
 
   	// find the user
   	Manager.findUserByName(req.query.name, (err: any, user: UserModel)=> {
-
+		
 		if (err) throw err;
 		
 		if (!user) {
