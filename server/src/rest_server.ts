@@ -44,9 +44,9 @@ app.use(bodyParser.json());
 app.use(checkToken);
 
 app.all('/*', function(req: any, res: any, next: any) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "X-Requested-With");
-  next();
+  	res.header("Access-Control-Allow-Origin", "*");
+  	res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  	next();
 });
 
 // Initialize routes

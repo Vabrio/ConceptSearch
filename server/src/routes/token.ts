@@ -4,7 +4,6 @@ import { UserModel } from "../managers/models/user.model";
 var jwt    = require('jsonwebtoken'); // used to create, sign, and verify tokens
 
 function checkToken (req: any, res: any, next: any) {
-	
 	// check header or url parameters or post parameters for token
   	var token = req.body.token || req.query.token || req.headers['x-access-token'];
 
