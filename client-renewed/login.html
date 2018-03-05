@@ -4,10 +4,11 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheetlogin.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<title>Login on Concept Search</title>
 </head>
 <body>
-	<div id="Login">
+	<div id="login_form">
 		<div id="index">
 			<a href="index.html"><button class="btn index">Concept Search</button></a>
 		</div>
@@ -19,14 +20,14 @@
 		<div id="connexion">
 		<div id="connexionbar">
 			Identifiant: 
-			<input type="text" class="bar" placeholder="Your email.." name="identifiantbar">
+			<input type="text" class="bar" placeholder="Votre id..." name="identifiantbar" v-model="pseudo">
 		</div>
 		<div id="connexionbar">
 			Mot de passe:
-			<input type="text" class="bar" placeholder="Your mdp.." name="mdpbar">
+			<input type="password" class="bar" placeholder="Votre mdp.." name="mdpbar" v-model="password">
 		</div>
 		<div id="connexionbtn">
-			<button class="connexionbtn">Me connecter</button>
+			<button class="connexionbtn" @click="connect">Me connecter</button>
 		</div>
 		</div>
 		
@@ -34,24 +35,25 @@
 		<div id="newcompte">
 		<div id="identitybar">
 			Prénom: 
-			<input type="text" class="bar" placeholder="Your name.." name="namebar">
+			<input type="text" class="bar" placeholder="Votre prénom..." name="namebar" v-model="firstname">
 		</div>
 		<div id="identitybar">
 			Nom: 
-			<input type="text" class="bar" placeholder="Your surname.." name="surnamebar">
+			<input type="text" class="bar" placeholder="Votre nom..." name="lastnamebar" v-model="lastname">
 		</div>
 		<div id="identitybar">
 			Adresse mail:
-			<input type="text" class="bar" placeholder="Your email" name="mailbar">
+			<input type="email" class="bar" placeholder="Votre email" name="mailbar" v-model="email">
 		</div>
 		<div id="identitybar">
 			Date de naissance:
-			<input type="text" class="bar" placeholder="Prog javascript" name="birthbar">
+			<input type="text" class="bar" placeholder="jj/mm/aaaa" name="birthbar" v-model="birth_date">
 		</div>
 		<div id="submitbtn">
-			<button class="submitbtn">Créer mon compte</button>
+			<button class="submitbtn" @click="subscribe">Créer mon compte</button>
 		</div>
 		</div>
 	</div>
+	<script src="js/authentication.js"></script>
 </body>
 </html>

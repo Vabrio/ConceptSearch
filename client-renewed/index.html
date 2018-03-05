@@ -1,15 +1,19 @@
 <!doctype html>
-<html lang="fr"/>
+<html lang="fr">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="stylesheetindex.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<title>Concept Search</title>
 </head>
 <body>
 	<div id="login">
-		<a href="login.html"><button class="btn login">Connexion</button></a>
+		<a href="login.html" v-show="!auth.logged"><button class="btn login">Connexion</button></a>
+		<a href="#" v-show="auth.logged"><button class="btn login" @click="disconnect">Se déconnecter</button></a>
 	</div>
+	<script src="js/login.js"></script>
+	
 	<div id="name">
 		<h1 id="CSname">
 		Concept Search
