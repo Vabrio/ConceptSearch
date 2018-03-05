@@ -1,16 +1,17 @@
 #login{border: 1px solid none;
 text-align: right;
 padding-right: 10px;
+padding-top: 10px;
 }
-.login{border: 1.5px solid rgb(1,110,245);
+/*.login{border: 1.5px solid rgb(1,110,245);
 background-color: rgb(70,130,250);
 font-size: 17px;
 color: black;
 padding: 3px 7px;
 }
-.login:hover{background-color: rgb(190,210,255);
-color: black;
-}
+.login:hover{
+background-color: rgb(190,210,255);
+}*/
 
 #name{border: 1px solid none;
 text-align: center;
@@ -21,13 +22,13 @@ padding: 80px 60px 40px 60px;
 letter-spacing: 1px;
 }
 
-#searchbar{text-align: center;
+/*#searchbar{text-align: center;
 }
 .bar{width: 40%;
-height: 25px;
-font-size: 18px;
+height: 35px;
+font-size: 15px;
 padding-left: 6px;
-}
+}*/
 
 #search{border: 1px solid none;
 text-align: center;

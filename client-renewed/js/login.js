@@ -12,6 +12,9 @@ var login = new Vue({
 		disconnect: function(){
 			this.auth.token = null;
 			this.auth.logged = false;
+	 		localStorage.removeItem('token');
+			localStorage.removeItem('userInfo');
+			localStorage.removeItem('userConcepts');
 		}
 	}
 })

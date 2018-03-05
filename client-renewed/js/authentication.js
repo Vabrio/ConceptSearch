@@ -4,17 +4,22 @@ function logged(ans){
 	if (!ansJson.success){
 		console.log( ansJson.message);
 		if (ansJson.type == 0){
-			login_form.state_login = "has-error";
+			logger.state_login = "has-error";
 		}else{
-			login_form.state_login = "";
-			login_form.state_pwd = "has-error";
+			logger.state_login = "";
+			logger.state_pwd = "has-error";
 		}
 	} else{
 		console.log( ansJson.message + ansJson.token );
+		login.auth.logged = true;
+		login.auth.token = ansJson.token;
 	 	localStorage.setItem('token', ansJson.token);
+		localStorage.setItem('userInfo', ansJson.user);
+		localStorage.setItem('userConcepts', ansJson.concepts);
+		$("#logger").modal("toggle");
 		/*usercontent.concepts=ansJson.concepts;
 		usercontent.userData=ansJson.user;*/
-		window.location.href = 'index.html';
+		
 	}
 }
 function subscribed(ans){
@@ -23,40 +28,55 @@ function subscribed(ans){
 	if (!ansJson.success) {
 		console.log(ansJson.message);
 		if (ansJson.type) {
-			login_form.sub_state = "has-error";
+			logger.state_login = "has-error";
 		}
 	}else {
-		login_form.connect();
+		logger.connect();
 	}
 }
-var login_form = new Vue({
-	el: "#login_form",
+var logger = new Vue({
+	el: "#logger",
 	data: {
+		subscribing: false,
 		pseudo: "",
 		password: "",
+		password_check: "",
 		firstname: "",
 		lastname: "",
 		email: "",
 		birth_date: "",
-		sub_state: "",
 		state_login: "",
 		state_pwd: ""
 	},
 	computed: {
+		connectButton: function(){
+			if (this.subscribing){return "Connexion"}
+			else {return "S'inscrire"}
+		}
 	},
 	methods: {
+		toggleConnect: function(){
+			this.subscribing = !this.subscribing;
+			this.state_login ="";
+			this.state_pwd ="";
+		},
+		submit: function(){
+			if (this.subscribing){this.subscribe()}
+			else {this.connect()};
+		},
 		connect: function(){
-			console.log("Trying to connect");
 			this.$http.post(url+"users/authenticate?name="+ this.pseudo +"&password="+this.password).then(response => {
 				logged(response);
 			});
 		},
 		subscribe: function(){
-			console.log("Trying to subscribe");
-			this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password).then(response => {
-				subscribed(response);
-			});
-			//httpAsync(url+"users/subscribe?name="+this.sub_login+"&password="+this.sub_pwd, "", subscribed, "POST");
+			if (this.password != this.password_check){
+				this.state_pwd = "has-error";
+			}else {
+				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password).then(response => {
+					subscribed(response);
+				});
+			}
 		}
 	}
 })
