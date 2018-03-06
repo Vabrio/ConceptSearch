@@ -61,10 +61,12 @@ var logger = new Vue({
 			this.state_pwd ="";
 		},
 		loginC: function(){
-			this.$http.post(url+"users/userindb?name="+this.pseudo).then( (response) => {
+			this.$http.get(url+"users/userindb?name="+this.pseudo).then( (response) => {
 				var ansJson = JSON.parse(ans.bodyText);
 				if (!ansJson.success){
 					this.state_login = "has-error";
+				} else {
+					this.state_login = "has-success";
 				}
 			})
 		},
