@@ -49,10 +49,6 @@ var logger = new Vue({
 		state_pwd: ""
 	},
 	computed: {
-		connectButton: function(){
-			if (this.subscribing){return "Connexion"}
-			else {return "S'inscrire"}
-		}
 	},
 	methods: {
 		toggleConnect: function(){

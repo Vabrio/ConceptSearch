@@ -29,7 +29,7 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 			'birth_date': new Date(query.birthdate)
 		});	
 		Manager.addUser(user, res);
-	}).catch((error) =>{
+	}).catch((error: any) =>{
 		console.log("error in hashing pwd " + error);
 	});
 	
