@@ -42,11 +42,32 @@
 		  	<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Mon compte
 		  	<span class="caret"></span></button>
 		  	<ul class="dropdown-menu dropdown-menu-right">
-				<li><a href="#">Mes informatioins</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#userInfo">Mes informations</a></li>
 				<li><a href="#">Concepts ajoutés</a></li>
 				<li><a href="#" @click="disconnect">Se déconnecter</a></li>
 		  	</ul>
 		</div> 
+	</div>
+	
+	<!-- Login/subscribe popup -->
+	<div class="modal fade" id="userInfo" role="dialog">
+		<div class="modal-dialog">
+
+		<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h3>Informations personnelles</h3>
+				</div>
+				
+				<div class="modal-body">
+				</div>
+				
+				<div class="modal-footer">
+					<button class="btn btn-info">Modifier</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script src="js/login.js"></script>
 	
