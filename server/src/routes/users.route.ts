@@ -111,9 +111,9 @@ userRoutes.post('/update', function(req: any, res: any) {
 userRoutes.get('/userindb', function(req: any, res: any){
 	Manager.findUserByName(req.query.name, (err: any, user: UserModel) => {
 		if (user == null) {
-			res.status(500).json({success: true, message: "Did not find any user"});
+			res.json({success: true, message: "Did not find any user"});
 		}else{
-			res.status(500).json({success: false, message: "Login already token"});
+			res.json({success: false, message: "Login already token"});
 		}
    	})
 })

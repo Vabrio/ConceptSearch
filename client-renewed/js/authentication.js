@@ -34,6 +34,16 @@ function subscribed(ans){
 		logger.connect();
 	}
 }
+function checkLogin(ans){
+	console.log(ans);
+	var ansJson = JSON.parse(ans.bodyText);
+	if (!ansJson.success){
+		logger.state_login = "has-error";
+	} else {
+		logger.state_login = "has-success";
+	}
+}
+
 var logger = new Vue({
 	el: "#logger",
 	data: {
@@ -61,14 +71,7 @@ var logger = new Vue({
 			this.state_pwd ="";
 		},
 		loginC: function(){
-			this.$http.get(url+"users/userindb?name="+this.pseudo).then( (response) => {
-				var ansJson = JSON.parse(ans.bodyText);
-				if (!ansJson.success){
-					this.state_login = "has-error";
-				} else {
-					this.state_login = "has-success";
-				}
-			})
+			this.$http.get(url+"users/userindb?name="+this.pseudo).then(checkLogin)
 		},
 		pwdC: function(){
 			if (this.password_check == this.password){this.state_pwd = ""}
