@@ -71,7 +71,9 @@ var logger = new Vue({
 			this.state_pwd ="";
 		},
 		loginC: function(){
-			this.$http.get(url+"users/userindb?name="+this.pseudo).then(checkLogin)
+			if (this.subscribing){
+				this.$http.get(url+"users/userindb?name="+this.pseudo).then(checkLogin)
+			}
 		},
 		pwdC: function(){
 			if (this.password_check == this.password){this.state_pwd = ""}
