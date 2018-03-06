@@ -1,7 +1,10 @@
+.padding1 {
+	padding-top: 10px;
+}
+
 #login{border: 1px solid none;
 text-align: right;
 padding-right: 10px;
-padding-top: 10px;
 }
 /*.login{border: 1.5px solid rgb(1,110,245);
 background-color: rgb(70,130,250);
@@ -13,13 +16,16 @@ padding: 3px 7px;
 background-color: rgb(190,210,255);
 }*/
 
-#name{border: 1px solid none;
+#CSname{
 text-align: center;
-}
-#CSname{font-size: 60px;
 color: rgb(245,0,0);
-padding: 80px 60px 40px 60px;
+padding: 8vh 0px 2vh 0px;
 letter-spacing: 1px;
+}
+
+#searchBar{
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 /*#searchbar{text-align: center;
@@ -29,7 +35,7 @@ height: 35px;
 font-size: 15px;
 padding-left: 6px;
 }*/
-
+/*
 #search{border: 1px solid none;
 text-align: center;
 word-spacing: 30px;
@@ -44,4 +50,4 @@ background-color: rgb(255,50,50);
 font-size: 16px;
 }
 .search:hover{background-color: rgb(255,155,155);
-}
+}*/

@@ -1,4 +1,4 @@
-var url="http://concept-search.org:8080/";
+var url="https://concept-search.org:8080/";
 
 new Vue({
 
