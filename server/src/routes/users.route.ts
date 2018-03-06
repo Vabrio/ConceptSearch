@@ -2,6 +2,7 @@
 import { Manager} from "../managers/manager";
 import { UserModel } from "../managers/models/user.model";
 import { signToken } from "./token";
+import { NAMES_UNAVAILABLE } from "../const/const";
 
 declare const Buffer: any;
 declare const process: any;
@@ -28,9 +29,26 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 			'email': query.email,
 			'birth_date': new Date(query.birthdate)
 		});	
-		Manager.addUser(user, res);
+		
+		if (NAMES_UNAVAILABLE.includes(user.name)){
+			res.json({ success: false, message: 'Login already token !', type: 1});
+		}else{
+		Manager.findUserByName(user.name, (err: any, userF: UserModel)=>{
+			if (err) {
+				res.status(500).json({ success: false, message: 'db_error', type: 0 });
+			} else if (userF) {
+					res.json({ success: false, message: 'Login already token !', type: 1});
+			} else {
+        		Manager.addUser(user, (err: any, user2: UserModel) =>{
+					res.json({ 'success': 'User created !', 'user': user2 });
+				});
+			}
+		})
+		
+		}
 	}).catch((error: any) =>{
 		console.log("error in hashing pwd " + error);
+		res.status(500).json({ success: false, message: 'db_error', type: 0 });
 	});
 	
 	//console.log("Concept added : " + name + "\tIn writing with id : " + idWri);
@@ -90,6 +108,16 @@ userRoutes.post('/update', function(req: any, res: any) {
 	}
 });
 
+userRoutes.get('/userindb', function(req: any, res: any){
+	Manager.findUserByName(req.query.name, (err: any, user: UserModel) => {
+		if (user == null) {
+			res.status(500).json({success: true, message: "Did not find any user"});
+		}else{
+			res.status(500).json({success: false, message: "Login already token"});
+		}
+   	})
+})
+/*
 // route to return all users (GET http://localhost:8080/api/users)
 userRoutes.get('/list', function(req: any, res: any) {
 	if (req.decoded.status <1){
@@ -102,6 +130,6 @@ userRoutes.get('/list', function(req: any, res: any) {
 			res.json({success: true, users : users});
 		});
 	}
-});   
+});   */
 
 export {userRoutes}

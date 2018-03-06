@@ -13,7 +13,8 @@
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
 	<script src="js/http_request.js"></script>
-	<!-- Matomo -->
+	
+	<!-- Matomo analytics of the website -->
 	<script type="text/javascript">
 	  var _paq = _paq || [];
 	  /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
@@ -42,7 +43,7 @@
 		  	<span class="caret"></span></button>
 		  	<ul class="dropdown-menu dropdown-menu-right">
 				<li><a href="#">Mes informatioins</a></li>
-				<li><a href="#">Concepts personnels</a></li>
+				<li><a href="#">Concepts ajoutés</a></li>
 				<li><a href="#" @click="disconnect">Se déconnecter</a></li>
 		  	</ul>
 		</div> 
@@ -63,7 +64,7 @@
 				<form class="modal-body" v-on:submit.prevent>
 					<div class="input-group" v-bind:class="state_login">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-						<input class="form-control"  placeholder="Pseudonyme" v-model="pseudo" v-on:keyup.enter="submit"/>
+						<input class="form-control"  placeholder="Pseudonyme" v-model="pseudo" v-on:keyup.enter="submit" @blur="loginC"/>
 					</div>
 					<div class="input-group" v-bind:class="state_pwd">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
@@ -83,7 +84,7 @@
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 						<input type="email" class="form-control" placeholder="Vérifiecation email" v-model="email_check" v-on:keyup.enter="submit" @blur="emailC">
 					</div>
-					<br v-show="subscribing">
+					<!--<br v-show="subscribing">
 					<div class="input-group" v-show="subscribing">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
 						<input type="text" class="form-control" placeholder="Prénom" v-model="firstname" v-on:keyup.enter="submit">
@@ -95,7 +96,7 @@
 					<div class="input-group" v-show="subscribing">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 						<input type="date" class="form-control" placeholder="Date de naissance" v-model="birth_date" v-on:keyup.enter="submit">
-					</div>
+					</div>-->
 				</form>
 				
 				<div class="modal-footer">

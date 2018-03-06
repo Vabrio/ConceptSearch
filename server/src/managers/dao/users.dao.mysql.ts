@@ -12,7 +12,7 @@ import {UserModel} from '../models/user.model';
 class UsersDAO
 {
 	static create(user: UserModel, cb: any) {
-        db.query('INSERT INTO use_users SET name = ?, password = ?', [user.name, user.password], (err: any, result: any) => {
+        db.query('INSERT INTO use_users SET name = ?, password = ?, email = ?', [user.name, user.password, user.email], (err: any, result: any) => {
             user.id = result.insertId;
             cb(err, user);
         });

@@ -11,20 +11,7 @@ import {NAMES_UNAVAILABLE} from "../../const/const";
 class UsersService
 {
 	static create(user: UserModel , res: any) {
-		if (NAMES_UNAVAILABLE.includes(user.name)){
-			res.json({ success: false, message: 'Login already token !', type: 1});
-		}
-		UsersDAO.findByName(user.name, (err: any, userF: UserModel)=>{
-			if (err) {
-				res.status(500).json({ success: false, message: 'db_error', type: 0 });
-			} else if (userF) {
-					res.json({ success: false, message: 'Login already token !', type: 1});
-			} else {
-        		UsersDAO.create(user, (err: any, user2: UserModel) =>{
-					res.json({ 'success': 'User created !', 'user': user2 });
-				});
-			}
-		})
+		
     }
 
 	static update(user: UserModel, cb: any) {
@@ -32,9 +19,7 @@ class UsersService
     }
 
 	static delete(id: string, cb: any) {
-		return UsersDAO.delete(id, (err: any, user: UserModel) => {
-          cb(err, user);
-        });
+		return UsersDAO.delete(id, cb);
     }
 
     static find(id: number, cb: any) {

@@ -43,9 +43,9 @@ var logger = new Vue({
 		password_check: "",
 		email: "",
 		email_check: "",
-		firstname: "",
+		/*firstname: "",
 		lastname: "",
-		birth_date: "",
+		birth_date: "",*/
 		state_login: "",
 		state_pwd: "",
 		state_email: ""
@@ -60,6 +60,14 @@ var logger = new Vue({
 			this.state_login ="";
 			this.state_pwd ="";
 		},
+		loginC: function(){
+			this.$http.post(url+"users/userindb?name="+this.pseudo).then( (response) => {
+				var ansJson = JSON.parse(ans.bodyText);
+				if (!ansJson.success){
+					this.state_login = "has-error";
+				}
+			})
+		},
 		pwdC: function(){
 			if (this.password_check == this.password){this.state_pwd = ""}
 			else {this.state_pwd = "has-warning"}
@@ -73,9 +81,7 @@ var logger = new Vue({
 			else {this.connect()};
 		},
 		connect: function(){
-			this.$http.post(url+"users/authenticate?name="+ this.pseudo +"&password="+this.password).then(response => {
-				logged(response);
-			});
+			this.$http.post(url+"users/authenticate?name="+ this.pseudo +"&password="+this.password).then(logged);
 		},
 		subscribe: function(){
 			if (this.password != this.password_check){
@@ -83,9 +89,7 @@ var logger = new Vue({
 			}else if (this.email != this.email_check){
 				this.state_email = "has-error";
 			}else {
-				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password).then(response => {
-					subscribed(response);
-				});
+				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password+"?email="+this.email).then(subscribed);
 			}
 		}
 	}

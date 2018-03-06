@@ -2,12 +2,12 @@ interface Row {
 	id?: number;
 	name: string;
 	password: string;
-	firstname?: string;
-	lastname?: string;
 	email?: string;
-	birth_date?: Date;
 	status?: number;
 	created_at?: Date;
+	firstname?: string;
+	lastname?: string;
+	birth_date?: Date;
 }
 
 class UserModel
