@@ -24,8 +24,7 @@ letter-spacing: 1px;
 }
 
 #searchBar{
-	padding-right: 10px;
-	padding-left: 10px;
+	padding: 10px;
 }
 
 /*#searchbar{text-align: center;
@@ -56,7 +55,7 @@ font-size: 16px;
 
 #header{text-align: left;
 border: 1px solid none;
-padding: 20px 0 30px 20px;
+padding: 20px 0 40px 30px;
 }
 .index{border: 1.5px solid rgb(245,0,0);
 background-color: white;
@@ -70,4 +69,30 @@ padding: 3px 7px;
 height: 25px;
 font-size: 18px;
 padding-left: 10px;
+}
+
+#extract{border: 2px solid grey;
+padding: 8px 3px 8px 3px;
+text-align: left;
+}
+.extractTitle{text-decoration: underline;
+}
+.extractText{text-align: justify;
+color: green;
+padding: 5px 3px 5px 8px;
+}
+#proposition{text-align: left;
+}
+#result{border: 1.5px solid black;
+}
+.resultTitle{text-decoration: underline;
+text-decoration: /*gras*/;
+color: black;
+padding: 12px 6px 10px 6px;
+font-size: 16px;
+}
+.resultText{text-indent: 2;
+padding: 0 15px;
+color: black;
+text-align: justify;
 }
