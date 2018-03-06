@@ -12,7 +12,6 @@ var homePage = new Vue({
 	},
 	methods: {
 		search: function(){
-			console.log("searching...");
 			searchRes(null);
 		}
 	}
@@ -30,7 +29,7 @@ var researchPage = new Vue({
 	},
 	methods:{
 		toggleHomePage: function(){
-			homePage.homePage= true;	
+			homePage.homePage= true;
 		},
 	}
 })
