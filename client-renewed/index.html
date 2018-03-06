@@ -55,17 +55,18 @@
 					<button v-show="!subscribing" class="btn btn-link">Mot de passe oublié</button>
 					<div class="input-group" v-show="subscribing" v-bind:class="state_pwd">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-						<input type="password" class="form-control" placeholder="Mot de passe"  v-model="password_check" v-on:keyup.enter="submit" autocomplete="off">
+						<input type="password" class="form-control" placeholder="Mot de passe"  v-model="password_check" v-on:keyup.enter="submit" autocomplete="off" @blur="pwdC">
 					</div>
-					<br>
-					<div class="input-group" v-show="subscribing">
+					<br v-show="subscribing">
+					<div class="input-group" v-show="subscribing" v-bind:class="state_email">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 						<input type="email" class="form-control" placeholder="Email" v-model="email" v-on:keyup.enter="submit">
 					</div>
-					<div class="input-group" v-show="subscribing">
+					<div class="input-group" v-show="subscribing" v-bind:class="state_email">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-						<input type="email" class="form-control" placeholder="Vérifiecation email" v-model="email" v-on:keyup.enter="submit">
+						<input type="email" class="form-control" placeholder="Vérifiecation email" v-model="email_check" v-on:keyup.enter="submit" @blur="emailC">
 					</div>
+					<br v-show="subscribing">
 					<div class="input-group" v-show="subscribing">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-edit"></i></span>
 						<input type="text" class="form-control" placeholder="Prénom" v-model="firstname" v-on:keyup.enter="submit">

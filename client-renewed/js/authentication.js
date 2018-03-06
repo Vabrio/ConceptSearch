@@ -41,20 +41,32 @@ var logger = new Vue({
 		pseudo: "",
 		password: "",
 		password_check: "",
+		email: "",
+		email_check: "",
 		firstname: "",
 		lastname: "",
-		email: "",
 		birth_date: "",
 		state_login: "",
-		state_pwd: ""
+		state_pwd: "",
+		state_email: ""
 	},
 	computed: {
+	},
+	watch:{
 	},
 	methods: {
 		toggleConnect: function(){
 			this.subscribing = !this.subscribing;
 			this.state_login ="";
 			this.state_pwd ="";
+		},
+		pwdC: function(){
+			if (this.password_check == this.password){this.state_pwd = ""}
+			else {this.state_pwd = "has-warning"}
+		},
+		emailC: function(){
+			if (this.email_check == this.email){this.state_email = ""}
+			else {this.state_email = "has-warning"}
 		},
 		submit: function(){
 			if (this.subscribing){this.subscribe()}
@@ -68,6 +80,8 @@ var logger = new Vue({
 		subscribe: function(){
 			if (this.password != this.password_check){
 				this.state_pwd = "has-error";
+			}else if (this.email != this.email_check){
+				this.state_email = "has-error";
 			}else {
 				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password).then(response => {
 					subscribed(response);
