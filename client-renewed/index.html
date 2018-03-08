@@ -49,7 +49,7 @@
 		</div> 
 	</div>
 	
-	<!-- Login/subscribe popup -->
+	<!-- Userinfo popup -->
 	<div class="modal fade" id="userInfo" role="dialog">
 		<div class="modal-dialog">
 
@@ -133,7 +133,7 @@
 	<!-- Home page -->
 	<div id="homePage" v-show="homePage">
 		<!-- Title -->
-		<h1 id="CSname">Concept Search</h1>
+		<h1 id="CSname">Concept Search<small> version alpha</small></h1>
 
 		<div class="col-md-4 col-sm-2"></div>
 		<div class="col-md-4 col-sm-8">
@@ -160,12 +160,12 @@
 	<!-- Research page -->
 	<div id="researchPage" v-show="researchPage">
 		<div>
-			<div id="header" class="row padding2">
-				<div class="col-md-2">
-					<a href="#" @click="toggleHomePage"><button class="btn index">Concept Search</button></a>
+			<div id="header" class="row">
+				<div class="col-sm-3 col-md-3 col-lg-2">
+					<button class="btn index" @click="toggleHomePage"><h4 href="#">Concept Search <small>α</small></h4></button>
 				</div>
-				<div class="col-md-4">
-					<div class="input-group row"  id="searchBar" >
+				<div class="col-sm-6 col-md-4 col-lg-5">
+					<div class="input-group row">
 						<input type="text" class="form-control" placeholder="Search..." name="searchbar" v-model="searchbar" @keyup.enter="search">
 						<div class="input-group-btn">
 							<button class="btn btn-default" type="submit" @click="search">
@@ -174,7 +174,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-6"></div>
+				<div class="col-sm-3 col-md-5"></div>
 			</div>
 		</div>
 		<!--<div id="search">
@@ -183,44 +183,46 @@
 		</div>-->
 		<div>
 			<div class="col-md-1"></div>
-			<div id="auteur" class="col-md-1">
-				<div class="colAuteur">
-					Voici la colonne des auteurs
-				</div>
-				<div class="auteurName">
-					Emplacement de liste d'auteur sans mise en page css.
-				</div>
-			</div>
 			
-			<div id="extract" class="col-md-2">
+			<!-- Author component -->
+			<authors v-bind="result">
+				<div slot="auteursTitre" class="colAuteur">Auteurs :</div>
+				<div slot-scope="props" slot="auteursNames" class="auteurName"> <!-- v-show="dataReceived"-->
+						<book v-for="b in props.books" v-bind:author="b.author" :key="b.author"></book>
+				</div>
+			</authors>
+			
+			<extracts v-bind="result">
+				<template slot="writings" slot-scope="props">
+					<ul v-for="auth in props.metadata" v-show="auth.author == props.author" :key="auth.author">
+						<writing v-for="writ in auth.books" v-bind:list="writ.extracts"  v-bind:title="writ.name" v-bind:id-wri="writ.id" v-bind:author="props.author" :key="writ.id"></writing>
+					</ul>
+				</template>
+			</extracts>
+			<!--<div id="extract" class="col-md-2">
 				<div class="extractTitle">
 				Quelques extraits d'écrit correspondant à votre recherche:
-				<!--<div id="proposition">
+				<div id="proposition">
 					<ul class="nav nav-pills nav-stacked">
 					  <li class="active"><a href="#">Ecrit 1</a></li>
 					  <li><a href="#">Ecrit 2</a></li>
 					  <li><a href="#">Ecrit 3</a></li>
 					  <li><a href="#">Ecrit 4</a></li>
 					</ul>
-				</div>-->
+				</div>
 				</div>
 				<div class="extractText">
 					Bonjour je m'appel Cédric et ceci est un teste pour voir comment le texte s'affiche dans la colonne. Ce sera plus tard l'extrait d'un écrit que sera ici.
 				</div>
-			</div>
-			<div id="result" class="col-md-7">
-				<div class="resultTitle">
-					Voici le titre du livre dans lequel se trouve l'écrit ci-dessous
-				</div>
-				<div class="resultText">
-					Il était une fois un garçon qui s'appelait Cédric et qui en codant cette page ne savait pas du tout quoi écrire pour simuler du texte d'écrit. Ainsi il écrit sa vie et tout ce qu'il faisait au moment même où il écrivait ces lignes..
-				</div>
-			</div>
+			</div>-->
+			
+			<fulltext v-bind="completetext"></fulltext>
 			<div class="col-md-1"></div>
 		</div>
 	</div>
 	
 	
+	<script src="js/components.js"></script>
 	<script src="js/research.js"></script>
 	
 	

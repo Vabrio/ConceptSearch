@@ -1,3 +1,7 @@
+h1, h2, h3, h4, h5, h6{
+	margin: 0;
+}
+
 .padding1 {
 	padding-top: 10px;
 }
@@ -5,6 +9,7 @@
 #login{border: 1px solid none;
 text-align: right;
 padding-right: 10px;
+float: right;
 }
 /*.login{border: 1.5px solid rgb(1,110,245);
 background-color: rgb(70,130,250);
@@ -19,8 +24,9 @@ background-color: rgb(190,210,255);
 #CSname{
 text-align: center;
 color: rgb(245,0,0);
-padding: 8vh 0px 2vh 0px;
+padding: 16vh 0px 2vh 0px;
 letter-spacing: 1px;
+font-size: 36px;
 }
 
 #searchBar{
@@ -55,23 +61,17 @@ font-size: 16px;
 
 #header{text-align: left;
 border: 1px solid none;
-padding: 20px 0 40px 30px;
+padding: 10px 0 40px 10px;
 }
 .index{border: 1.5px solid rgb(245,0,0);
 background-color: white;
-font-size: 30px;
 color: rgb(245,0,0);
-padding: 3px 7px;
+padding-bottom: 10px;
 }
 .index:hover{background-color: rgb(255,230,210);
 }
-.bar{width: 20%;
-height: 25px;
-font-size: 18px;
-padding-left: 10px;
-}
 
-#auteur{border: 2px solid black;
+#auteurs{border: 2px solid black;
 }
 #extract{border: 1.5px solid grey;
 padding: 8px 3px 8px 3px;
@@ -85,7 +85,8 @@ padding: 5px 3px 5px 8px;
 }
 #proposition{text-align: left;
 }
-#result{border: 1.5px solid black;
+#fulltext{
+	border: 1.5px solid black;
 }
 .resultTitle{text-decoration: underline;
 text-decoration: /*gras*/;

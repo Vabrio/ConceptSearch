@@ -37,7 +37,8 @@ let globalSearch = function(request: string, writingList: Array<{id: number, add
 			else{
 				idAuthor = response.length;
 			}
-
+				
+	
 			if (link != undefined && (idAuthor == response.length ||  (response[idAuthor].books.length <= MAX_PER_AUTHOR ||  MAX_PER_AUTHOR == -1))){
 				// Get the writing as text
 				let iconvlite = require('iconv-lite');
@@ -48,6 +49,7 @@ let globalSearch = function(request: string, writingList: Array<{id: number, add
 				// Add the data found 
 				if (result.length != 0){
 					let extr = getExtracts(result, writingText);
+					
 					if (idAuthor == response.length){
 						authorDict[link.writer] = idAuthor;
 						response.push({author: link.writer,
@@ -242,11 +244,11 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 		
 		let swap_left= EXTRACT_SIZE, swap_right=EXTRACT_SIZE*2;
 		if (n- swap_left <0){
-			swap_right += swap_left - n;
-			swap_left =n;
+			swap_right += swap_left - n+1;
+			swap_left =n-1;
 		}else if (n+swap_right > text.length){
-			swap_right = text.length - n;
-			swap_left += swap_right - n + -text.length;
+			swap_right = text.length - n-1;
+			swap_left += swap_right - n + -text.length+1;
 		}
 		let index_left = n, index_right = n;
 		while (swap_left > 0 || swap_right >0){
@@ -278,8 +280,8 @@ let getExtracts = function(indexes: Array<[string, number]>, text: string) : Arr
 				swap_left --;
 			}
 		}
-		while (index_left > 0 && text[index_left-1] != ' ') {index_left ++;}
-		while (index_right < text.length -1  && text[index_right+1] != ' ') {index_right --;}
+		while (index_left > 0 && index_left<text.length && text[index_left-1] != ' ') {index_left ++;}
+		while (index_right < text.length -1 && text[index_right+1] != ' ') {index_right --;}
 		
 		var pre_text ="", post_text ="";
 		if (index_left>0 && !(text[index_left-2] == "." || text[index_left-2] == "!" || text[index_left-2] == "?")){

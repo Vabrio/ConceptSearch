@@ -14,20 +14,21 @@ var writingRoutes = express.Router();
 writingRoutes.get('/search', function (req: any, res: any) {
 	try {	
 		let request = req.query.request;
-		Manager.getWritingList((err: any, rows: any) => {
-
-			if (err){
-				console.log("Error while searching : " + err);
-			}else{
-				let research = globalSearch(request,rows);
-				res.header("Content-Type", "text/plain; charset=utf-8");
-
-				// Send answer
-				res.status(200).json(research);
-				//console.log("Research requested : " + request);
-			}
-		});
-		
+		if (request == "" || request == undefined || request == null){
+			res.status(500).json({success: false, message: "Not a valid request"});
+		}else{
+			Manager.getWritingList((err: any, rows: any) => {
+				if (err){
+					console.log("Error while searching : " + err);
+				}else{
+					let research = globalSearch(request,rows);
+					res.header("Content-Type", "text/plain; charset=utf-8");
+					// Send answer
+					res.json(research);
+					//console.log("Research requested : " + request);
+				}
+			});
+		}
 	}catch (e){
 		console.log("Error in searching : "+e);
 		res.status(500).json({success: false, message: "Server encountered a problem with the research. Problem might come from the data sent."});

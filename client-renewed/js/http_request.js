@@ -1,3 +1,4 @@
+//var url="http://localhost:8080/";
 var url="https://concept-search.org:8080/";
 
 new Vue({
@@ -11,7 +12,6 @@ new Vue({
   }
 
 })
-
 Vue.http.interceptors.push(function(request) {
 
   // modify method
