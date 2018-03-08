@@ -4,11 +4,10 @@ var homePage = new Vue({
 		homePage: true,
 		searchbar: "",
 	},
-	computed: {
-	},
 	methods: {
 		search: function(){
-			homePage.homePage= false;
+			researchPage.request.research = this.searchbar;
+			researchPage.search();
 		}
 	}
 })
@@ -35,6 +34,7 @@ function getwriting(idWri, list, author, title){
 
 
 function searchResults(ans){
+	homePage.homePage= false;
 	data = JSON.parse(ans.bodyText);
 	researchPage.result.books = data;
 	if (data == "") {
