@@ -13,10 +13,16 @@ class UsersService
 	static create(user: UserModel , cb: any) {
         UsersDAO.create(user, cb);
     }
+	static createTemp(user: UserModel, uuid: string , cb: any) {
+        UsersDAO.createTemp(user, uuid, cb);
+    }
 
 	static update(user: UserModel, cb: any) {
         UsersDAO.update(user, cb);
     }
+	static updateTemp(id: number, cb: any){
+		UsersDAO.updateTemp(id, cb);
+	}
 
 	static delete(id: string, cb: any) {
 		return UsersDAO.delete(id, cb);
@@ -28,6 +34,10 @@ class UsersService
 
     static findByName(name: string, cb: any) {
         return UsersDAO.findByName(name, cb);
+    }
+
+    static findByUUID(uuid: string, cb: any) {
+        return UsersDAO.findByUUID(uuid, cb);
     }
 
 	static list(cb: any) {

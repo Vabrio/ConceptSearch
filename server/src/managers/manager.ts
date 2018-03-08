@@ -59,10 +59,17 @@ class Manager {
 	static addUser(user: UserModel, res: any){
 		UsersService.create(user, res);
 	}
+	// Add a user in the db to be verified
+	static addTempUser(user: UserModel, uuid: string, res: any){
+		UsersService.createTemp(user, uuid, res);
+	}
 	
 	// Update userinfo in the DB
 	static updateUser(user: UserModel, res: any){
 		UsersService.update(user, res);
+	}
+	static updateTemp(id: number, res: any){
+		UsersService.updateTemp(id, res);
 	}
 	
 	// Get a list of all users
@@ -73,6 +80,9 @@ class Manager {
 	// Find a user by its name
 	static findUserByName(name : string, res: any){
 		UsersService.findByName(name, res);
+	}
+	static findUserByUUID(uuid : string, res: any){
+		UsersService.findByUUID(uuid, res);
 	}
 	
 	// Find a user by its name

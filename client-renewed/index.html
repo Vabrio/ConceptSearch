@@ -84,6 +84,12 @@
 			</div>
 		</div>
 	</div>
+	
+	<div id="alert_verif_mail" class="alert alert-info alert-dismissible col-xs-6 col-xs-push-3" v-show="show" style="text-align: center">
+		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+		Vous n'avez pas encore vérifié votre email :  <a href="#" class="alert-link" @click="resend">recevoir un nouvel email de vérification.</a>
+	</div>
+	
 	<script src="js/login.js"></script>
 	
 	<!-- Login/subscribe popup -->
@@ -143,7 +149,6 @@
 		</div>
 	</div>
 	<script src="js/authentication.js"></script>
-	
 	
 	<!-- Home page -->
 	<div id="homePage" v-show="homePage">

@@ -39,6 +39,16 @@ function createTables(){
 			console.log("error while accessing use_users table : " + err);
 		}
 	});
+
+	// Creating the users table
+	db.query("SHOW TABLES LIKE 'use_users_temp'", (err: any, result: any) => {
+		if (result.length==0){
+			db.query("CREATE TABLE use_users_temp (id integer primary key auto_increment, name text, password text, email text, uuid text, created_at datetime default current_timestamp);");
+			console.log("USERS_TEMP TABLE INITIALIZED");
+		}else if(err){
+			console.log("error while accessing use_users table : " + err);
+		}
+	});
 }
 
 

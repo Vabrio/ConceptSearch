@@ -9,6 +9,7 @@ npm install bcrypt
 npm install body-parser
 npm install jsonwebtoken
 npm install nodemailer
+npm install uuid
 
 # Remove require pb
 npm install @types/node --save-dev

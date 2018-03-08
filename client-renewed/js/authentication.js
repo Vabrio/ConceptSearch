@@ -60,7 +60,8 @@ var logger = new Vue({
 		birth_date: "",*/
 		state_login: "",
 		state_pwd: "",
-		state_email: ""
+		state_email: "",
+		show_email_verif: false
 	},
 	computed: {
 	},
@@ -75,6 +76,8 @@ var logger = new Vue({
 		loginC: function(){
 			if (this.subscribing){
 				this.$http.get(url+"users/userindb?name="+this.pseudo).then(checkLogin)
+			}else{
+				this.state_login="";
 			}
 		},
 		pwdC: function(){

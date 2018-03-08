@@ -32,6 +32,9 @@ function checkToken (req: any, res: any, next: any) {
 
 function signToken (user: UserModel) {
 	
+	if (!user.status){
+		user.status=-1;
+	}
 	const payload = {
 		status: user.status,
 		username: user.name,

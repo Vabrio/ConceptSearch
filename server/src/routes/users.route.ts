@@ -3,12 +3,14 @@ import { Manager} from "../managers/manager";
 import { UserModel } from "../managers/models/user.model";
 import { signToken } from "./token";
 import { NAMES_UNAVAILABLE } from "../const/const";
+import { userinitmail } from "../resources/sendmail";
 
 declare const Buffer: any;
 declare const process: any;
 
 let fs = require('fs');
 let bcrypt = require('bcrypt');
+let uuidv4 = require('uuid/v4');
 const saltRounds = 10;
 
 // ROUTES FOR THE USER MANAGEMENT
@@ -39,8 +41,12 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 			} else if (userF) {
 					res.json({ success: false, message: 'Login already token !', type: 1});
 			} else {
-        		Manager.addUser(user, (err: any, user2: UserModel) =>{
-					res.json({ 'success': 'User created !', 'user': user2 });
+				var uuid = uuidv4();
+				userinitmail(uuid, user.email);
+        		Manager.addTempUser(user, uuid, (err: any, user2: UserModel) =>{
+					if(!err){
+						res.json({ 'success': 'User created !', 'user': user2 });
+					}
 				});
 			}
 		})
@@ -59,7 +65,7 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 userRoutes.post('/authenticate', function(req: any, res: any) {
 
   	// find the user
-  	Manager.findUserByName(req.query.name, (err: any, user: UserModel)=> {
+  	Manager.findUserByName(req.query.name, (err: any, user: any)=> {
 		
 		if (err) throw err;
 		
@@ -119,22 +125,34 @@ userRoutes.get('/userindb', function(req: any, res: any){
 })
 
 userRoutes.get('/verify', function(req: any, res: any){
-	res.cookie('success', true);
-	res.redirect("http://concept-search.org");
-})
-/*
-// route to return all users (GET http://localhost:8080/api/users)
-userRoutes.get('/list', function(req: any, res: any) {
-	if (req.decoded.status <1){
-		res.json({success: false, message: "you don't have the privileges"})
-	}else{
-		Manager.getUsers((err: any, users: any) => {
-			if (err) {
-				res.json({success: false, message: "pb in getting list"})
-			}
-			res.json({success: true, users : users});
-		});
+	//console.log(req.query.secret);
+	if (!req.query.secret){
+		res.cookie('success', false);
+		res.redirect("http://localhost/dev-CS");
 	}
-});   */
+	Manager.findUserByUUID(req.query.secret, (err: any,user: any)=>{
+		if (err) {
+			console.log("error while looking for temp user : " +err);
+			res.cookie('verified_mail', false);
+			res.redirect("http://localhost/dev-CS");
+	 	}else {
+			res.cookie('verified_mail', true);
+			res.cookie('user', JSON.stringify(user));
+			res.redirect("http://localhost/dev-CS");
+		}
+	})
+})
+
+userRoutes.get('/resend', function(req: any, res: any){
+	Manager.updateTemp(req.query.id, (err: any, user: any) =>{
+		if (err) {
+			console.log("error resending email");
+			res.json({success: false, message: "server pb"})
+		}else {
+			userinitmail(user.uuid, user.email);
+			res.json({success: true, message: "mail sent"})
+		}
+	})
+})
 
 export {userRoutes}
