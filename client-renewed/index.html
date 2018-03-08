@@ -192,13 +192,38 @@
 				</div>
 			</authors>
 			
+			<!-- Extracts -->
 			<extracts v-bind="result">
+
 				<template slot="writings" slot-scope="props">
-					<ul v-for="auth in props.metadata" v-show="auth.author == props.author" :key="auth.author">
-						<writing v-for="writ in auth.books" v-bind:list="writ.extracts"  v-bind:title="writ.name" v-bind:id-wri="writ.id" v-bind:author="props.author" :key="writ.id"></writing>
-					</ul>
+					
+					<!-- We create a list for each author and we show only the current author -->
+					<div v-for="auth in props.metadata" v-show="auth.author == props.author" :key="auth.author">
+						
+						<!-- List all writings for one author -->
+						<writing v-for="writ in auth.books" v-bind:list="writ.extracts"  v-bind:title="writ.name" v-bind:id-wri="writ.id" v-bind:author="props.author" :key="writ.id">
+							<!-- One writing -->
+							<span slot="extr" slot-scope="props">
+								<!-- Title of the writing -->
+								<a class="extractTitle" href="#writingHead" v-on:click="$root.changeWriting(props.idWri, props.list, props.author, props.title)" >{{ props.title }}</a> 
+								<br>
+								<!-- List of extracts -->
+								<div v-show="props.title == $root.result.writingName">
+									<extract v-for="extr in props.list" v-bind:text="extr.extract" v-bind:index="extr.index":key="extr.index">
+										
+										<!-- One extract -->
+										<span slot="textextr" slot-scope="props">
+											<a class="extractText" v-bind:href="'#'+props.index" >{{ props.text }}</a>
+										</span>
+										
+									</extract>
+								</div>
+							</span>
+						</writing>
+					</div>
 				</template>
 			</extracts>
+			
 			<!--<div id="extract" class="col-md-2">
 				<div class="extractTitle">
 				Quelques extraits d'écrit correspondant à votre recherche:

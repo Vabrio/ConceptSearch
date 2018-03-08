@@ -1,3 +1,4 @@
+/* Author */
 Vue.component('authors', {
 	props: ['books', 'dataReceived', 'changeAuthor', 'writingName', 'idWri'],
 	template: '\
@@ -11,19 +12,19 @@ Vue.component('book', {
 	template: '<div><a v-on:click="$root.changeAuthor(author)">{{ author }}</a></div>'
 })
 
+
+/* Extracts */
 Vue.component('extracts', {
 	props: ['books', 'author'],
 	template: '<div id="extract" class="col-md-2"><slot name="writings" :author="author" :metadata="books"></slot></div>'
 })
-
-Vue.component('extract', {
-	props: ['list','text', 'index', 'idWri', 'author', 'title'],
-	template: '<li><a class="extractText" v-bind:href="\'#\'+index" >{{ text }}</a></li>'
-})
-
 Vue.component('writing', {
 	props: ['list', 'title', 'idWri', 'author'],
-	template: '<li><div><a class="extractTitle" href="#writingHead" v-on:click="$root.changeWriting(idWri, list, author, title)" >{{ title }}</a> <br/><ul v-show="title == $root.result.writingName"><extract v-for="extr in list" v-bind:list="list" v-bind:text="extr.extract" v-bind:index="extr.index" v-bind:idWri="idWri" v-bind:author="author" v-bind:title="title" :key="extr.index"></extract></ul></div></li>'
+	template: '<div><slot name="extr" :list="list" :title="title" :id-wri="idWri" :author="author"></slot></div>'
+})
+Vue.component('extract', {
+	props: ['text', 'index'],
+	template: '<div><slot name="textextr" :text="text" :index="index"></slot></div>'
 })
 
 
