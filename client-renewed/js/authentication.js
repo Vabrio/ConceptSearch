@@ -13,9 +13,11 @@ function logged(ans){
 		console.log( ansJson.message + ansJson.token );
 		login.auth.logged = true;
 		login.auth.token = ansJson.token;
+		login.auth.concepts = ansJson.concepts;
+		userinfos.infos = ansJson.user;
 	 	localStorage.setItem('token', ansJson.token);
-		localStorage.setItem('userInfo', ansJson.user);
-		localStorage.setItem('userConcepts', ansJson.concepts);
+		localStorage.setItem('userInfo', JSON.stringify(ansJson.user));
+		localStorage.setItem('userConcepts', JSON.stringify(ansJson.concepts));
 		$("#logger").modal("toggle");
 		/*usercontent.concepts=ansJson.concepts;
 		usercontent.userData=ansJson.user;*/
@@ -76,11 +78,11 @@ var logger = new Vue({
 			}
 		},
 		pwdC: function(){
-			if (this.password_check == this.password){this.state_pwd = ""}
+			if (this.password_check == this.password){this.state_pwd = "has-success"}
 			else {this.state_pwd = "has-warning"}
 		},
 		emailC: function(){
-			if (this.email_check == this.email){this.state_email = ""}
+			if (this.email_check == this.email && validateEmail(this.email)){this.state_email = "has-success"}
 			else {this.state_email = "has-warning"}
 		},
 		submit: function(){
@@ -96,7 +98,7 @@ var logger = new Vue({
 			}else if (this.email != this.email_check){
 				this.state_email = "has-error";
 			}else {
-				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password+"?email="+this.email).then(subscribed);
+				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password+"&email="+this.email).then(subscribed);
 			}
 		}
 	}

@@ -8,8 +8,8 @@ h1, h2, h3, h4, h5, h6{
 
 #login{border: 1px solid none;
 text-align: right;
-padding-right: 10px;
-float: right;
+padding-right: 10px; right: 0;
+position: fixed;
 }
 /*.login{border: 1.5px solid rgb(1,110,245);
 background-color: rgb(70,130,250);
@@ -98,4 +98,28 @@ font-size: 16px;
 padding: 0 15px;
 color: black;
 text-align: justify;
+}
+
+
+
+/* Text presentation */ 
+
+/* Hover on text to see concepts */
+.hoverItem {
+	position: relative;
+    text-decoration: underline;
+	text-decoration-style: dashed;
+	cursor: pointer;
+}
+.hiddenText {
+	position: absolute;
+	top: -15px;
+	right: 0;
+	color: white;
+	background-color: grey;
+	opacity: 0.8;
+    display: none;
+}
+.hoverItem:hover .hiddenText {
+    display:block;
 }

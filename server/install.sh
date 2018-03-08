@@ -8,6 +8,7 @@ npm install mysql
 npm install bcrypt
 npm install body-parser
 npm install jsonwebtoken
+npm install nodemailer
 
 # Remove require pb
 npm install @types/node --save-dev

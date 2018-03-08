@@ -1,9 +1,3 @@
-//=========================================================================
-// Le module DAO contient les requetes pour une base de donnée spécifique.
-// Il peut y avoir une DAO MySQL, une DAO PostgreSQL, une DAO Oracle, etc...
-// Par la suite il sera facile de switcher de l'une à l'autre sans toucher
-// au reste du code de l'application.
-//=========================================================================
 
 import {db} from "../config/mysql/mysql.db"
 import {UserModel} from '../models/user.model';

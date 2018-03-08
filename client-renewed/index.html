@@ -38,11 +38,11 @@
 	<div id="login" class="padding1">	
 		<button v-show="!auth.logged" class="btn btn-primary" data-toggle="modal" data-target="#logger">Connexion</button>
 		
-		<div class="dropdown" v-show="auth.logged">
+		<div class="dropdown" v-show="auth.logged" id="login_menu">
 		  	<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Mon compte
 		  	<span class="caret"></span></button>
 		  	<ul class="dropdown-menu dropdown-menu-right">
-				<li><a href="#" data-toggle="modal" data-target="#userInfo">Mes informations</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#userinfos">Mes informations</a></li>
 				<li><a href="#">Concepts ajoutés</a></li>
 				<li><a href="#" @click="disconnect">Se déconnecter</a></li>
 		  	</ul>
@@ -50,7 +50,7 @@
 	</div>
 	
 	<!-- Userinfo popup -->
-	<div class="modal fade" id="userInfo" role="dialog">
+	<div class="modal fade" id="userinfos" role="dialog">
 		<div class="modal-dialog">
 
 		<!-- Modal content-->
@@ -61,11 +61,26 @@
 				</div>
 				
 				<div class="modal-body">
+					<div v-show="page==0">
+						<p>Email : <i>{{ showmail }}</i></p>
+						<button class="btn btn-info" @click="changeMail">changer d'adresse email</button>
+						<button class="btn btn-primary" @click="changePwd">changer de mot de passe</button>
+					</div>
+					<div v-show="page==1">
+						<div class="input-group" v-bind:class="state_email">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+							<input type="email" class="form-control" placeholder="Email" v-model="infos.email" v-on:keyup.enter="submit">
+						</div>
+						<div class="input-group" v-bind:class="state_email">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+							<input type="email" class="form-control" placeholder="Vérifiecation email" v-model="email_check" v-on:keyup.enter="submit" @blur="emailC">
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer" v-show="page>0">
+					<button @click="submit" class="btn btn-warning">Envoyer</button>
 				</div>
 				
-				<div class="modal-footer">
-					<button class="btn btn-info">Modifier</button>
-				</div>
 			</div>
 		</div>
 	</div>

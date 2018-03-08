@@ -117,6 +117,11 @@ userRoutes.get('/userindb', function(req: any, res: any){
 		}
    	})
 })
+
+userRoutes.get('/verify', function(req: any, res: any){
+	res.cookie('success', true);
+	res.redirect("http://concept-search.org");
+})
 /*
 // route to return all users (GET http://localhost:8080/api/users)
 userRoutes.get('/list', function(req: any, res: any) {

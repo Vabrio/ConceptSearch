@@ -10,8 +10,8 @@ import {NAMES_UNAVAILABLE} from "../../const/const";
 
 class UsersService
 {
-	static create(user: UserModel , res: any) {
-		
+	static create(user: UserModel , cb: any) {
+        UsersDAO.create(user, cb);
     }
 
 	static update(user: UserModel, cb: any) {

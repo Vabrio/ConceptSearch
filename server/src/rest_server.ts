@@ -12,6 +12,7 @@ import { conceptRoutes } from "./routes/concepts.route";
 import { userRoutes } from "./routes/users.route";
 import { writingRoutes } from "./routes/writings.route";
 import { startServer } from "./routes/server_start";
+import { initmail, sendmail } from "./resources/sendmail";
 // Libs
 let fs = require('fs');
 let bodyParser  = require('body-parser');
@@ -33,6 +34,8 @@ if (LOG_FILE){
 
 // Initializing db
 createTables();
+// Initialize mail sender
+initmail();
 
 
 // STARTING REST SERVER
@@ -53,6 +56,8 @@ app.all('/*', function(req: any, res: any, next: any) {
 app.use('/concepts', conceptRoutes);
 app.use('/users', userRoutes);
 app.use('/writings', writingRoutes);
+
+
 
 // Start rest server
 startServer(app);
