@@ -3,6 +3,9 @@ var homePage = new Vue({
 	data: {
 		homePage: true,
 		searchbar: "",
+		authorbar: "",
+		titlebar: "",
+		advanced_search: false,
 	},
 	methods: {
 		search: function(){
