@@ -1,3 +1,6 @@
+//------------------------------------------------------------------
+// Const that allows fast changing of some systems
+//------------------------------------------------------------------
 const NAMES_UNAVAILABLE = ["default", "Alice"];
 
 // Extracting parameters

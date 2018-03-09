@@ -1,3 +1,6 @@
+//------------------------------------------------------------------
+// Deals with the token as a middleware
+//------------------------------------------------------------------
 import { SECRET } from "../const/const";
 import { UserModel } from "../managers/models/user.model";
 

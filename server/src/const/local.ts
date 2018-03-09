@@ -1,3 +1,6 @@
+//------------------------------------------------------------------
+// Constants that are local for each system (file is in gitignore)
+//------------------------------------------------------------------
 // Show the console (true) or put in a file  (false)
 const LOG_FILE = true;
 

@@ -1,3 +1,6 @@
+//------------------------------------------------------------------
+// Mysql parameter and connection
+//------------------------------------------------------------------
 declare function require(name:string): any;
 
 let mysql      = require('mysql');

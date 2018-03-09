@@ -1,6 +1,11 @@
+//-------------------------------------------------------------------------
+// Functions that format a given text using the concepts and the extracts
+// so it will give the correct html render
+//-------------------------------------------------------------------------
 function textFormatting (writingText: string, list: any, concepts: any){
 	
-	let htmlFormatting: any[] = [], found: any;
+	let htmlFormatting: any[] = [],
+		found: any;
 	
 	for (let c of concepts){
 		let request = c.extract;

@@ -1,3 +1,9 @@
+
+
+//-------------------------------------------------------------------
+// Initialize and functions to send emails to user with nodemailer
+//-------------------------------------------------------------------
+
 'use strict';
 const nodemailer = require('nodemailer');
 

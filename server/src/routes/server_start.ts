@@ -1,3 +1,7 @@
+//------------------------------------------------------------------
+// Start the server using ssl or usual http depending on the params 
+// in const/local
+//------------------------------------------------------------------
 import { PORT, SSL_KEY, SSL_CERTIFICATE, USE_SSL } from "../const/local";
 const https = require('https');
 const fs = require('fs');
