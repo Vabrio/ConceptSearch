@@ -5,9 +5,9 @@ interface Row {
 	email?: string;
 	status?: number;
 	created_at?: Date;
-	firstname?: string;
+	/*firstname?: string;
 	lastname?: string;
-	birth_date?: Date;
+	birth_date?: Date;*/
 }
 
 class UserModel
@@ -38,6 +38,20 @@ class UserModel
 	set password(val: string) {
         this.row.password = val;
     }
+	
+    get email() {
+        return this.row.email;
+    }
+	set email(val: string) {
+        this.row.email = val;
+    }
+
+    /*get birth_date() {
+        return this.row.birth_date;
+    }
+	set birth_date(val: Date) {
+        this.row.birth_date = val;
+    }
 
     get firstname() {
         return this.row.firstname;
@@ -51,21 +65,7 @@ class UserModel
     }
 	set lastname(val: string) {
         this.row.lastname = val;
-    }
-	
-    get email() {
-        return this.row.email;
-    }
-	set email(val: string) {
-        this.row.email = val;
-    }
-
-    get birth_date() {
-        return this.row.birth_date;
-    }
-	set birth_date(val: Date) {
-        this.row.birth_date = val;
-    }
+    }*/
 	
     get status() {
         return this.row.status;

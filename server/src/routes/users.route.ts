@@ -27,10 +27,7 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 		let user = new UserModel({
 			'name': query.name,
 			'password': hash,
-			'firstname': query.firstname,
-			'lastname': query.lastname,
-			'email': query.email,
-			'birth_date': new Date(query.birthdate)
+			'email': query.email
 		});	
 		
 		if (NAMES_UNAVAILABLE.includes(user.name)){

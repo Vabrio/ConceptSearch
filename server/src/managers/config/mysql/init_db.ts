@@ -33,7 +33,8 @@ function createTables(){
 	// Creating the users table
 	db.query("SHOW TABLES LIKE 'use_users'", (err: any, result: any) => {
 		if (result.length==0){
-			db.query("CREATE TABLE use_users (id integer primary key auto_increment, name text, password text, firstname text, lastname text, email text, birth_date datetime, status integer default 1, created_at datetime default current_timestamp);");
+			db.query("CREATE TABLE use_users (id integer primary key auto_increment, name text, password text, email text, status integer default 1, created_at datetime default current_timestamp);");
+			/*db.query("CREATE TABLE use_users (id integer primary key auto_increment, name text, password text, firstname text, lastname text, email text, birth_date datetime, status integer default 1, created_at datetime default current_timestamp);");*/
 			console.log("USERS TABLE INITIALIZED");
 		}else if(err){
 			console.log("error while accessing use_users table : " + err);
