@@ -1,13 +1,9 @@
-declare const Buffer: any;
-let fs = require('fs');
-
 import { WritingsService } from "./services/writings.service";
 import { ConceptsService } from "./services/concepts.service";
 import { UsersService } from "./services/users.service";
 import { WritingModel } from "./models/writing.model";
 import { ConceptModel } from "./models/concept.model";
 import { UserModel } from "./models/user.model";
-import { ROOT_DIR } from "../rest_server"
 
 class Manager {
     
@@ -19,18 +15,7 @@ class Manager {
 	// Giving a writing id, returns the writing
 	static getWriting(id: number, res: any){
 		// Getting the writing in plain text
-		WritingsService.find(id, (err: any, writing: WritingModel) => {
-			if(err){
-				res(err, null);
-			}else{
-				
-				//We extract the writing
-				let iconvlite = require('iconv-lite');
-				let filebuffer = fs.readFileSync(ROOT_DIR+writing.address);
-				let writingText = iconvlite.decode(filebuffer, 'ISO-8859-1');
-				res(err, writingText);
-			}
-		})
+		WritingsService.find(id, res)
     }
 	
 	// Giver writingid, returns associated concepts
