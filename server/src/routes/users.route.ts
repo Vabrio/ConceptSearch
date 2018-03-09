@@ -143,17 +143,17 @@ userRoutes.get('/verify', function(req: any, res: any){
 	//console.log(req.query.secret);
 	if (!req.query.secret){
 		res.cookie('success', false);
-		res.redirect("https://concept-search.org/dev-CS");
+			res.redirect("https://concept-search.org/CS_dev");
 	}
 	Manager.findUserByUUID(req.query.secret, (err: any,user: any)=>{
 		if (err) {
 			console.log("error while looking for temp user : " +err);
 			res.cookie('verified_mail', false);
-			res.redirect("https://concept-search.org/dev-CS");
+			res.redirect("https://concept-search.org/CS_dev");
 	 	}else {
 			res.cookie('verified_mail', true);
 			res.cookie('user', JSON.stringify(user));
-			res.redirect("https://concept-search.org/dev-CS");
+			res.redirect("https://concept-search.org/CS_dev");
 		}
 	})
 })
