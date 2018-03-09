@@ -64,9 +64,8 @@ class Manager {
 		UsersService.createTemp(user, uuid, res);
 	}
 	
-	// Update userinfo in the DB
-	static updateUser(user: UserModel, res: any){
-		UsersService.update(user, res);
+	static updateUserPwd(id: number, hash: string, cb: any){
+		UsersService.udpateUserPwd(id, hash, cb);
 	}
 	static updateTemp(id: number, res: any){
 		UsersService.updateTemp(id, res);
@@ -75,6 +74,10 @@ class Manager {
 	// Get a list of all users
 	static getUsers(res: any){
 		UsersService.list(res);
+	}
+	// Get a list of all users
+	static getUser(id: number, name: string, res: any){
+		UsersService.find(id, name, res);
 	}
 	
 	// Find a user by its name

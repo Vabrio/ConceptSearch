@@ -17,9 +17,9 @@ class UsersService
         UsersDAO.createTemp(user, uuid, cb);
     }
 
-	static update(user: UserModel, cb: any) {
-        UsersDAO.update(user, cb);
-    }
+	static udpateUserPwd(id: number, hash: string, cb: any){
+		UsersDAO.udpateUserPwd(id, hash, cb);
+	}
 	static updateTemp(id: number, cb: any){
 		UsersDAO.updateTemp(id, cb);
 	}
@@ -28,8 +28,8 @@ class UsersService
 		return UsersDAO.delete(id, cb);
     }
 
-    static find(id: number, cb: any) {
-        return UsersDAO.find(id, cb);
+    static find(id: number, name: string, cb: any) {
+        return UsersDAO.find(id, name, cb);
     }
 
     static findByName(name: string, cb: any) {

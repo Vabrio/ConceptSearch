@@ -12,7 +12,7 @@ import { conceptRoutes } from "./routes/concepts.route";
 import { userRoutes } from "./routes/users.route";
 import { writingRoutes } from "./routes/writings.route";
 import { startServer } from "./routes/server_start";
-import { initmail, sendmail } from "./resources/sendmail";
+import { initmail } from "./resources/sendmail";
 // Libs
 let fs = require('fs');
 let bodyParser  = require('body-parser');

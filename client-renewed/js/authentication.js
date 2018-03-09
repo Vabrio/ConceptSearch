@@ -50,6 +50,7 @@ var logger = new Vue({
 	el: "#logger",
 	data: {
 		subscribing: false,
+		forgot_pwd: false,
 		pseudo: "",
 		password: "",
 		password_check: "",
@@ -69,7 +70,8 @@ var logger = new Vue({
 	},
 	methods: {
 		toggleConnect: function(){
-			this.subscribing = !this.subscribing;
+			this.subscribing = false;
+			this.forgot_pwd = false;
 			this.state_login ="";
 			this.state_pwd ="";
 		},

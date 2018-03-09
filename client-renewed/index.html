@@ -57,37 +57,52 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h3>Informations personnelles</h3>
+					<h3 v-show="page==0" style="text-align: center;">Informations personnelles</h3>
+					<button class="btn glyphicon glyphicon-chevron-left col-xs-1" @click="page=0" v-show="page==1"></button>
 				</div>
 				
 				<div class="modal-body">
 					<div v-show="page==0">
+						<p>Login : <i>{{ infos.name }}</i></p>
 						<p>Email : <i>{{ showmail }}</i></p>
-						<button class="btn btn-info" @click="changeMail">changer d'adresse email</button>
-						<button class="btn btn-primary" @click="changePwd">changer de mot de passe</button>
+						<p>Date de création : <i>{{ infos.created_at }}</i></p>
 					</div>
 					<div v-show="page==1">
-						<div class="input-group" v-bind:class="state_email">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-							<input type="email" class="form-control" placeholder="Email" v-model="infos.email" v-on:keyup.enter="submit">
+						<div class="input-group" v-bind:class="state_old_pwd">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input type="password" placeholder="Ancien mot de passe" class="form-control" v-model="pwd_old" v-on:keyup.enter="submit"/>
+						</div><br>
+						<div class="input-group" v-bind:class="state_pwd">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input type="password" placeholder="Nouveau mot de passe" class="form-control" v-model="pwd" v-on:keyup.enter="submit"/>
 						</div>
-						<div class="input-group" v-bind:class="state_email">
-							<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-							<input type="email" class="form-control" placeholder="Vérifiecation email" v-model="email_check" v-on:keyup.enter="submit" @blur="emailC">
+						<div class="input-group" v-bind:class="state_pwd">
+							<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+							<input type="password" class="form-control" placeholder="Nouveau mot de passe"  v-model="pwd_check" v-on:keyup.enter="submit" autocomplete="off" @blur="pwdC">
 						</div>
 					</div>
 				</div>
-				<div class="modal-footer" v-show="page>0">
-					<button @click="submit" class="btn btn-warning">Envoyer</button>
+				<div class="modal-footer">
+					<button class="btn btn-warning" @click="changePwd" v-show="page==0">changer de mot de passe</button>
+					<button @click="submit" class="btn btn-warning" v-show="page>0">Envoyer</button>
 				</div>
 				
 			</div>
 		</div>
 	</div>
-	
-	<div id="alert_verif_mail" class="alert alert-info alert-dismissible col-xs-6 col-xs-push-3" v-show="show" style="text-align: center">
-		<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-		Vous n'avez pas encore vérifié votre email :  <a href="#" class="alert-link" @click="resend">recevoir un nouvel email de vérification.</a>
+	<div id="alerts">
+		<div class="alert alert-info alert-dismissible col-xs-6 col-xs-push-3" v-if="show==1" style="text-align: center">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			Vous n'avez pas encore vérifié votre email :  <a href="#" class="alert-link" @click="resend">recevoir un nouvel email de vérification.</a>
+		</div>
+		<div class="alert alert-info alert-dismissible col-xs-6 col-xs-push-3" v-if="show==2" style="text-align: center">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			Email envoyé !
+		</div>
+		<div class="alert alert-info alert-dismissible col-xs-6 col-xs-push-3" v-if="show==3" style="text-align: center">
+			<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+			Votre email a bien été vérifié, veuillez vous connecter pour profiter pleinement de l'expérience !
+		</div>
 	</div>
 	
 	<script src="js/login.js"></script>
@@ -99,26 +114,26 @@
 		<!-- Modal content-->
 			<div class="modal-content">
 				<div class="modal-header">
-					<button class="btn glyphicon glyphicon-chevron-left" @click="toggleConnect" v-show="subscribing"></button>
+					<button class="btn glyphicon glyphicon-chevron-left" @click="toggleConnect" v-show="subscribing || forgot_pwd"></button>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				
 				<form class="modal-body" v-on:submit.prevent>
-					<div class="input-group" v-bind:class="state_login">
+					<div class="input-group" v-bind:class="state_login" v-show="!forgot_pwd">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
 						<input class="form-control"  placeholder="Pseudonyme" v-model="pseudo" v-on:keyup.enter="submit" @blur="loginC"/>
 					</div>
-					<div class="input-group" v-bind:class="state_pwd">
+					<div class="input-group" v-bind:class="state_pwd" v-show="!forgot_pwd">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						<input type="password" placeholder="Mot de passe" class="form-control" v-model="password" v-on:keyup.enter="submit"/>
 					</div>
-					<button v-show="!subscribing" class="btn btn-link">Mot de passe oublié</button>
+					<button v-show="!subscribing && !forgot_pwd" class="btn btn-link" @click="forgot_pwd=true">Mot de passe oublié</button>
 					<div class="input-group" v-show="subscribing" v-bind:class="state_pwd">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
 						<input type="password" class="form-control" placeholder="Mot de passe"  v-model="password_check" v-on:keyup.enter="submit" autocomplete="off" @blur="pwdC">
 					</div>
 					<br v-show="subscribing">
-					<div class="input-group" v-show="subscribing" v-bind:class="state_email">
+					<div class="input-group" v-show="subscribing || forgot_pwd" v-bind:class="state_email">
 						<span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
 						<input type="email" class="form-control" placeholder="Email" v-model="email" v-on:keyup.enter="submit">
 					</div>
@@ -142,7 +157,7 @@
 				</form>
 				
 				<div class="modal-footer">
-					<button @click="toggleConnect" class="btn btn-link" v-show="!subscribing">S'inscrire</button>
+					<button @click="subscribing=true" class="btn btn-link" v-show="!subscribing">S'inscrire</button>
 					<button type="button" class="btn btn-primary" v-on:click="submit">Suivant</button>
 				</div>
 			</div>

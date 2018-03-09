@@ -15,7 +15,7 @@ var login = new Vue({
 		disconnect: function(){
 			this.auth.token = null;
 			this.auth.logged = false;
-			userinfos.infos={email: ""};
+			userinfos.infos={email: "", name:"", created_at: ""};
 	 		localStorage.removeItem('token');
 			localStorage.removeItem('userInfo');
 			localStorage.removeItem('userConcepts');
@@ -28,14 +28,13 @@ function validateEmail(email)
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
 }
-
 function adaptAlert(ans){
-	console.log(ans);
+	alerts.show = 1;
 }
-var alertVerifMail = new Vue({
-	el: "#alert_verif_mail",
+var alerts = new Vue({
+	el: "#alerts",
 	data: {
-		show: false
+		show: 0,
 	},
 	methods: {
 		resend: function(){
@@ -44,15 +43,30 @@ var alertVerifMail = new Vue({
 	}
 })
 
+function pwdChanged(ans){
+	var ansJSON = JSON.parse(ans.bodyText);
+	if (ansJSON.success){
+		$("#userinfos").modal("toggle");
+		login.disconnect();
+	}else if (ansJSON.type){
+		userinfos.state_old_pwd = "has-error";
+	}
+	
+}
 var userinfos = new Vue({
 	el: "#userinfos",
 	data: {
 		infos: {
-			email: ""
+			name: "",
+			email: "",
+			created_at: "",
 		},
 		page: 0,
-		email_check: "",
-		state_email: ""
+		pwd: "",
+		pwd_old: "",
+		pwd_check: "",
+		state_pwd: "",
+		state_old_pwd: ""
 	},
 	computed: {
 		showmail: function(){
@@ -63,24 +77,24 @@ var userinfos = new Vue({
 	watch:{
 		infos: function(val){
 			if (val.status == -1){
-				alertVerifMail.show = true;
+				alerts.show = 1;
 			}else {
-				alertVerifMail.show = false;
+				alerts.show = 0;
+			}
+			if (val.created_at){
+				this.infos.created_at = (new Date(this.infos.created_at)).toLocaleString('fr-FR');
 			}
 		}	
 	},
 	methods: {
-		changeMail: function(){this.page = 1;},
-		changePwd: function(){this.page = 2;},
-		emailC: function(){
-			if (this.email_check == this.infos.email && validateEmail(this.infos.email)){this.state_email = "has-success"; return true;}
-			else {this.state_email = "has-warning"; return false;}
+		changePwd: function(){this.page = 1;},
+		pwdC: function(){
+			if (this.pwd == this.pwd_check){this.state_pwd = "has-success"; return true;}
+			else {this.state_pwd = "has-warning"; return false;}
 		},
 		submit: function(){
-			if (this.page==1){
-				if (this.emailC()){
-					console.log("ok")
-				}
+			if (this.page==1 && this.pwdC()){
+				this.$http.post(url+"users/updatepwd?id="+this.infos.id+"&name="+this.infos.name+"&newpwd="+this.pwd+"&oldpwd="+this.pwd_old+"&token="+login.auth.token).then(pwdChanged)
 			}else {
 				
 			}
@@ -111,7 +125,11 @@ function getCookie(cname) {
     return "";
 }
 
-var user = JSON.parse(getCookie("user"));
-if (getCookie("verified_mail") && user!=null){
-	userinfos.infos = user;
+var user;
+if (getCookie("user")){
+	user = JSON.parse(getCookie("user"));
+} else { user = null;}
+if (getCookie("verified_mail") && user != null){
+	login.disconnect();
+	alerts.show=2;
 }

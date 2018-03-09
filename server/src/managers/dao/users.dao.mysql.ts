@@ -16,9 +16,9 @@ class UsersDAO
             cb(err, user);
         });
     }
-
-	static update(user: UserModel, cb: any) {
-        db.query('UPDATE use_users SET firstname = ?, lastname = ?, email = ?, birth_date = ?, status = ? WHERE id = ?', [user.firstname, user.lastname, user.email, user.birth_date, user.status ,user.id], (err: any, rows:any) => {
+	
+	static udpateUserPwd(id: number, hash: string, cb: any) {
+        db.query('UPDATE use_users SET password = ? WHERE id = ?', [hash,id], (err: any, rows:any) => {
             cb(err, rows);
         });
     }
@@ -47,8 +47,8 @@ class UsersDAO
             }));
         });
     }
-	static find(id: number, cb: any) {
-		db.query('SELECT * FROM use_users WHERE id = ? LIMIT 1', [id], (err: any, rows: any) => {
+	static find(id: number, name: string, cb: any) {
+		db.query('SELECT * FROM use_users WHERE id = ? AND name= ? LIMIT 1', [id, name], (err: any, rows: any) => {
             cb(err, new UserModel(rows[0]));
         });
     }
