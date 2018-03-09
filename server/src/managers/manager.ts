@@ -84,6 +84,18 @@ class Manager {
 	static findUserByName(name : string, res: any){
 		UsersService.findByName(name, res);
 	}
+	// Find a user by its name
+	static findVerifiedUserByName(name : string, res: any){
+		UsersService.findVerifByName(name, res);
+	}
+	// Find a user by its name
+	static findUserByEmail(email : string, res: any){
+		UsersService.findByEmail(email, res);
+	}
+	// Find a user by its name
+	static findTempUserByEmail(email : string, res: any){
+		UsersService.findTempByEmail(email, res);
+	}
 	static findUserByUUID(uuid : string, res: any){
 		UsersService.findByUUID(uuid, res);
 	}

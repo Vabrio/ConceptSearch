@@ -57,7 +57,9 @@ app.use('/concepts', conceptRoutes);
 app.use('/users', userRoutes);
 app.use('/writings', writingRoutes);
 
-
+app.use(function (req: any, res: any, next: any) {
+  res.status(404).send("Welcome ! Please try another page")
+})
 
 // Start rest server
 startServer(app);

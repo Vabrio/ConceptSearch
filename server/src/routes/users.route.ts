@@ -11,6 +11,7 @@ declare const process: any;
 let fs = require('fs');
 let bcrypt = require('bcrypt');
 let uuidv4 = require('uuid/v4');
+let crypto = require('crypto')
 const saltRounds = 10;
 
 // ROUTES FOR THE USER MANAGEMENT
@@ -38,17 +39,38 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 		Manager.findUserByName(user.name, (err: any, userF: UserModel)=>{
 			if (err) {
 				res.status(500).json({ success: false, message: 'db_error', type: 0 });
+				return 0;
 			} else if (userF) {
-					res.json({ success: false, message: 'Login already token !', type: 1});
-			} else {
-				var uuid = uuidv4();
-				Mailer.userinitmail(uuid, user.email);
-        		Manager.addTempUser(user, uuid, (err: any, user2: UserModel) =>{
-					if(!err){
-						res.json({ 'success': 'User created !', 'user': user2 });
-					}
-				});
-			}
+				res.json({ success: false, message: 'Login already token !', type: 1});
+				return 0;
+			} 
+			Manager.findUserByEmail(user.email, (err: any, userF2: UserModel)=>{
+				if (err) {
+					res.status(500).json({ success: false, message: 'db_error', type: 0 });
+					return 0;
+				} else if (userF2) {
+					res.json({ success: false, message: 'Email already token !', type: 2});
+					return 0;
+				} 
+				Manager.findTempUserByEmail(user.email, (err: any, userF3: UserModel)=>{
+					if (err) {
+						res.status(500).json({ success: false, message: 'db_error', type: 0 });
+						return 0;
+					} else if (userF2) {
+						res.json({ success: false, message: 'Email already token !', type: 2});
+						return 0;
+					} 
+					var uuid = uuidv4();
+					Mailer.userinitmail(uuid, user.email);
+					Manager.addTempUser(user, uuid, (err: any, user2: UserModel) =>{
+						if(!err){
+							user2.status=-1;
+							res.json({ 'success': 'User created !', 'user': user2 });
+						}
+					});
+					
+				})
+			});
 		})
 		
 		}
@@ -65,7 +87,7 @@ userRoutes.post('/subscribe', function(req: any, res: any){
 userRoutes.post('/authenticate', function(req: any, res: any) {
 
   	// find the user
-  	Manager.findUserByName(req.query.name, (err: any, user: any)=> {
+  	Manager.findVerifiedUserByName(req.query.name, (err: any, user: any)=> {
 		
 		if (err) throw err;
 		
@@ -167,6 +189,35 @@ userRoutes.get('/resend', function(req: any, res: any){
 			Mailer.userinitmail(user.uuid, user.email);
 			res.json({success: true, message: "mail sent"})
 		}
+	})
+})
+
+/* New password */
+userRoutes.get('/forgot', function(req:any, res:any){
+	Manager.findUserByEmail(req.query.email, (err: any, user: any)=>{
+		if (err || user==null){
+			res.json({success: false, message: "email not found", type: 1});
+			return 0;
+		}
+		crypto.randomBytes(20, function(err: any, buf: any) {
+			if (err || user==null){
+				console.log("problem crypto generator");
+				res.json({success: false, message: "crypto pb", type: 0});
+				return 0;
+			}
+			var pwd = buf.toString('hex');
+			bcrypt.hash(pwd, saltRounds).then(function(hash: string) {
+				Manager.updateUserPwd(user.id, hash, (err: any, updateAns: any) => {
+					if (err || updateAns.changedRows == 0) { 
+						res.json({success: false, message: "server pb", type: 0})
+					} else{
+						res.json({success: true, message: "email sent with new pwd"});
+						Mailer.forgotChanged(user.name, pwd, user.email);
+					}
+				});
+			})
+		});
+		
 	})
 })
 

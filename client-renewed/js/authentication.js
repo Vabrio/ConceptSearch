@@ -25,16 +25,22 @@ function logged(ans){
 	}
 }
 function subscribed(ans){
-	console.log(ans.bodyText);
 	var ansJson = JSON.parse(ans.bodyText);
 	if (!ansJson.success) {
 		console.log(ansJson.message);
-		if (ansJson.type) {
+		if (ansJson.type==1) {
 			logger.state_login = "has-error";
+		}if (ansJson.type==2){
+			logger.state_email = "has-error";
 		}
 	}else {
-		logger.connect();
+		$("#logger").modal("toggle");
+		userinfos.infos = ansJson.user;
+		console.log(userinfos.infos.status);
 	}
+}
+function resetpwd(ans){
+	console.log(ans);
 }
 function checkLogin(ans){
 	console.log(ans);
@@ -92,6 +98,7 @@ var logger = new Vue({
 		},
 		submit: function(){
 			if (this.subscribing){this.subscribe()}
+			else if (this.forgot_pwd){this.forgotpwd()}
 			else {this.connect()};
 		},
 		connect: function(){
@@ -103,8 +110,11 @@ var logger = new Vue({
 			}else if (this.email != this.email_check){
 				this.state_email = "has-error";
 			}else {
-				this.$http.post(url+"users/subscribe?name="+ this.pseudo +"&password="+this.password+"&email="+this.email).then(subscribed);
+				this.$http.post(url+"users/subscribe?name="+ this.pseudo+"&password="+this.password+"&email="+this.email).then(subscribed);
 			}
+		},
+		forgotpwd: function(){
+			this.$http.get(url+"users/forgot?email="+ this.email).then(resetpwd);
 		}
 	}
 })

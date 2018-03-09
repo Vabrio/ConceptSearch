@@ -13,6 +13,7 @@ class UsersDAO
     }
 	static createTemp(user: UserModel, uuid: string, cb: any) {
         db.query('INSERT INTO use_users_temp SET name = ?, password = ?, email = ?, uuid = ?', [user.name, user.password, user.email, uuid], (err: any, result: any) => {
+			user.id = result.insertId;
             cb(err, user);
         });
     }
@@ -90,6 +91,24 @@ class UsersDAO
 				});
 			}
         });
+    }
+	static findVerifByName(name: string, cb: any) {
+		db.query('SELECT * FROM use_users WHERE name = ? LIMIT 1', [name], (err: any, rows: any) => {
+			if (rows.length > 0) cb(err, new UserModel(rows[0]));
+			else {cb(err,null)}
+        });
+    }
+	static findByEmail(email: string, cb: any) {
+		db.query('SELECT * FROM use_users WHERE email = ? LIMIT 1', [email], (err: any, rows: any) => {
+			if (rows.length > 0) cb(err, new UserModel(rows[0]));
+			else cb(err, null);
+        });
+    }
+	static findTempByEmail(email: string, cb: any) {
+		db.query('SELECT id, name, password, email, created_at FROM use_users_temp WHERE email = ? LIMIT 1', [email], (err: any, rows: any) => {
+			if (rows.length > 0) {cb(err, rows[0])} 
+			else cb(err, null);
+		});
     }
 }
 

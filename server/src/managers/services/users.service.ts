@@ -35,6 +35,16 @@ class UsersService
     static findByName(name: string, cb: any) {
         return UsersDAO.findByName(name, cb);
     }
+    static findVerifByName(name: string, cb: any) {
+        return UsersDAO.findVerifByName(name, cb);
+    }
+    static findByEmail(email: string, cb: any) {
+        return UsersDAO.findByEmail(email, cb);
+    }
+    static findTempByEmail(email: string, cb: any) {
+        return UsersDAO.findTempByEmail(email, cb);
+    }
+
 
     static findByUUID(uuid: string, cb: any) {
         return UsersDAO.findByUUID(uuid, cb);
