@@ -12,6 +12,7 @@
 	<!-- JS Libraries -->
 	<script src="https://cdn.jsdelivr.net/npm/vue@2.5.13/dist/vue.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue-resource@1.5.0"></script>
+	<!-- Custom js -->
 	<script src="js/http_request.js"></script>
 	
 	<!-- Matomo analytics of the website -->
@@ -224,16 +225,18 @@
 			
 			<!-- Author component -->
 			<authors v-bind="result" class="col-md-1">
-				<div slot="auteursTitre" class="colAuteur">Auteurs :</div>
-				<div slot-scope="props" slot="auteursNames" class="auteurName"> <!-- v-show="dataReceived"-->
-						<book v-for="b in props.books" v-bind:author="b.author" :key="b.author"></book>
+				<div slot="globalSlot" id="auteurs" slot-scope="props">
+					<div class="colAuteur">Auteurs :</div>
+					<div class="auteurName"> <!-- v-show="dataReceived"-->
+							<book v-for="b in props.books" v-bind:author="b.author" :key="b.author"></book>
+					</div>
 				</div>
 			</authors>
 			
 			<!-- Extracts -->
-			<extracts v-bind="result">
+			<extracts v-bind="result" class="col-md-2">
 
-				<template slot="writings" slot-scope="props">
+				<div slot="writings" slot-scope="props" id="extract">
 					
 					<!-- We create a list for each author and we show only the current author -->
 					<div v-for="auth in props.metadata" v-show="auth.author == props.author" :key="auth.author">
@@ -259,9 +262,9 @@
 							</span>
 						</writing>
 					</div>
-				</template>
+				</div>
 			</extracts>
-			
+
 			<!--<div id="extract" class="col-md-2">
 				<div class="extractTitle">
 				Quelques extraits d'écrit correspondant à votre recherche:
@@ -279,15 +282,29 @@
 				</div>
 			</div>-->
 			
-			<fulltext class="col-md-7" v-bind="completetext"></fulltext>
+			<fulltext class="col-md-7" v-bind="completetext">
+				<div id="fulltext" slot="globalSlot" slot-scope="props">
+					<div class="resultTitle">{{ props.title }}</div>
+					<div class="resultText" >
+						<div style="overflow: auto;" id="text_chosen" class="row" v-html=" props.text "></div>
+					</div>
+				</div>
+			</fulltext>
 			<div class="col-md-1"></div>
 		</div>
 	</div>
 	
 	
-	<script src="js/selector.js"></script>
+	<!-- The popover to add a concept -->
+	<div class="popover">
+		<input type='text' class='span1' />
+		<input type='button' class='btn' value='Save' />
+	</div>
+	
+	
 	<script src="js/components.js"></script>
 	<script src="js/research.js"></script>
+	<script src="js/selector.js"></script>
 	
 	
 </body>

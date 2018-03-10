@@ -2,9 +2,8 @@
 Vue.component('authors', {
 	props: ['books', 'dataReceived', 'changeAuthor', 'writingName', 'idWri'],
 	template: '\
-			<div id="auteurs">\
-				<slot name="auteursTitre"></slot>\
-				<slot name="auteursNames" :books="books"></slot>\
+			<div>\
+				<slot name="globalSlot" :books="books"></slot>\
 			</div>'
 })
 Vue.component('book', {
@@ -16,7 +15,7 @@ Vue.component('book', {
 /* Extracts */
 Vue.component('extracts', {
 	props: ['books', 'author'],
-	template: '<div id="extract" class="col-md-2"><slot name="writings" :author="author" :metadata="books"></slot></div>'
+	template: '<div><slot name="writings" :author="author" :metadata="books"></slot></div>'
 })
 Vue.component('writing', {
 	props: ['list', 'title', 'idWri', 'author'],
@@ -32,17 +31,9 @@ Vue.component('extract', {
 Vue.component('fulltext', {
 	props: ['initialText', 'text', 'author','title','idWri'],
 	template: '\
-			<div id="fulltext">\
-				<div class="resultTitle">{{ title }}</div>\
-				<div class="resultText" >\
-					<div style="overflow: auto;" id="text_chosen" class="row" v-html=" text " v-on:select="onClick()"></div>\
-				</div>\
-			</div>',
-	methods: {
-		onclick: function(){
-			
-		}
-  	}
+			<div >\
+				<slot name="globalSlot" :title="title" :text="text" ></slot>\
+			</div>'
 })
 
 

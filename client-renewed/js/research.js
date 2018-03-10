@@ -34,11 +34,18 @@ function getwriting(idWri, list, author, title){
 		title: title}}).then(link);
 }
 
-
+function sortAuthors(a, b){
+	var authorA = a.author,
+		authorB = b.author;
+	var authorOrderedTable =[ "Baha'u'llah", "Bab", "Abdu'l-Baha", "Shoghi Effendi", "Maison universelle de justice", "Compilations", "Varia"]
+	return authorOrderedTable.indexOf(authorA) - authorOrderedTable.indexOf(authorB);
+	
+}
 
 function searchResults(ans){
 	homePage.homePage= false;
 	data = JSON.parse(ans.bodyText);
+	data.sort(sortAuthors);
 	researchPage.result.books = data;
 	if (data == "") {
 		researchPage.result.books = [];

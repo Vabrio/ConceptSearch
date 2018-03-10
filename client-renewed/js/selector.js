@@ -20,26 +20,23 @@ function changeSelection()
     end_position = endPosition;
 	
 }*/
-/*
 
 
 document.addEventListener('copy', function(e){
-    e.clipboardData.setData('text/plain', window.getSelection()+'\n\n\t('+completeText.author+', '+completeText.title+')');
+    e.clipboardData.setData('text/plain', window.getSelection()+'\n\n\t('+researchPage.completetext.author+', '+researchPage.completetext.title+')');
     e.preventDefault();
-	// We want our data, not data from any selection, to be written to the clipboard
 });
 
-//document.addEventListener('selectionchange', changeSelection);
-var text_chosen = document.getElementById('text_chosen');
-text_chosen.addEventListener('mouseup', onClick);
-
-//function changeSelection(e){}
+$('#text_chosen').mouseup(onClick);
 
 function onClick(e){
-	searchRes.dataReceived = false;
-	addConcept.extract = $.selection("html");
-	addConcept.wordSelected = $.selection("text");
+    var offset = $(this).offset();
+    var left = e.pageX;
+    var top = e.pageY;
+    var theHeight = $('.popover').height();
+    $('.popover').show();
+    $('.popover').css('left', (left+10) + 'px');
+    $('.popover').css('top', (top-(theHeight/2)-10) + 'px');
+	/*addConcept.extract = $.selection("html");
+	addConcept.wordSelected = $.selection("text");*/
 }
-
-
-*/
