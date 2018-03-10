@@ -223,7 +223,7 @@
 			<div class="col-md-1"></div>
 			
 			<!-- Author component -->
-			<authors v-bind="result">
+			<authors v-bind="result" class="col-md-1">
 				<div slot="auteursTitre" class="colAuteur">Auteurs :</div>
 				<div slot-scope="props" slot="auteursNames" class="auteurName"> <!-- v-show="dataReceived"-->
 						<book v-for="b in props.books" v-bind:author="b.author" :key="b.author"></book>
@@ -279,7 +279,7 @@
 				</div>
 			</div>-->
 			
-			<fulltext v-bind="completetext"></fulltext>
+			<fulltext class="col-md-7" v-bind="completetext"></fulltext>
 			<div class="col-md-1"></div>
 		</div>
 	</div>

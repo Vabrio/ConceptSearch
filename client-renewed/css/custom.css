@@ -6,10 +6,15 @@ h1, h2, h3, h4, h5, h6{
 	padding-top: 10px;
 }
 
-#login{border: 1px solid none;
-text-align: right;
-padding-right: 10px; right: 0;
-position: fixed;
+#login{
+	border: 1px solid none;
+	text-align: right;
+	padding-right: 10px; right: 0;
+	position: fixed;
+	z-index: 500;
+}
+fulltext{
+	z-index: 1000;
 }
 /*.login{border: 1.5px solid rgb(1,110,245);
 background-color: rgb(70,130,250);

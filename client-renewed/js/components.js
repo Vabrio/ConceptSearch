@@ -2,7 +2,7 @@
 Vue.component('authors', {
 	props: ['books', 'dataReceived', 'changeAuthor', 'writingName', 'idWri'],
 	template: '\
-			<div id="auteurs" class="col-md-1">\
+			<div id="auteurs">\
 				<slot name="auteursTitre"></slot>\
 				<slot name="auteursNames" :books="books"></slot>\
 			</div>'
@@ -32,7 +32,7 @@ Vue.component('extract', {
 Vue.component('fulltext', {
 	props: ['initialText', 'text', 'author','title','idWri'],
 	template: '\
-			<div class="col-md-7" id="fulltext">\
+			<div id="fulltext">\
 				<div class="resultTitle">{{ title }}</div>\
 				<div class="resultText" >\
 					<div style="overflow: auto;" id="text_chosen" class="row" v-html=" text " v-on:select="onClick()"></div>\

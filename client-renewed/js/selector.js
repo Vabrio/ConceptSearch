@@ -1,4 +1,4 @@
-document.addEventListener('mouseup', changeSelection);
+/*document.addEventListener('mouseup', changeSelection);
 
 function changeSelection()
 {              
@@ -19,7 +19,7 @@ function changeSelection()
 
     end_position = endPosition;
 	
-}
+}*/
 /*
 
 
