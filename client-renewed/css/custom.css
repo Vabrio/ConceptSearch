@@ -23,7 +23,7 @@ background-color: rgb(190,210,255);
 
 #CSname{
 text-align: center;
-color: rgb(245,0,0);
+color: rgb(122, 85, 37);
 padding: 25vh 0px 2vh 0px;
 letter-spacing: 1px;
 font-size: 36px;
@@ -63,17 +63,24 @@ font-size: 16px;
 border: 1px solid none;
 padding: 10px 0 40px 10px;
 }
-.index{border: 1.5px solid rgb(245,0,0);
+.index{border: 1.5px solid rgb(122, 85, 37);
 background-color: white;
-color: rgb(245,0,0);
+color: rgb(122, 85, 37);
 padding-bottom: 10px;
 }
 .index:hover{background-color: rgb(255,230,210);
 }
 
-#auteurs{border: 2px solid black;
+#auteurs{border: 2px solid gray;
+    border-radius: 20px / 10px;
+    box-shadow: 6px 6px 15px gray;
+    background-color: rgb(255, 245, 232);
+
 }
 #extract{border: 1.5px solid grey;
+    border-radius: 20px / 10px;
+    box-shadow: 6px 6px 15px gray;
+    background-color: rgb(255, 245, 232);
 padding: 8px 3px 8px 3px;
 text-align: left;
 }
@@ -86,7 +93,10 @@ padding: 5px 3px 5px 8px;
 #proposition{text-align: left;
 }
 #fulltext{
-	border: 1.5px solid black;
+	border: 1.5px solid gray;
+    border-radius: 20px / 10px;
+    box-shadow: 6px 6px 15px gray;
+    background-color: rgb(255, 245, 232);
 }
 .resultTitle{text-decoration: underline;
 text-decoration: /*gras*/;
