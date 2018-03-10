@@ -8,4 +8,5 @@ client/js/version.js
 server/build
 server/build/*
 server/src/const/local.ts
-
+.DS_Store
+client-renewed/.DS_Store
