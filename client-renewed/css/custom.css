@@ -85,6 +85,7 @@ font-size: 16px;
     box-shadow: 6px 6px 15px gray;
     background-color: rgb(255, 245, 232);
 	padding-top: 10px;
+	padding-left: 10px;
 }
 #extract{
 	border: 1.5px solid grey;
